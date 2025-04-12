@@ -48,13 +48,11 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <section className="py-20 px-6 bg-white font-[vazir]" dir="rtl">
+    <section className="py-20 px-6  " dir="rtl">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 text-[#141843]">
-            سوالات متداول
-          </h2>
-          <p className="text-lg text-gray-600">پاسخ به سوالات رایج شما</p>
+          <h2 className="text-4xl font-bold mb-4 text-white">سوالات متداول</h2>
+          <p className="text-lg text-white">پاسخ به سوالات رایج شما</p>
           <div className="w-24 h-1 bg-[#0165FC] mx-auto mt-6"></div>
         </div>
 
@@ -72,7 +70,7 @@ const FAQ: React.FC = () => {
                 className={`w-full text-right p-5 flex justify-between items-center transition-colors ${
                   openQuestion === item.id
                     ? 'bg-[#141843] text-white'
-                    : 'bg-white text-[#141843] hover:bg-gray-50'
+                    : 'bg-white text-black hover:bg-gray-50'
                 }`}
               >
                 <span className="font-bold text-lg">{item.question}</span>

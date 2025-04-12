@@ -25,11 +25,7 @@ const JobMarketplace: React.FC = () => {
   };
 
   return (
-    <section
-      ref={containerRef}
-      className="py-24 px-6 bg-gradient-to-b from-white to-gray-50 font-[vazir]"
-      dir="rtl"
-    >
+    <section ref={containerRef} className="py-24 px-6 font-[vazir]" dir="rtl">
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={
@@ -38,10 +34,10 @@ const JobMarketplace: React.FC = () => {
         transition={{ duration: 0.8 }}
         className="text-center mb-16 max-w-3xl mx-auto"
       >
-        <h2 className="text-4xl font-bold mb-6 text-[#141843]">
+        <h2 className="text-4xl font-bold mb-6 text-white">
           بازار کار یوتیوب کلاب
         </h2>
-        <p className="text-lg text-gray-600">
+        <p className="text-lg text-white">
           فرصت‌های شغلی مرتبط با تولید محتوا و یوتیوب را در اینجا پیدا کنید یا
           آگهی استخدام خود را ثبت کنید
         </p>

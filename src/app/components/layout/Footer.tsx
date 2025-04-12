@@ -25,34 +25,32 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="w-full mt-auto relative" dir="rtl">
-      {/* Wavy Shape Divider */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-0 transform -translate-y-full">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-          className="w-full h-16 md:h-24"
+    <footer className="w-full mt-auto relative bg-blue-400" dir="rtl">
+      {/* Theme Toggle - Moved to top for better visibility */}
+      <div className="absolute top-4 left-4 z-10">
+        <button
+          onClick={toggleTheme}
+          className="p-2 rounded-full bg-indigo-700 text-white hover:bg-indigo-600 transition-colors duration-200 flex items-center justify-center"
+          aria-label={theme === 'dark' ? 'روشن کردن تم' : 'تاریک کردن تم'}
         >
-          <path
-            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-            className={theme === 'dark' ? 'fill-indigo-900' : 'fill-indigo-600'}
-          ></path>
-        </svg>
+          {theme === 'dark' ? (
+            <FiSun className="h-5 w-5" />
+          ) : (
+            <FiMoon className="h-5 w-5" />
+          )}
+        </button>
       </div>
 
       {/* Footer Content */}
-      <div
-        className={`pt-16 ${
-          theme === 'dark' ? 'bg-indigo-900' : 'bg-indigo-600'
-        } text-white`}
-      >
+      <div className="pt-12 text-white" style={{ backgroundColor: '#1C1A47' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 pb-10">
             {/* Column 1: About Us */}
             <div>
-              <h3 className="text-lg font-bold text-white mb-4">درباره ما</h3>
-              <p className="text-indigo-100 mb-4 text-sm leading-relaxed">
+              <h3 className="text-xl font-bold text-white mb-4 border-b border-indigo-500 pb-2">
+                درباره ما
+              </h3>
+              <p className="text-indigo-100 mb-6 text-sm leading-relaxed">
                 یوتیوب کلاب یک پلتفرم آموزشی آنلاین است که با هدف ارتقای سطح
                 دانش و مهارت‌های برنامه‌نویسی و طراحی وب در ایران راه‌اندازی شده
                 است. ما به شما کمک می‌کنیم تا با آموزش‌های کاربردی و پروژه‌محور،
@@ -63,27 +61,29 @@ const Footer: React.FC = () => {
                   href="https://instagram.com/youtubeclub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white hover:text-pink-300 transition-colors"
+                  className="text-white hover:text-pink-300 transition-colors p-2 bg-indigo-800 rounded-full"
                   aria-label="Instagram"
                 >
-                  <FaInstagram className="h-6 w-6" />
+                  <FaInstagram className="h-5 w-5" />
                 </Link>
                 <Link
                   href="https://youtube.com/youtubeclub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white hover:text-red-300 transition-colors"
+                  className="text-white hover:text-red-300 transition-colors p-2 bg-indigo-800 rounded-full"
                   aria-label="YouTube"
                 >
-                  <FaYoutube className="h-6 w-6" />
+                  <FaYoutube className="h-5 w-5" />
                 </Link>
               </div>
             </div>
 
             {/* Column 2: Quick Links */}
             <div>
-              <h3 className="text-lg font-bold text-white mb-4">دسترسی سریع</h3>
-              <ul className="space-y-2">
+              <h3 className="text-xl font-bold text-white mb-4 border-b border-indigo-500 pb-2">
+                دسترسی سریع
+              </h3>
+              <ul className="space-y-3">
                 {[
                   { name: 'صفحه اصلی', href: '/' },
                   { name: 'دوره‌های آموزشی', href: '/courses' },
@@ -95,8 +95,9 @@ const Footer: React.FC = () => {
                   <li key={index}>
                     <Link
                       href={link.href}
-                      className="text-indigo-100 hover:text-white transition-colors text-sm"
+                      className="text-indigo-100 hover:text-white transition-colors text-sm flex items-center"
                     >
+                      <span className="inline-block w-1.5 h-1.5 bg-indigo-300 rounded-full ml-2"></span>
                       {link.name}
                     </Link>
                   </li>
@@ -106,19 +107,19 @@ const Footer: React.FC = () => {
 
             {/* Column 3: Contact Info */}
             <div>
-              <h3 className="text-lg font-bold text-white mb-4">
+              <h3 className="text-xl font-bold text-white mb-4 border-b border-indigo-500 pb-2">
                 اطلاعات تماس
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-4">
                 <li className="flex items-start">
-                  <FiMapPin className="h-5 w-5 text-indigo-300 mt-0.5 ml-2" />
+                  <FiMapPin className="h-5 w-5 text-indigo-300 mt-0.5 ml-3 flex-shrink-0" />
                   <span className="text-indigo-100 text-sm">
                     تهران، خیابان ولیعصر، بالاتر از میدان ونک، برج نگین، طبقه
                     ۱۰، واحد ۱۰۰۵
                   </span>
                 </li>
                 <li className="flex items-center">
-                  <FiPhone className="h-5 w-5 text-indigo-300 ml-2" />
+                  <FiPhone className="h-5 w-5 text-indigo-300 ml-3 flex-shrink-0" />
                   <Link
                     href="tel:+982188776655"
                     className="text-indigo-100 hover:text-white transition-colors text-sm"
@@ -127,7 +128,7 @@ const Footer: React.FC = () => {
                   </Link>
                 </li>
                 <li className="flex items-center">
-                  <FiMail className="h-5 w-5 text-indigo-300 ml-2" />
+                  <FiMail className="h-5 w-5 text-indigo-300 ml-3 flex-shrink-0" />
                   <Link
                     href="mailto:info@youtubeclub.ir"
                     className="text-indigo-100 hover:text-white transition-colors text-sm"
@@ -138,76 +139,59 @@ const Footer: React.FC = () => {
               </ul>
             </div>
 
-            {/* Column 4: Trust Badges */}
+            {/* Column 4: Trust Badges - UPDATED with centered images on white background */}
             <div>
-              <h3 className="text-lg font-bold text-white mb-4">
+              <h3 className="text-xl font-bold text-white mb-4 border-b border-indigo-500 pb-2">
                 نماد های اعتماد
               </h3>
-              <div className="flex flex-col space-y-4">
-                {/* Enamad Logo */}
+              <div className="flex flex-row md:flex-col gap-4">
+                {/* Enamad Logo - Centered on white background */}
                 <Link
                   href="https://enamad.ir/verify.aspx?id=123456"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-white p-2 rounded-md shadow-sm hover:shadow-md transition-shadow"
+                  className="inline-block"
                   aria-label="نماد اعتماد الکترونیکی"
                 >
-                  <div className="relative h-24 w-24">
-                    <Image
-                      src="/enamadLogo.webp"
-                      alt="نماد اعتماد الکترونیکی"
-                      fill
-                      sizes="96px"
-                      className="object-contain"
-                    />
+                  <div className="bg-white rounded-md p-1 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
+                    <div className="relative w-14 h-14 md:w-18 md:h-18">
+                      <Image
+                        src="/enamadLogo.webp"
+                        alt="نماد اعتماد الکترونیکی"
+                        fill
+                        sizes="(max-width: 768px) 56px, 72px"
+                        className="object-contain"
+                      />
+                    </div>
                   </div>
                 </Link>
 
-                {/* ZarinPal Logo */}
+                {/* ZarinPal Logo - Centered on white background */}
                 <Link
                   href="https://www.zarinpal.com/trustlogo/123456"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-white p-2 rounded-md shadow-sm hover:shadow-md transition-shadow"
+                  className="inline-block"
                   aria-label="درگاه پرداخت زرین‌پال"
                 >
-                  <div className="relative h-24 w-24">
-                    <Image
-                      src="/zarinpal-1.webp"
-                      alt="درگاه پرداخت زرین‌پال"
-                      fill
-                      sizes="96px"
-                      className="object-contain"
-                    />
+                  <div className="bg-white rounded-md p-1 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
+                    <div className="relative w-14 h-14 md:w-18 md:h-18">
+                      <Image
+                        src="/zarinpal-1.webp"
+                        alt="درگاه پرداخت زرین‌پال"
+                        fill
+                        sizes="(max-width: 768px) 56px, 72px"
+                        className="object-contain"
+                      />
+                    </div>
                   </div>
                 </Link>
-
-                {/* Theme Toggle Button */}
-                <button
-                  onClick={toggleTheme}
-                  className="flex items-center justify-center space-x-2 space-x-reverse mt-4 text-white hover:text-indigo-200 transition-colors"
-                  aria-label={
-                    theme === 'dark' ? 'روشن کردن تم' : 'تاریک کردن تم'
-                  }
-                >
-                  {theme === 'dark' ? (
-                    <>
-                      <FiSun className="h-5 w-5" />
-                      <span className="text-sm">تم روشن</span>
-                    </>
-                  ) : (
-                    <>
-                      <FiMoon className="h-5 w-5" />
-                      <span className="text-sm">تم تاریک</span>
-                    </>
-                  )}
-                </button>
               </div>
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="py-6 border-t border-indigo-500 dark:border-indigo-800">
+          <div className="py-4 border-t border-indigo-700 mt-4">
             <p className="text-center text-sm text-indigo-100">
               © {new Date().getFullYear()} یوتیوب کلاب. تمامی حقوق محفوظ است.
             </p>
