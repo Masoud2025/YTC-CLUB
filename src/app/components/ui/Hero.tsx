@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
               transition={{ delay: 0.3, duration: 0.7 }}
               className="inline-block px-4 py-1 rounded-full bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-sm font-medium mb-4"
             >
-              یادگیری آنلاین برنامه‌نویسی
+              یادگیری آنلاین ادیت
             </motion.span>
 
             <motion.h1
