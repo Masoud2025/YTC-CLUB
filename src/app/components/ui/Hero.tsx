@@ -5,12 +5,12 @@ import Image from 'next/image';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-b from-indigo-50 to-white dark:from-indigo-950 dark:to-gray-900 pt-16 pb-24 md:pt-24 md:pb-32">
-      <div className="w-full">
-        <div className="grid grid-cols-1 gap-12 items-center">
-          {/* Hero Image - Moved Up with negative margin */}
-          <div className="order-1 relative w-full -mt-8 md:-mt-16 flex flex-col items-center">
-            <div className="relative w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] flex justify-center">
+    <section className="relative w-full h-screen overflow-hidden bg-gradient-to-b from-indigo-50 to-white dark:from-indigo-950 dark:to-gray-900 flex flex-col justify-center items-center">
+      <div className="w-full h-full flex flex-col">
+        <div className="flex-1 grid grid-cols-1 items-center">
+          {/* Hero Image - Centered in viewport */}
+          <div className="relative w-full flex flex-col items-center justify-center flex-1">
+            <div className="relative w-full h-[50vh] sm:h-[55vh] md:h-[60vh] flex justify-center">
               <div className="relative w-full h-full">
                 <Image
                   src="/HeroImage.png"
