@@ -46,9 +46,9 @@ const ServiceCard: React.FC<{ service: ServiceItem; index: number }> = ({
           <div className="bg-[#141843]/10 rounded-full w-20 h-20 flex items-center justify-center ml-5">
             {service.icon}
           </div>
-          <h3 className="text-3xl font-bold text-[#141843]">{service.title}</h3>
+          <h3 className="text-3xl font-bold text-white">{service.title}</h3>
         </div>
-        <p className="text-gray-600 mb-10 leading-relaxed text-lg">
+        <p className="text-white mb-10 leading-relaxed text-lg">
           {service.description}
         </p>
         <motion.button
@@ -115,11 +115,7 @@ const Services: React.FC = () => {
   ];
 
   return (
-    <section
-      id="services"
-      className="py-24 px-6 bg-gray-50 font-[vazir]"
-      dir="rtl"
-    >
+    <section id="services" className="py-24 px-6 font-[vazir]" dir="rtl">
       <motion.div
         ref={headerRef}
         initial={{ opacity: 0, y: -30 }}
@@ -127,8 +123,8 @@ const Services: React.FC = () => {
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className="text-center mb-24"
       >
-        <h2 className="text-5xl font-bold mb-6 text-[#141843]">خدمات ما</h2>
-        <p className="text-2xl text-gray-600 max-w-3xl mx-auto">
+        <h2 className="text-5xl font-bold mb-6  text-white">خدمات ما</h2>
+        <p className="text-2xl text-white max-w-3xl mx-auto">
           راهکارهای حرفه‌ای برای ارتقای محتوای دیجیتال شما
         </p>
         <div className="w-24 h-1 bg-[#0165FC] mx-auto mt-8"></div>

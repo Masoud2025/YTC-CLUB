@@ -12,6 +12,7 @@ const lalezar = Lalezar({
   subsets: ['arabic', 'latin'],
   display: 'swap',
 });
+
 export const metadata: Metadata = {
   title: 'YTC-CLUB',
   description: 'Learn, design, post – YTC-Club',
@@ -24,11 +25,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lalezar.className} antialiased`}>
+      <body
+        className={`${lalezar.className} antialiased min-h-screen bg-gradient-to-b from-indigo-50 to-white dark:from-indigo-950 dark:to-[#1B1A46]`}
+      >
         <ThemeProvider>
           {/* <LoadingProvider> */}
           <Navbar />
-          {children}
+          <main className="min-h-[calc(100vh-160px)]">{children}</main>
           <Footer />
           {/* </LoadingProvider> */}
         </ThemeProvider>

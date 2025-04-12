@@ -88,7 +88,7 @@ const YouTubeClubIntro: React.FC = () => {
   };
 
   return (
-    <section ref={containerRef} className="py-20 px-6 bg-white font-[vazir]">
+    <section ref={containerRef} className="py-20 px-6  font-[vazir]">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={containerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -191,15 +191,15 @@ const YouTubeClubIntro: React.FC = () => {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="w-full md:w-1/2 order-1 md:order-2"
           >
-            <h2 className="text-4xl font-bold mb-6 text-[#141843]">
+            <h2 className="text-4xl font-bold mb-6 text-white">
               معرفی کامل یوتیوب کلاب
             </h2>
-            <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+            <p className="text-lg text-white mb-6 leading-relaxed">
               داخل این ویدیو شما به طور کامل با سایت یوتیوب کلاب و قسمت های
               مختلف سایت و کاربرد های مختلف اون آشنا میشیم.
             </p>
             <div className="w-20 h-1 bg-[#0165FC] mb-8"></div>
-            <h3 className="text-2xl font-bold text-[#141843] mb-6">خدمات ما</h3>
+            <h3 className="text-2xl font-bold text-white mb-6">خدمات ما</h3>
             <motion.button
               whileHover={{ scale: 1.05, backgroundColor: '#141843' }}
               whileTap={{ scale: 0.95 }}

@@ -123,11 +123,11 @@ const FeatureGrid: React.FC = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-b from-[#14143A] to-[#1A1A42] py-16">
+    <div className=" py-16">
       <div dir="rtl" className="container mx-auto px-4 font-[Vazir] relative">
         {/* Background decorative elements */}
-        <div className="absolute top-20 left-10 w-64 h-64 bg-[#0165FC]/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-80 h-80 bg-[#0165FC]/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-10 w-64 h-64  rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 right-10 w-80 h-80  rounded-full blur-3xl"></div>
 
         <motion.div
           ref={ref}

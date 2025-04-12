@@ -5,52 +5,35 @@ import Image from 'next/image';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-gradient-to-b from-indigo-50 to-white dark:from-indigo-950 dark:to-gray-900 flex flex-col justify-center items-center">
+    <section className="relative w-full h-screen overflow-hidden  dark:to-gray-900 flex flex-col justify-center items-center">
       <div className="w-full h-full flex flex-col">
         <div className="flex-1 grid grid-cols-1 items-center">
-          {/* Hero Image - Centered in viewport */}
+          {/* Hero Image - Slightly smaller than previous version but still larger than original */}
           <div className="relative w-full flex flex-col items-center justify-center flex-1">
-            <div className="relative w-full h-[50vh] sm:h-[55vh] md:h-[60vh] flex justify-center">
-              <div className="relative w-full h-full">
-                <Image
-                  src="/HeroImage.png"
-                  alt="یوتیوب کلاب"
-                  fill
-                  priority
-                  className="object-contain"
-                  sizes="100vw"
-                />
-              </div>
+            <div className="relative w-full h-[65vh] sm:h-[70vh] md:h-[75vh]">
+              <Image
+                src="/HeroImage.png"
+                alt="یوتیوب کلاب"
+                fill
+                priority
+                className="object-contain"
+                sizes="100vw"
+              />
             </div>
 
             {/* Button - Now above the line with no background */}
-            <button className="px-8 py-3 text-indigo-600 dark:text-indigo-400 font-medium rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 mb-4">
+            <button className="px-8 py-3 text-indigo-600 dark:text-indigo-400 font-medium rounded-lg hover:cursor-pointer transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 mb-4">
               آشنایی با ما
             </button>
 
             {/* Bolder Gray Line */}
-            <div className="w-full max-w-4xl h-1 bg-gray-300 dark:bg-gray-700"></div>
+            <div className="w-full max-w-5xl h-1 bg-gray-300 dark:bg-gray-700"></div>
 
             {/* Decorative Elements */}
             <div className="absolute -z-10 top-1/4 right-1/4 w-64 h-64 bg-indigo-300 dark:bg-indigo-700 rounded-full filter blur-3xl opacity-30" />
             <div className="absolute -z-10 bottom-1/4 left-1/4 w-64 h-64 bg-purple-300 dark:bg-purple-700 rounded-full filter blur-3xl opacity-30" />
           </div>
         </div>
-      </div>
-
-      {/* Wave Divider */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-0">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-          className="w-full h-12 md:h-16"
-        >
-          <path
-            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-            className="fill-white dark:fill-gray-900"
-          ></path>
-        </svg>
       </div>
     </section>
   );
