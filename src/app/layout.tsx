@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Lalezar } from 'next/font/google';
 import Navbar from './components/layout/Header';
-
+import Footer from './components/layout/Footer';
+import ThemeProvider from './components/Theme/ThemProvider';
 import './globals.css';
 
 // Initialize the font object
@@ -23,8 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${lalezar.className} antialiased`}>
-        <Navbar />
-        {children}
+        <ThemeProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
