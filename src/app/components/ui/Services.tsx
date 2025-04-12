@@ -110,7 +110,7 @@ const Services: React.FC = () => {
       description:
         'خدمات حرفه‌ای تدوین ویدیو با بهره‌گیری از جدیدترین تکنیک‌ها و نرم‌افزارها برای ارتقای کیفیت محتوای شما. از ترنزیشن‌های خلاقانه و افکت‌های ویژه گرفته تا تصحیح رنگ حرفه‌ای، همه را با بالاترین استانداردها ارائه می‌دهیم.',
       icon: <SiAdobepremierepro className="text-5xl text-[#0165FC]" />,
-      imageSrc: '/images/video-editing.jpg', // Replace with your actual image path
+      imageSrc: '/workSample1.jpg', // Replace with your actual image path
     },
   ];
 

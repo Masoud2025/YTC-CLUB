@@ -10,9 +10,7 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      <div className="relative top-[-5cm]">
-        <CircularScroller />
-      </div>
+      <CircularScroller />
       <FeatureGrid />
       <Services />
       <YouTubeClubIntro />

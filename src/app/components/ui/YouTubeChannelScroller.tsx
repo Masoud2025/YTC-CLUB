@@ -91,9 +91,6 @@ const CircularScroller: React.FC<CircularScrollerProps> = ({
 
   return (
     <div className="w-full overflow-hidden">
-      <h1 className="text-center text-[50px]">
-        چند تا از یوتیوبر هایی که با تیم ما همکاری کردن
-      </h1>
       <motion.div
         className="flex"
         animate={{
