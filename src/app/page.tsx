@@ -3,6 +3,7 @@ import FeatureGrid from './components/ui/FeaturedGridCards';
 import Hero from './components/ui/Hero';
 import JobMarketplace from './components/ui/JobMarkectPlace';
 import Services from './components/ui/Services';
+import StatsBanner from './components/ui/StatusBanner';
 import YouTubeClubIntro from './components/ui/VideoIntro';
 import CircularScroller from './components/ui/YouTubeChannelScroller';
 
@@ -13,6 +14,7 @@ export default function Home() {
       <CircularScroller />
       <FeatureGrid />
       <Services />
+      <StatsBanner />
       <YouTubeClubIntro />
       <JobMarketplace />
       <FAQ />

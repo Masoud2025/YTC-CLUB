@@ -18,7 +18,9 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   return (
     <div
       className={`rounded-xl p-6 flex flex-col items-center ${
-        isHighlighted ? 'bg-[#0165FC]' : 'bg-transparent'
+        isHighlighted
+          ? 'bg-[#0165FC] shadow-[0_0_20px_rgba(1,101,252,0.5)]'
+          : 'bg-transparent'
       }`}
     >
       <div className="text-5xl text-[#0165FC] mb-6 p-4">{icon}</div>
