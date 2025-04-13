@@ -1,106 +1,39 @@
 'use client';
-import React, { useEffect } from 'react';
-import { motion, useAnimation, Variants } from 'framer-motion';
+import React from 'react';
 import { FaYoutube, FaBriefcase, FaChartLine } from 'react-icons/fa';
-import { useInView } from 'react-intersection-observer';
 
 interface FeatureCardProps {
   icon: React.ReactNode;
   title: string;
   description: string;
-  index: number;
+  isHighlighted?: boolean;
 }
-
-const cardVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 50,
-  },
-  visible: (index: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      delay: 0.1 * index,
-      ease: 'easeOut',
-    },
-  }),
-};
 
 const FeatureCard: React.FC<FeatureCardProps> = ({
   icon,
   title,
   description,
-  index,
+  isHighlighted = false,
 }) => {
-  const controls = useAnimation();
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-    rootMargin: '-50px 0px',
-  });
-
-  useEffect(() => {
-    if (inView) {
-      controls.start('visible');
-    }
-  }, [controls, inView]);
-
   return (
-    <motion.div
-      ref={ref}
-      className="bg-[#1A1A42] rounded-xl shadow-lg p-6 flex flex-col items-center border border-[#0165FC]/20 relative overflow-hidden"
-      variants={cardVariants}
-      initial="hidden"
-      animate={controls}
-      custom={index}
-      whileHover={{
-        y: -5,
-        boxShadow: '0 10px 25px rgba(1, 101, 252, 0.2)',
-        transition: { duration: 0.2 },
-      }}
+    <div
+      className={`rounded-xl p-6 flex flex-col items-center ${
+        isHighlighted ? 'bg-[#0165FC]' : 'bg-transparent'
+      }`}
     >
-      {/* Decorative gradient element */}
-      <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-gradient-to-br from-[#0165FC]/30 to-transparent blur-xl"></div>
+      <div className="text-5xl text-[#0165FC] mb-6 p-4">{icon}</div>
 
-      <motion.div
-        className="text-5xl text-[#0165FC] mb-6 p-4 rounded-full bg-[#1A1A42]/50 border border-[#0165FC]/30 relative z-10"
-        whileHover={{ rotate: 5, scale: 1.1 }}
-      >
-        {icon}
-      </motion.div>
-
-      <h3 className="text-xl font-bold mb-3 text-white w-full text-right relative z-10">
+      <h3 className="text-xl font-bold mb-3 text-white w-full text-right">
         {title}
       </h3>
-      <p className="text-gray-300 leading-relaxed w-full text-right relative z-10">
+      <p className="text-gray-300 leading-relaxed w-full text-right">
         {description}
       </p>
-
-      {/* Bottom decorative element */}
-      <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-transparent via-[#0165FC] to-transparent w-full"></div>
-    </motion.div>
+    </div>
   );
 };
 
 const FeatureGrid: React.FC = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const headerControls = useAnimation();
-
-  useEffect(() => {
-    if (inView) {
-      headerControls.start({
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.6, ease: 'easeOut' },
-      });
-    }
-  }, [headerControls, inView]);
-
   const features = [
     {
       icon: <FaYoutube />,
@@ -123,32 +56,24 @@ const FeatureGrid: React.FC = () => {
   ];
 
   return (
-    <div className=" py-16">
-      <div dir="rtl" className="container mx-auto px-4 font-[Vazir] relative">
-        {/* Background decorative elements */}
-        <div className="absolute top-20 left-10 w-64 h-64  rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-80 h-80  rounded-full blur-3xl"></div>
-
-        <motion.div
-          ref={ref}
-          className="mb-16 text-center relative z-10"
-          initial={{ opacity: 0, y: -20 }}
-          animate={headerControls}
-        >
+    <div className="py-16">
+      <div dir="rtl" className="container mx-auto px-4 font-[Vazir]">
+        <div className="mb-16 text-center">
           <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">
-            یوتیوب کلاب مناسب تولید کنندگان محتوا
+            <span className="text-[#0165FC]">یوتیوب</span> کلاب مناسب تولید
+            کنندگان محتوا
           </h2>
           <div className="h-1 w-32 bg-gradient-to-r from-transparent via-[#0165FC] to-transparent mx-auto"></div>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
               icon={feature.icon}
               title={feature.title}
               description={feature.description}
-              index={index}
+              isHighlighted={index === 1} // Only highlight the middle card
             />
           ))}
         </div>
