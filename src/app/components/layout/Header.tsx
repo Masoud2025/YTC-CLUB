@@ -134,7 +134,7 @@ const Navbar: React.FC = () => {
                       className={`px-3 py-2 rounded-md text-base font-medium flex items-center transition-colors
                         ${
                           isActive(link.href)
-                            ? 'text-indigo-400'
+                            ? 'text-gray '
                             : 'text-gray-300 hover:bg-gray-700'
                         }`}
                       aria-expanded={
@@ -152,7 +152,7 @@ const Navbar: React.FC = () => {
 
                     {link.dropdown && (
                       <div
-                        className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+                        className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-[#282A2A] ring-1 ring-black ring-opacity-5 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
                         role="menu"
                         aria-orientation="vertical"
                       >

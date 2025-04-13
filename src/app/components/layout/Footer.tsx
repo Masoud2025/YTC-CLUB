@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="w-full mt-auto relative bg-blue-400" dir="rtl">
+    <footer className="w-full mt-auto relative bg-[#2A2C2C]" dir="rtl">
       {/* Theme Toggle - Moved to top for better visibility */}
       <div className="absolute top-4 left-4 z-10">
         <button
