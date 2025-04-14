@@ -23,16 +23,20 @@ const StatsBanner: React.FC = () => {
 
   return (
     <div
-      className="w-[1440px] h-[100px] bg-[#2655A6] mx-auto flex items-center justify-center"
+      className="w-full bg-[#2655A6] mx-auto py-8 flex items-center justify-center"
       dir="rtl"
     >
-      <div className="flex justify-between items-center w-full px-20">
+      <div className="flex flex-col md:flex-row justify-between items-center w-full px-4 md:px-8 lg:px-20 gap-6 md:gap-4">
         {stats.map((stat, index) => (
           <div key={index} className="flex flex-col items-center">
-            <div className="text-4xl text-white mb-1">{stat.icon}</div>
+            <div className="text-3xl md:text-4xl text-white mb-1">
+              {stat.icon}
+            </div>
             <div className="text-center">
-              <div className="text-xl font-bold text-white">{stat.value}</div>
-              <div className="text-sm text-white">{stat.label}</div>
+              <div className="text-lg md:text-xl font-bold text-white">
+                {stat.value}
+              </div>
+              <div className="text-xs md:text-sm text-white">{stat.label}</div>
             </div>
           </div>
         ))}

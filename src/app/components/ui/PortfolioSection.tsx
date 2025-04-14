@@ -45,13 +45,13 @@ const PortfolioSection: React.FC = () => {
   const portfolioItems: PortfolioItemProps[] = [
     {
       imageSrc: '/worksamples.png', // Replace with your actual image path
-      title: 'طراحی وبسایت شرکتی',
+      title: 'ادیت ویدیو',
       buttonText: 'مشاهده نمونه کار ها',
-      buttonHref: '/portfolio/corporate-website',
+      buttonHref: '/edit_video_samples',
     },
     {
       imageSrc: '/worksamples2.png', // Replace with your actual image path
-      title: 'اپلیکیشن موبایل',
+      title: ' طراحی تامینل',
       buttonText: 'مشاهده نمونه کار ها',
       buttonHref: '/portfolio/mobile-app',
     },
