@@ -2,6 +2,7 @@ import FAQ from './components/ui/FAQ';
 import FeatureGrid from './components/ui/FeaturedGridCards';
 import Hero from './components/ui/Hero';
 import JobMarketplace from './components/ui/JobMarkectPlace';
+import PortfolioSection from './components/ui/PortfolioSection';
 import Services from './components/ui/Services';
 import StatsBanner from './components/ui/StatusBanner';
 import YouTubeClubIntro from './components/ui/VideoIntro';
@@ -17,6 +18,7 @@ export default function Home() {
       <StatsBanner />
       <YouTubeClubIntro />
       <JobMarketplace />
+      <PortfolioSection />
       <FAQ />
     </div>
   );
