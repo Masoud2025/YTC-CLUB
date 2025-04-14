@@ -53,7 +53,7 @@ const PortfolioSection: React.FC = () => {
       imageSrc: '/worksamples2.png', // Replace with your actual image path
       title: ' طراحی تامینل',
       buttonText: 'مشاهده نمونه کار ها',
-      buttonHref: '/portfolio/mobile-app',
+      buttonHref: '/design_portfolio',
     },
   ];
 
