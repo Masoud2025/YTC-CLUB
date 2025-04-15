@@ -8,10 +8,10 @@ export default function YouTubeClubServices() {
       {/* Top Section - Services Introduction */}
       <div className="flex flex-col md:flex-row items-center gap-8 mb-16">
         <div className="md:w-1/2">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">
+          <h2 className="text-3xl font-bold mb-6 text-white">
             خدمات تیم یوتیوب کلاب برای شما
           </h2>
-          <p className="text-lg leading-relaxed text-gray-600">
+          <p className="text-lg leading-relaxed text-white">
             تیم یوتیوب کلاب به صورت کامل کارهای یوتیوب و اینستاگرام و تیک تاک
             شما رو به عهده میگیره و به شما کمک میکنه تا در کار خود پیشرفت کنید و
             به نتیجه دلخواهتون برسید
@@ -20,9 +20,10 @@ export default function YouTubeClubServices() {
         <div className="md:w-1/2">
           <div className="relative w-full h-64 md:h-80">
             <Image
-              src="/images/youtube-club-team.jpg"
+              src="/buster.png"
               alt="تیم یوتیوب کلاب"
-              fill
+              width={200}
+              height={200}
               style={{ objectFit: 'cover' }}
               className="rounded-xl"
             />
@@ -170,7 +171,7 @@ export default function YouTubeClubServices() {
 
       {/* Instructors Section */}
       <div>
-        <h2 className="text-2xl font-bold mb-8 text-gray-800 text-center">
+        <h2 className="text-2xl font-bold mb-8 text-white text-center">
           مدرسان تیم یوتیوب کلاب
         </h2>
 
@@ -179,15 +180,16 @@ export default function YouTubeClubServices() {
           <div className="md:w-1/2 bg-white rounded-xl shadow-lg overflow-hidden">
             <div className="relative h-64">
               <Image
-                src="/images/instructor-1.jpg"
+                src="/IliaTarah.png"
                 alt="مدرس یوتیوب کلاب"
-                fill
+                width={200}
+                height={200}
                 style={{ objectFit: 'cover' }}
               />
             </div>
             <div className="p-6">
               <h3 className="text-xl font-bold mb-2 text-gray-800">
-                علی محمدی
+                ایلیاطراحی
               </h3>
               <p className="text-gray-600 mb-4">
                 متخصص ادیت ویدیو و موشن گرافیک
@@ -226,17 +228,18 @@ export default function YouTubeClubServices() {
           <div className="md:w-1/2 bg-white rounded-xl shadow-lg overflow-hidden">
             <div className="relative h-64">
               <Image
-                src="/images/instructor-2.jpg"
+                src="/aliEditor.png"
                 alt="مدرس یوتیوب کلاب"
-                fill
+                width={200}
+                height={200}
                 style={{ objectFit: 'cover' }}
               />
             </div>
             <div className="p-6">
               <h3 className="text-xl font-bold mb-2 text-gray-800">
-                سارا حسینی
+                علی ادیتور
               </h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-white mb-4">
                 متخصص استراتژی محتوا و سئو یوتیوب
               </p>
               <p className="text-gray-600">

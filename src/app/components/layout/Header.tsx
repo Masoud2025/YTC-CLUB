@@ -63,8 +63,8 @@ const navLinks: NavLink[] = [
     name: 'کسب و کار',
     href: '/contact',
     dropdown: [
-      { name: ' مشاغل یوتیوب', href: '/contact/sub1' },
-      { name: 'زیرمنو 2', href: '/contact/sub2' },
+      { name: ' مشاغل یوتیوب', href: '/job_finder' },
+      { name: 'اشتراک ویژه', href: '/price_plan' },
     ],
   },
 ];
