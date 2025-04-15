@@ -30,7 +30,7 @@ const navLinks: NavLink[] = [
     name: 'خانه',
     href: '/',
     dropdown: [
-      { name: 'حساب کاربری', href: '/home/sub1' },
+      { name: 'حساب کاربری', href: '/login' },
       { name: 'آشنایی باتیم', href: '/about_us' },
     ],
   },

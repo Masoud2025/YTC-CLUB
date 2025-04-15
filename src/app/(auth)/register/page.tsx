@@ -109,7 +109,7 @@ export default function RegisterPage() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-12"
+      className="min-h-screen flex items-center justify-center  px-4 py-12"
       dir="rtl"
     >
       <div className="w-full max-w-6xl flex rounded-2xl shadow-lg overflow-hidden">

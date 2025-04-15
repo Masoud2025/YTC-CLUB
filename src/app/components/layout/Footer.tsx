@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
       <div className="absolute top-4 left-4 z-10">
         <button
           onClick={toggleTheme}
-          className="p-2 rounded-full bg-indigo-700 text-white hover:bg-indigo-600 transition-colors duration-200 flex items-center justify-center"
+          className="p-2 rounded-full  text-white hover:bg-indigo-600 transition-colors duration-200 flex items-center justify-center"
           aria-label={theme === 'dark' ? 'روشن کردن تم' : 'تاریک کردن تم'}
         >
           {theme === 'dark' ? (
@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Footer Content */}
-      <div className="pt-12 text-white" style={{ backgroundColor: '#1C1A47' }}>
+      <div className="pt-12 text-white" style={{ backgroundColor: '#353737' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 pb-10">
             {/* Column 1: About Us */}

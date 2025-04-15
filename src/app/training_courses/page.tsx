@@ -11,20 +11,20 @@ export default function CourseIntroduction() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+      <div className="bg-[#353737] rounded-2xl shadow-xl overflow-hidden">
         <div className="p-8">
-          <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center text-gray-800 border-b border-gray-200 pb-4">
+          <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center text-white border-b border-gray-200 pb-4">
             توضیحات کامل دوره
           </h1>
 
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Course details on the left for desktop, bottom for mobile */}
             <div className="lg:w-1/2 order-2 lg:order-1">
-              <h2 className="text-xl font-bold text-blue-700 mb-4">
+              <h2 className="text-xl font-bold text-white mb-4">
                 معرفی دوره : Magic Designer (طراح جادویی)
               </h2>
 
-              <div className="space-y-6 text-gray-700">
+              <div className="space-y-6 text-white">
                 <div>
                   <p className="mb-2 text-lg font-semibold">
                     💡اما این دوره راجب چیه؟
@@ -52,7 +52,7 @@ export default function CourseIntroduction() {
                   <p className="mb-2 text-lg font-semibold">
                     🔻سوالات احتمالی؟!
                   </p>
-                  <div className="space-y-3 bg-gray-50 p-4 rounded-lg">
+                  <div className="space-y-3 bg-gray-50 text-black p-4 rounded-lg">
                     <div>
                       <p className="font-bold">۱ - دوره کجا قرار گرفته ؟</p>
                       <p>
@@ -105,7 +105,7 @@ export default function CourseIntroduction() {
                       </svg>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-600">مدت زمان دوره</p>
+                      <p className="text-sm text-white">مدت زمان دوره</p>
                       <p className="font-bold text-gray-800">
                         ۴ ساعت و ۳۰ دقیقه
                       </p>
@@ -176,7 +176,7 @@ export default function CourseIntroduction() {
             <div className="lg:w-1/2 order-1 lg:order-2">
               <div className="relative h-80 md:h-96 lg:h-full rounded-xl overflow-hidden">
                 <Image
-                  src="/courses/magic-designer-thumbnail.jpg"
+                  src="/traingn-curose.jpg"
                   alt="دوره طراح جادویی - Magic Designer"
                   fill
                   style={{ objectFit: 'cover' }}

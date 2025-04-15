@@ -26,7 +26,7 @@ const jobsData: Job[] = [
     title: 'ادیتور ویدیو یوتیوب',
     description:
       'به یک ادیتور حرفه‌ای برای تدوین ویدیوهای یوتیوب نیازمندیم. تسلط به پریمیر و افترافکت الزامی است. امکان دورکاری وجود دارد.',
-    imageUrl: '/images/jobs/video-editor.jpg',
+    imageUrl: '/sampleUser.jpg',
     contactInfo: {
       phone: '09123456789',
       telegram: '@videoeditor_hire',
@@ -40,7 +40,7 @@ const jobsData: Job[] = [
     title: 'طراح تامنیل یوتیوب',
     description:
       'استودیو تولید محتوا به یک طراح تامنیل با سابقه و خلاق نیازمند است. آشنایی با اصول طراحی و تسلط به فتوشاپ ضروری است.',
-    imageUrl: '/images/jobs/thumbnail-designer.jpg',
+    imageUrl: '/sampleUser2.jpg',
     contactInfo: {
       phone: '09187654321',
       telegram: '@thumbnail_jobs',
@@ -157,14 +157,14 @@ export default function JobsPage() {
         </p>
 
         {/* Search and Filter Section */}
-        <div className="bg-gray-800 rounded-xl p-6 mb-10">
+        <div className="bg-[#353737] rounded-xl p-6 mb-10">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <div className="relative">
                 <input
                   type="text"
                   placeholder="جستجو در فرصت‌های شغلی..."
-                  className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full bg-[#302f2f] text-white px-4 py-3 rounded-lg pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
                 />
@@ -189,7 +189,7 @@ export default function JobsPage() {
 
             <div className="w-full md:w-64">
               <select
-                className="w-full bg-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full bg-[#302f2f] text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={selectedCategory}
                 onChange={e => setSelectedCategory(e.target.value)}
               >
@@ -212,7 +212,7 @@ export default function JobsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
+                className="bg-[#353737] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
               >
                 <div className="relative h-48">
                   <Image
@@ -221,7 +221,7 @@ export default function JobsPage() {
                     fill
                     style={{ objectFit: 'cover' }}
                   />
-                  <div className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">
+                  <div className="absolute top-3 left-3 bg-[#0F3F77] text-white text-xs font-bold px-2 py-1 rounded">
                     {job.category}
                   </div>
                 </div>
@@ -330,7 +330,7 @@ export default function JobsPage() {
                         className={`px-4 py-2 rounded-lg text-sm font-bold ${
                           isPlusUser
                             ? 'bg-green-600 hover:bg-green-700 text-white'
-                            : 'bg-blue-600 hover:bg-blue-700 text-white'
+                            : 'bg-[#0F3F77] hover:bg-blue-700 text-white'
                         }`}
                       >
                         {isPlusUser
@@ -386,7 +386,7 @@ export default function JobsPage() {
                   />
                 </svg>
               </button>
-              <button className="bg-blue-600 text-white w-10 h-10 rounded-lg flex items-center justify-center">
+              <button className="bg-[#0F3F77] text-white w-10 h-10 rounded-lg flex items-center justify-center">
                 1
               </button>
               <button className="bg-gray-700 hover:bg-gray-600 text-white w-10 h-10 rounded-lg flex items-center justify-center">
@@ -459,7 +459,7 @@ export default function JobsPage() {
 
               <div className="bg-blue-900/30 border border-blue-700/50 rounded-lg p-4">
                 <div className="flex items-start">
-                  <div className="bg-blue-600 rounded-full p-2 ml-3">
+                  <div className="bg-[#0F3F77] rounded-full p-2 ml-3">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6 text-white"

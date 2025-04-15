@@ -9,7 +9,7 @@ const editingPacks = [
   {
     id: 'premiere-pro-basics',
     title: 'پک آموزش مقدماتی پریمیر پرو',
-    image: '/packs/premiere-pro-basics.jpg',
+    image: '/packImage.jpg',
     shortDescription:
       'آموزش صفر تا صد مقدماتی نرم‌افزار پریمیر پرو برای تدوین ویدیو',
     price: '۲۹۰,۰۰۰',

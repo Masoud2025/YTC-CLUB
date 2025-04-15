@@ -133,7 +133,7 @@ export default function PricingPlans() {
           </p>
 
           {/* Billing Toggle */}
-          <div className="mt-10 inline-flex items-center bg-gray-800 p-1 rounded-lg">
+          <div className="mt-10 inline-flex items-center bg-[#353737] p-1 rounded-lg">
             <button
               onClick={() => setBillingCycle('monthly')}
               className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
@@ -187,13 +187,13 @@ export default function PricingPlans() {
               >
                 {/* Popular Badge */}
                 {plan.badge && (
-                  <div className="absolute top-0 left-0 right-0 bg-blue-600 text-white text-center text-sm py-1 font-medium">
+                  <div className="absolute top-0 left-0 right-0 bg-green-600 text-white text-center text-sm py-1 font-medium">
                     {plan.badge}
                   </div>
                 )}
 
                 <div
-                  className={`p-8 bg-gray-800 h-full flex flex-col ${
+                  className={`p-8 bg-[#353737] h-full flex flex-col ${
                     plan.badge ? 'pt-12' : ''
                   }`}
                 >
@@ -278,7 +278,7 @@ export default function PricingPlans() {
                       isHovered ? 'scale-[1.02] shadow-lg' : ''
                     } ${
                       plan.popular
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                        ? 'bg-[blue-600] hover:bg-blue-700 text-white'
                         : plan.id === 'basic'
                         ? 'bg-gray-700 hover:bg-gray-600 text-white'
                         : 'bg-gray-700 hover:bg-gray-600 text-white'
@@ -299,7 +299,7 @@ export default function PricingPlans() {
           </h2>
 
           <div className="space-y-6">
-            <div className="bg-gray-800 rounded-xl p-6">
+            <div className="bg-[#353737] rounded-xl p-6">
               <h3 className="text-lg font-bold text-white mb-2">
                 چگونه می‌توانم اشتراک خود را ارتقا دهم؟
               </h3>
@@ -309,7 +309,7 @@ export default function PricingPlans() {
               </p>
             </div>
 
-            <div className="bg-gray-800 rounded-xl p-6">
+            <div className="bg-[#353737] rounded-xl p-6">
               <h3 className="text-lg font-bold text-white mb-2">
                 آیا می‌توانم اشتراک خود را لغو کنم؟
               </h3>
@@ -319,7 +319,7 @@ export default function PricingPlans() {
               </p>
             </div>
 
-            <div className="bg-gray-800 rounded-xl p-6">
+            <div className="bg-[#353737] rounded-xl p-6">
               <h3 className="text-lg font-bold text-white mb-2">
                 چه روش‌های پرداختی پشتیبانی می‌شوند؟
               </h3>
@@ -329,7 +329,7 @@ export default function PricingPlans() {
               </p>
             </div>
 
-            <div className="bg-gray-800 rounded-xl p-6">
+            <div className="bg-[#353737] rounded-xl p-6">
               <h3 className="text-lg font-bold text-white mb-2">
                 اگر از اشتراک خود راضی نبودم چه کنم؟
               </h3>
@@ -342,7 +342,7 @@ export default function PricingPlans() {
         </div>
 
         {/* Testimonial */}
-        <div className="mt-24 bg-gray-800 rounded-2xl p-8 max-w-4xl mx-auto">
+        <div className="mt-24 bg-[#353737] rounded-2xl p-8 max-w-4xl mx-auto">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/3 mb-6 md:mb-0">
               <div className="w-24 h-24 rounded-full overflow-hidden mx-auto">
