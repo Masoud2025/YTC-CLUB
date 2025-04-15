@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Lalezar } from 'next/font/google';
+// import { Lalezar } from 'next/font/google';
+import { Vazirmatn, Lalezar } from 'next/font/google';
 import Navbar from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import ThemeProvider from './components/Theme/ThemProvider';
@@ -7,10 +8,19 @@ import './globals.css';
 // import LoadingProvider from './components/ui/LoadingProvider';
 
 // Initialize the font object
-const lalezar = Lalezar({
-  weight: '400', // Lalezar typically only comes in regular weight
-  subsets: ['arabic', 'latin'],
+const vazirmatn = Vazirmatn({
+  subsets: ['arabic'],
   display: 'swap',
+  variable: '--font-vazirmatn',
+  weight: ['400', '500', '700'],
+});
+
+// Configure Lalezar for headings
+const lalezar = Lalezar({
+  subsets: ['arabic'],
+  display: 'swap',
+  variable: '--font-lalezar',
+  weight: '400',
 });
 
 export const metadata: Metadata = {
@@ -24,9 +34,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fa">
       <body
-        className={`${lalezar.className} antialiased min-h-screen bg-[#282A2A]`}
+        className={`${vazirmatn.variable} ${lalezar.variable} antialiased min-h-screen bg-[#282A2A]`}
       >
         <ThemeProvider>
           {/* <LoadingProvider> */}

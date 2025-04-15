@@ -147,7 +147,7 @@ const Footer: React.FC = () => {
               <div className="flex flex-row md:flex-col gap-4">
                 {/* Enamad Logo - Centered on white background */}
                 <Link
-                  href="https://enamad.ir/verify.aspx?id=123456"
+                  href="https://trustseal.enamad.ir/?id=583141&Code=XBeyUuednnONcuUwp6bFFlCDVLmo28jw"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block"

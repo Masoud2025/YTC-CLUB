@@ -31,32 +31,32 @@ const navLinks: NavLink[] = [
     href: '/',
     dropdown: [
       { name: 'حساب کاربری', href: '/home/sub1' },
-      { name: 'آشنایی باتیم', href: '/home/sub2' },
+      { name: 'آشنایی باتیم', href: '/about_us' },
     ],
   },
   {
     name: 'طراحی',
     href: '/courses',
     dropdown: [
-      { name: 'پک های رایگان طراحی', href: '/courses/sub1' },
-      { name: 'آموزش رایگان طراحی', href: '/courses/sub2' },
+      { name: 'پک های رایگان طراحی', href: '/free_design_packs' },
+      { name: 'آموزش رایگان طراحی', href: '/free_design_tutorial' },
     ],
   },
   {
     name: 'ادیت',
     href: '/blog',
     dropdown: [
-      { name: 'پک های رایگان ادیت', href: '/blog/sub1' },
-      { name: 'آموزش های رایگان ادیت', href: '/blog/sub2' },
+      { name: 'پک های رایگان ادیت', href: '/free_edit_packs' },
+      { name: 'آموزش های رایگان ادیت', href: '/free_edit_thumbnails' },
     ],
   },
   {
     name: 'محصولات',
     href: '/products',
     dropdown: [
-      { name: 'پک ها', href: '/products/sub1' },
-      { name: 'دوره آموزشی', href: '/products/sub2' },
-      { name: 'خدمات طراحی و ادیت', href: '/products/sub3' },
+      { name: 'پک ها', href: '/edit_packs' },
+      { name: 'دوره آموزشی', href: '/training_courses' },
+      { name: 'خدمات طراحی و ادیت', href: '/design_and_editing_services' },
     ],
   },
   {

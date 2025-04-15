@@ -82,7 +82,7 @@ export default function AboutUs() {
           {/* Banner Image */}
           <div className="w-1/2 relative">
             <Image
-              src="/worksamples.png"
+              src="/aboutUs.png"
               alt="یوتیوب کلاب"
               fill
               style={{ objectFit: 'cover', objectPosition: 'center' }}
