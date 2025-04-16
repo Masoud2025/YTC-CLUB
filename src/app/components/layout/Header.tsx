@@ -116,8 +116,27 @@ const Navbar: React.FC = () => {
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex justify-between items-center h-full">
-            {/* Logo - Right Side */}
+            {/* Logo - Right Side with Hamburger Menu */}
             <div className="flex-shrink-0 flex items-center">
+              {/* Mobile menu button on the right side */}
+              <div className="md:hidden flex items-center ml-2">
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                  aria-expanded={isOpen ? 'true' : 'false'}
+                  aria-controls="mobile-menu"
+                >
+                  <span className="sr-only">
+                    {isOpen ? 'بستن منو' : 'باز کردن منو'}
+                  </span>
+                  {isOpen ? (
+                    <FiX className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <FiMenu className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </button>
+              </div>
+
               <Link href="/" className="flex items-center" onClick={closeMenu}>
                 <span className="mr-2 text-2xl font-bold text-white">
                   یوتیوب <span className="text-[#468FD5]">کلاب</span>
@@ -177,37 +196,28 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Auth Buttons and Icons - Left Side */}
-            <div className="hidden md:flex items-center">
+            <div className="flex items-center">
+              {/* Login button visible on both mobile and desktop */}
               <Link
                 href="/auth"
-                className="px-5 py-2.5 text-base font-medium text-white bg-[#175299] rounded-xl hover:bg-[#0f3f77] focus:outline-none shadow-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center transition-colors mr-8"
+                className="px-5 py-2.5 text-base font-medium text-white bg-[#175299] rounded-xl hover:bg-[#0f3f77] focus:outline-none shadow-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center transition-colors mr-4 md:mr-8"
               >
                 <FiUser className="ml-2 h-5 w-5" aria-hidden="true" />
-                ورود / ثبت نام
+                <span className="hidden xs:inline">ورود / ثبت نام</span>
+                <span className="xs:hidden">ورود</span>
               </Link>
-              <div className="flex items-center space-x-6 space-x-reverse">
+
+              {/* Desktop icons */}
+              <div className="hidden md:flex items-center space-x-6 space-x-reverse">
                 <FiShoppingCart className="h-7 w-7 text-white cursor-pointer" />
                 <FiSearch className="h-7 w-7 text-white cursor-pointer" />
               </div>
-            </div>
 
-            {/* Mobile menu button */}
-            <div className="md:hidden flex items-center">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                aria-expanded={isOpen ? 'true' : 'false'}
-                aria-controls="mobile-menu"
-              >
-                <span className="sr-only">
-                  {isOpen ? 'بستن منو' : 'باز کردن منو'}
-                </span>
-                {isOpen ? (
-                  <FiX className="block h-6 w-6" aria-hidden="true" />
-                ) : (
-                  <FiMenu className="block h-6 w-6" aria-hidden="true" />
-                )}
-              </button>
+              {/* Mobile icons */}
+              <div className="flex md:hidden items-center space-x-4 space-x-reverse">
+                <FiShoppingCart className="h-6 w-6 text-white cursor-pointer" />
+                <FiSearch className="h-6 w-6 text-white cursor-pointer" />
+              </div>
             </div>
           </div>
         </div>
@@ -221,7 +231,7 @@ const Navbar: React.FC = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden"
+              className="md:hidden bg-[#353737]" // Added background color to the mobile menu
             >
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {navLinks.map((link, index) => (
@@ -252,12 +262,17 @@ const Navbar: React.FC = () => {
                     </button>
 
                     {link.dropdown && activeDropdown === index && (
-                      <div className="pr-6 mt-1 space-y-1" role="menu">
+                      <div
+                        className="bg-[#282A2A] rounded-md mt-1 mb-2"
+                        role="menu"
+                      >
+                        {' '}
+                        {/* Added background color to dropdown items */}
                         {link.dropdown.map((item, idx) => (
                           <Link
                             key={idx}
                             href={item.href}
-                            className="block px-3 py-2 rounded-md text-lg font-medium text-gray-400 hover:bg-gray-700"
+                            className="block px-6 py-2 text-lg font-medium text-gray-300 hover:bg-gray-700 border-b border-gray-700 last:border-b-0"
                             onClick={closeMenu}
                             role="menuitem"
                           >
@@ -268,22 +283,6 @@ const Navbar: React.FC = () => {
                     )}
                   </div>
                 ))}
-              </div>
-              <div className="pt-4 pb-3 border-t border-gray-700">
-                <div className="flex items-center justify-between px-5">
-                  <Link
-                    href="/auth"
-                    className="px-5 py-2.5 text-base font-medium text-white bg-[#175299] rounded-xl hover:bg-[#0f3f77] focus:outline-none shadow-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center transition-colors mr-4"
-                    onClick={closeMenu}
-                  >
-                    <FiUser className="ml-2 h-5 w-5" aria-hidden="true" />
-                    ورود / ثبت نام
-                  </Link>
-                  <div className="flex items-center space-x-6 space-x-reverse">
-                    <FiShoppingCart className="h-7 w-7 text-white" />
-                    <FiSearch className="h-7 w-7 text-white" />
-                  </div>
-                </div>
               </div>
             </motion.div>
           )}
