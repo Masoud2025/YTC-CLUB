@@ -120,7 +120,7 @@ const Navbar: React.FC = () => {
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="flex items-center" onClick={closeMenu}>
                 <span className="mr-2 text-2xl font-bold text-white">
-                  یتویب <span className="text-[#468FD5]">کلاب</span>
+                  یوتیوب <span className="text-[#468FD5]">کلاب</span>
                 </span>
               </Link>
             </div>
