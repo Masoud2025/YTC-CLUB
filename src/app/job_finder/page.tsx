@@ -1,6 +1,5 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 // Define the Job type
@@ -203,66 +202,58 @@ export default function JobsPage() {
           </div>
         </div>
 
-        {/* Jobs List */}
+        {/* Jobs List - Now in a single column layout */}
         {jobs.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex flex-col gap-6">
             {jobs.map(job => (
               <motion.div
                 key={job.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className="bg-[#353737] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
+                className="bg-[#353737] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.01]"
               >
-                <div className="relative h-48">
-                  <Image
-                    src={job.imageUrl}
-                    alt={job.title}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                  />
-                  <div className="absolute top-3 left-3 bg-[#0F3F77] text-white text-xs font-bold px-2 py-1 rounded">
-                    {job.category}
-                  </div>
-                </div>
-
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-3">
-                    <h2 className="text-xl font-bold text-white">
-                      {job.title}
-                    </h2>
-                    <span className="text-xs text-gray-400">
-                      {job.postedDate}
-                    </span>
+                    <div>
+                      <h2 className="text-xl font-bold text-white mb-2">
+                        {job.title}
+                      </h2>
+                      <div className="flex items-center mb-2">
+                        <span className="bg-[#0F3F77] text-white text-xs font-bold px-2 py-1 rounded mr-2">
+                          {job.category}
+                        </span>
+                        <span className="text-xs text-gray-400">
+                          {job.postedDate}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 text-gray-400 ml-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                      <span className="text-gray-300">{job.location}</span>
+                    </div>
                   </div>
 
-                  <p className="text-gray-300 mb-4 line-clamp-3">
-                    {job.description}
-                  </p>
-
-                  <div className="flex items-center mb-4">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5 text-gray-400 ml-2"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                    <span className="text-gray-300">{job.location}</span>
-                  </div>
+                  <p className="text-gray-300 mb-6">{job.description}</p>
 
                   <div className="border-t border-gray-700 pt-4">
                     <div className="flex justify-between items-center">

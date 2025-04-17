@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -77,6 +77,18 @@ const Navbar: React.FC = () => {
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
   const pathname = usePathname();
 
+  // Search functionality states
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchResults, setSearchResults] = useState<
+    { text: string; node: Node; count: number }[]
+  >([]);
+  const [currentResultIndex, setCurrentResultIndex] = useState<number>(0);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const [highlightedElements, setHighlightedElements] = useState<HTMLElement[]>(
+    [],
+  );
+
   // Handle navbar visibility on scroll
   useEffect(() => {
     const handleScroll = (): void => {
@@ -95,6 +107,50 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  // Focus search input when search modal opens
+  useEffect(() => {
+    if (isSearchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [isSearchOpen]);
+
+  // Add keyboard shortcuts for search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Close search on Escape
+      if (e.key === 'Escape' && isSearchOpen) {
+        handleCloseSearch();
+      }
+
+      // Navigate results with arrow keys
+      if (isSearchOpen && searchResults.length > 0) {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          navigateResults('next');
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          navigateResults('prev');
+        }
+      }
+
+      // Open search with Ctrl+F or Cmd+F
+      if ((e.ctrlKey || e.metaKey) && e.key === 'f' && !isSearchOpen) {
+        e.preventDefault();
+        handleOpenSearch();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isSearchOpen, searchResults, currentResultIndex]);
+
+  // Clean up highlights when search is closed
+  useEffect(() => {
+    return () => {
+      clearHighlights();
+    };
+  }, []);
+
   const toggleDropdown = (index: number): void => {
     setActiveDropdown(activeDropdown === index ? null : index);
   };
@@ -106,6 +162,200 @@ const Navbar: React.FC = () => {
 
   const isActive = (href: string): boolean => {
     return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  const handleOpenSearch = (): void => {
+    setIsSearchOpen(true);
+  };
+
+  const handleCloseSearch = (): void => {
+    setIsSearchOpen(false);
+    setSearchTerm('');
+    clearHighlights();
+    setSearchResults([]);
+    setCurrentResultIndex(0);
+  };
+
+  const clearHighlights = (): void => {
+    // Remove all highlighted elements
+    highlightedElements.forEach(el => {
+      const parent = el.parentNode;
+      if (parent) {
+        parent.replaceChild(document.createTextNode(el.textContent || ''), el);
+        parent.normalize(); // Merge adjacent text nodes
+      }
+    });
+    setHighlightedElements([]);
+  };
+
+  const handleSearch = (e: React.FormEvent): void => {
+    e.preventDefault();
+
+    if (!searchTerm.trim()) return;
+
+    // Clear previous highlights
+    clearHighlights();
+
+    // Get all text nodes in the document
+    const textNodes: Node[] = [];
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode: function (node) {
+          // Skip script and style elements
+          if (
+            node.parentNode &&
+            ['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEXTAREA', 'INPUT'].includes(
+              (node.parentNode as Element).tagName,
+            )
+          ) {
+            return NodeFilter.FILTER_REJECT;
+          }
+
+          // Accept non-empty text nodes
+          if (node.textContent && node.textContent.trim().length > 0) {
+            return NodeFilter.FILTER_ACCEPT;
+          }
+
+          return NodeFilter.FILTER_SKIP;
+        },
+      },
+    );
+
+    let currentNode: Node | null;
+    while ((currentNode = walker.nextNode())) {
+      textNodes.push(currentNode);
+    }
+
+    // Find matches
+    const results: { text: string; node: Node; count: number }[] = [];
+    const searchTermLower = searchTerm.toLowerCase();
+
+    textNodes.forEach(node => {
+      const text = node.textContent || '';
+      const textLower = text.toLowerCase();
+      let count = 0;
+      let index = textLower.indexOf(searchTermLower);
+
+      while (index !== -1) {
+        count++;
+        index = textLower.indexOf(searchTermLower, index + 1);
+      }
+
+      if (count > 0) {
+        results.push({ text, node, count });
+      }
+    });
+
+    // Set search results
+    setSearchResults(results);
+
+    // Highlight all results
+    const newHighlightedElements: HTMLElement[] = [];
+    results.forEach(result => {
+      const newElements = highlightTextInNode(result.node, searchTerm);
+      newHighlightedElements.push(...newElements);
+    });
+    setHighlightedElements(newHighlightedElements);
+
+    // Focus on first result if any
+    if (results.length > 0) {
+      setCurrentResultIndex(0);
+      scrollToResult(0);
+    }
+  };
+
+  const highlightTextInNode = (
+    node: Node,
+    searchText: string,
+  ): HTMLElement[] => {
+    const text = node.textContent || '';
+    const parent = node.parentNode;
+    if (!parent) return [];
+
+    const highlightedElements: HTMLElement[] = [];
+    const searchTextLower = searchText.toLowerCase();
+    const textLower = text.toLowerCase();
+
+    // If no match or parent is not valid, return empty array
+    if (textLower.indexOf(searchTextLower) === -1) return [];
+
+    // Create a document fragment to hold the new nodes
+    const fragment = document.createDocumentFragment();
+
+    let lastIndex = 0;
+    let index = textLower.indexOf(searchTextLower);
+
+    while (index !== -1) {
+      // Add text before the match
+      if (index > lastIndex) {
+        fragment.appendChild(
+          document.createTextNode(text.substring(lastIndex, index)),
+        );
+      }
+
+      // Create highlighted span for the match
+      const matchText = text.substring(index, index + searchText.length);
+      const highlightSpan = document.createElement('span');
+      highlightSpan.textContent = matchText;
+      highlightSpan.className = 'bg-yellow-300 text-black px-0.5 rounded';
+      highlightSpan.dataset.searchHighlight = 'true';
+
+      fragment.appendChild(highlightSpan);
+      highlightedElements.push(highlightSpan);
+
+      lastIndex = index + searchText.length;
+      index = textLower.indexOf(searchTextLower, lastIndex);
+    }
+
+    // Add remaining text
+    if (lastIndex < text.length) {
+      fragment.appendChild(document.createTextNode(text.substring(lastIndex)));
+    }
+
+    // Replace the original node with the fragment
+    parent.replaceChild(fragment, node);
+
+    return highlightedElements;
+  };
+
+  const scrollToResult = (index: number): void => {
+    if (index >= 0 && index < highlightedElements.length) {
+      const element = highlightedElements[index];
+
+      // Update highlight styles
+      highlightedElements.forEach((el, i) => {
+        if (i === index) {
+          el.className = 'bg-orange-500 text-white px-0.5 rounded';
+        } else {
+          el.className = 'bg-yellow-300 text-black px-0.5 rounded';
+        }
+      });
+
+      // Scroll element into view
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }
+  };
+
+  const navigateResults = (direction: 'next' | 'prev'): void => {
+    if (highlightedElements.length === 0) return;
+
+    let newIndex = currentResultIndex;
+
+    if (direction === 'next') {
+      newIndex = (currentResultIndex + 1) % highlightedElements.length;
+    } else {
+      newIndex =
+        (currentResultIndex - 1 + highlightedElements.length) %
+        highlightedElements.length;
+    }
+
+    setCurrentResultIndex(newIndex);
+    scrollToResult(newIndex);
   };
 
   return (
@@ -210,13 +460,19 @@ const Navbar: React.FC = () => {
               {/* Desktop icons */}
               <div className="hidden md:flex items-center space-x-6 space-x-reverse">
                 <FiShoppingCart className="h-7 w-7 text-white cursor-pointer" />
-                <FiSearch className="h-7 w-7 text-white cursor-pointer" />
+                <FiSearch
+                  className="h-7 w-7 text-white cursor-pointer"
+                  onClick={handleOpenSearch}
+                />
               </div>
 
               {/* Mobile icons */}
               <div className="flex md:hidden items-center space-x-4 space-x-reverse">
                 <FiShoppingCart className="h-6 w-6 text-white cursor-pointer" />
-                <FiSearch className="h-6 w-6 text-white cursor-pointer" />
+                <FiSearch
+                  className="h-6 w-6 text-white cursor-pointer"
+                  onClick={handleOpenSearch}
+                />
               </div>
             </div>
           </div>
@@ -288,6 +544,120 @@ const Navbar: React.FC = () => {
           )}
         </AnimatePresence>
       </nav>
+
+      {/* Search Modal - Very light overlay */}
+      <AnimatePresence>
+        {isSearchOpen && (
+          <>
+            {/* Very light overlay - almost transparent */}
+            <div
+              className="fixed inset-0 bg-transparent z-50"
+              onClick={handleCloseSearch}
+            />
+
+            {/* Search bar at the top */}
+            <motion.div
+              initial={{ y: -100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -100, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed top-4 left-1/2 transform -translate-x-1/2 w-full max-w-2xl z-50"
+            >
+              <div className="bg-[#353737] rounded-xl shadow-lg overflow-hidden mx-4">
+                <div className="p-4">
+                  <form onSubmit={handleSearch} className="relative">
+                    <input
+                      ref={searchInputRef}
+                      type="text"
+                      value={searchTerm}
+                      onChange={e => setSearchTerm(e.target.value)}
+                      placeholder="جستجو در صفحه..."
+                      className="w-full bg-[#282A2A] text-white px-4 py-3 pr-12 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      dir="rtl"
+                    />
+                    <div className="absolute left-4 top-3 flex items-center">
+                      <button
+                        type="button"
+                        onClick={() => navigateResults('prev')}
+                        className="text-gray-400 hover:text-white p-1 mr-1"
+                        disabled={highlightedElements.length === 0}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 15l7-7 7 7"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => navigateResults('next')}
+                        className="text-gray-400 hover:text-white p-1 mr-1"
+                        disabled={highlightedElements.length === 0}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        type="submit"
+                        className="text-blue-500 hover:text-blue-400 p-1"
+                      >
+                        <FiSearch className="h-5 w-5" />
+                      </button>
+                    </div>
+                    <div className="absolute right-4 top-3">
+                      <button
+                        type="button"
+                        onClick={handleCloseSearch}
+                        className="text-gray-400 hover:text-white"
+                      >
+                        <FiX className="h-5 w-5" />
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+                {/* Search results counter */}
+                {highlightedElements.length > 0 && (
+                  <div className="px-4 py-2 bg-[#282A2A] text-gray-300 text-sm flex justify-between items-center">
+                    <span>
+                      {currentResultIndex + 1} از {highlightedElements.length}{' '}
+                      نتیجه
+                    </span>
+                    <span>
+                      {searchResults.reduce(
+                        (total, result) => total + result.count,
+                        0,
+                      )}{' '}
+                      مورد یافت شد
+                    </span>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
