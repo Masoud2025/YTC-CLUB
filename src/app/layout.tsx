@@ -24,7 +24,7 @@ const lalezar = Lalezar({
 });
 
 export const metadata: Metadata = {
-  title: 'YTC-CLUB',
+  title: 'یوتیوب کلاب – ارائه خدمات یوتیوب',
   description: 'Learn, design, post – YTC-Club',
 };
 
