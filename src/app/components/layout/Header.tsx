@@ -13,7 +13,7 @@ import {
   FiShoppingCart,
 } from 'react-icons/fi';
 import { RiArrowDropDownLine } from 'react-icons/ri';
-
+// import { morabba } from '../../font';
 type DropdownItem = {
   name: string;
   href: string;
@@ -388,8 +388,9 @@ const Navbar: React.FC = () => {
               </div>
 
               <Link href="/" className="flex items-center" onClick={closeMenu}>
-                <span className="mr-2 text-2xl font-bold text-white">
-                  یوتیوب <span className="text-[#468FD5]">کلاب</span>
+                <span className="mr-2 text-2xl">
+                  <span className={`font-black text-white`}>یوتیوب</span>{' '}
+                  <span className={` font-bold text-[#468FD5]`}>کلاب</span>
                 </span>
               </Link>
             </div>
@@ -449,7 +450,7 @@ const Navbar: React.FC = () => {
             <div className="flex items-center">
               {/* Login button visible on both mobile and desktop */}
               <Link
-                href="/auth"
+                href="/login"
                 className="px-5 py-2.5 text-base font-medium text-white bg-[#175299] rounded-xl hover:bg-[#0f3f77] focus:outline-none shadow-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center transition-colors mr-4 md:mr-8"
               >
                 <FiUser className="ml-2 h-5 w-5" aria-hidden="true" />

@@ -1,1 +1,16 @@
 @import 'tailwindcss';
+/* Apply font for logo on navbar  */
+/* In your globals.css or create a new CSS file */
+/* @font-face {
+  font-family: 'Morababa';
+  src: url('/public/fonts/Morabba/ttf/Morabba-SemiBold.ttf') format('.ttf');
+}
+
+.custom-font {
+  font-family: 'Morababa', sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  font-size: 40px;
+} */
+/*  */

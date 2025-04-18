@@ -332,16 +332,6 @@ export default function RegisterPage() {
               <FaGoogle className="mr-2 text-red-500" />
               گوگل
             </motion.button>
-            <motion.button
-              type="button"
-              className="flex items-center justify-center bg-gray-800 dark:bg-gray-700 border border-gray-700 dark:border-gray-600 rounded-lg px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-700 dark:hover:bg-gray-600"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => handleSocialRegister('github')}
-            >
-              <FiGithub className="mr-2" />
-              گیت‌هاب
-            </motion.button>
           </motion.div>
 
           {/* Login link */}
