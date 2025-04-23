@@ -1,0 +1,25 @@
+/* /styles/font.css */
+
+@font-face {
+  font-family: 'Morabba';
+  src: url('/fonts/Morabba/ttf/Morabba-ExtraBold.ttf');
+  font-weight: bolder;
+  font-style: normal;
+}
+.testFont {
+  font-family: 'Morabba';
+  font-size: 3rem;
+}
+/* @font-face {
+  font-family: 'Rubik';
+  src: url('../fonts/rubik/Rubik-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: url('../fonts/rubik/Rubik-Italic.ttf');
+  font-weight: normal;
+  font-style: italic;
+} */

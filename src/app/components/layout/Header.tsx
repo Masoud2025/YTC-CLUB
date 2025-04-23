@@ -13,7 +13,7 @@ import {
   FiShoppingCart,
 } from 'react-icons/fi';
 import { RiArrowDropDownLine } from 'react-icons/ri';
-// import { morabba } from '../../font';
+import './font.css';
 type DropdownItem = {
   name: string;
   href: string;
@@ -359,7 +359,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center mt-5">
+    <div className="LOGO flex justify-center mt-5">
       <nav
         className="z-50 bg-[#353737] shadow-[5px_5px_15px_rgba(0,0,0,0.3)] rounded-[30px] w-[1529px] h-[100px]"
         dir="rtl"
@@ -387,10 +387,15 @@ const Navbar: React.FC = () => {
                 </button>
               </div>
 
-              <Link href="/" className="flex items-center" onClick={closeMenu}>
-                <span className="mr-2 text-2xl">
-                  <span className={`font-black text-white`}>یوتیوب</span>{' '}
-                  <span className={` font-bold text-[#468FD5]`}>کلاب</span>
+              <Link
+                href="/"
+                className="LOGO flex items-center"
+                onClick={closeMenu}
+              >
+                <span className="testFont mr-2 text-2xl">
+                  <span className={`    text-white`}>یوتیوب </span>
+
+                  <span className={`LOGO text-[#468FD5]`}>کلاب</span>
                 </span>
               </Link>
             </div>

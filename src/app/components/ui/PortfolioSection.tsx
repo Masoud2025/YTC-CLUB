@@ -2,6 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import '../layout/font.css';
 
 interface PortfolioItemProps {
   imageSrc: string;
@@ -61,12 +62,12 @@ const PortfolioSection: React.FC = () => {
     <section className="py-16 container mx-auto px-4">
       <div className="relative mb-12 flex items-center">
         <div className="flex-grow h-px bg-gray-300"></div>
-        <h2 className="text-2xl font-bold mx-4 px-4 absolute right-0">
+        <h2 className=" text-2xl font-bold mx-4 px-4 absolute right-0">
           نمونه کارهای ما
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8" dir="rtl">
+      <div className="testFont grid grid-cols-1 md:grid-cols-2 gap-8" dir="rtl">
         {portfolioItems.map((item, index) => (
           <PortfolioItem
             key={index}

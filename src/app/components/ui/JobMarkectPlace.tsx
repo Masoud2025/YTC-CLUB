@@ -5,7 +5,7 @@ import { FaSearch, FaEdit, FaTimes } from 'react-icons/fa';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import './IransansFont.css';
 // Define types for form data
 interface JobFormData {
   jobTitle: string;
@@ -255,7 +255,9 @@ const JobMarketplace: React.FC = () => {
         >
           {/* Left side - Text */}
           <div className="w-1/2 p-8 flex flex-col justify-center">
-            <h3 className="text-2xl font-bold mb-3 text-white">کارجو هستم</h3>
+            <h3 className="IranSans text-2xl font-bold mb-3 text-white">
+              کارجو هستم
+            </h3>
             <p className="text-white mb-6">
               به دنبال فرصت‌های شغلی در حوزه تولید محتوا و یوتیوب
             </p>
@@ -283,7 +285,9 @@ const JobMarketplace: React.FC = () => {
         >
           {/* Left side - Text */}
           <div className="w-1/2 p-8 flex flex-col justify-center">
-            <h3 className="text-2xl font-bold mb-3 text-white">کارفرما هستم</h3>
+            <h3 className="IranSans text-2xl font-bold mb-3 text-white">
+              کارفرما هستم
+            </h3>
             <p className="text-white mb-6">
               ثبت آگهی استخدام و جذب متخصصان حوزه تولید محتوا
             </p>
