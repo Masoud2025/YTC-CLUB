@@ -150,8 +150,10 @@ export default function JobsPage() {
   return (
     <div className="min-h-screen bg-[#282A2A] text-gray-100">
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold mb-2 text-white">فرصت‌های شغلی</h1>
-        <p className="text-gray-400 mb-8">
+        <h1 className="text-3xl text-center font-bold mb-2 text-white">
+          فرصت‌های شغلی
+        </h1>
+        <p className="text-gray-400 text-center mb-8">
           جدیدترین فرصت‌های شغلی در حوزه تولید محتوا و رسانه‌های اجتماعی
         </p>
 

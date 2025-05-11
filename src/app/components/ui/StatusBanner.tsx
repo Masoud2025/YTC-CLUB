@@ -23,7 +23,7 @@ const StatsBanner: React.FC = () => {
 
   return (
     <div
-      className="w-full bg-[#2655A6] mx-auto py-8 flex items-center justify-center"
+      className="w-[80%] rounded-4xl bg-[#2655A6] mx-auto py-8 flex items-center justify-center "
       dir="rtl"
     >
       <div className="flex flex-col md:flex-row justify-between items-center w-full px-4 md:px-8 lg:px-20 gap-6 md:gap-4">

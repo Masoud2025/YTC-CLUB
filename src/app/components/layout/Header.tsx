@@ -359,9 +359,9 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <div className="LOGO flex justify-center mt-5">
+    <div className="flex justify-center mt-5">
       <nav
-        className="z-50 bg-[#353737] shadow-[5px_5px_15px_rgba(0,0,0,0.3)] rounded-[30px] w-[1529px] h-[100px]"
+        className="z-50 bg-[#353737] shadow-[5px_5px_15px_rgba(0,0,0,0.3)] rounded-[30px] w-[1490px] h-[100px]"
         dir="rtl"
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-8 h-full">
