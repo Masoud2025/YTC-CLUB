@@ -1,6 +1,6 @@
 {
   "app": "ytc-club",
-  "port": 3000,
+  "port": 80,
   "build": {
     "location": "iran"
   },
