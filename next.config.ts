@@ -1,7 +1,15 @@
-import type { NextConfig } from 'next';
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  webpack: (config: { watchOptions: { ignored: string[] } }) => {
+    config.watchOptions = {
+      ignored: [
+        '**/Application Data/**',
+        '**/AppData/**',
+        '**/node_modules/**',
+      ],
+    };
+    return config;
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
