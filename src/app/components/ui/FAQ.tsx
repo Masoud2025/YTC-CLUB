@@ -49,7 +49,7 @@ const FAQ: React.FC = () => {
 
   return (
     <section className="py-20 px-6  " dir="rtl">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4 text-white">سوالات متداول</h2>
           <p className="text-lg text-white">پاسخ به سوالات رایج شما</p>
@@ -63,14 +63,14 @@ const FAQ: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: item.id * 0.1 }}
-              className="border border-gray-200 rounded-xl overflow-hidden"
+              className="border  rounded-xl overflow-hidden"
             >
               <button
                 onClick={() => toggleQuestion(item.id)}
                 className={`w-full text-right p-5 flex justify-between items-center transition-colors ${
                   openQuestion === item.id
                     ? 'bg-[#353737] text-white'
-                    : 'bg-[#353737] text-white hover:bg-gray-50'
+                    : 'bg-[#353737] text-white hover:bg-gray-700'
                 }`}
               >
                 <span className="font-bold text-lg">{item.question}</span>

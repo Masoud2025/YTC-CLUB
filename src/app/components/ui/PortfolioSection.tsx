@@ -23,13 +23,13 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
         <Image
           src={imageSrc}
           alt={title}
-          width={247}
+          width={307}
           height={174}
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
-      <h3 className="text-xl font-bold mb-2 text-center">{title}</h3>
+      <h3 className="text-xl font-bold mb-2 text-center text-white">{title}</h3>
       <div className="flex justify-center w-full">
         <Link
           href={buttonHref}
@@ -60,16 +60,16 @@ const PortfolioSection: React.FC = () => {
 
   return (
     <section className="py-16 container mx-auto px-4">
-      <div className="relative mb-12 flex items-center">
-        <div className="flex-grow h-px bg-gray-300"></div>
-        <h2 className=" text-2xl font-bold mx-4 px-4 absolute right-0">
+      <div className="relative mb-12 flex items-center" dir="rtl">
+        <h2 className="text-2xl font-bold ml-4 text-white z-10 bg-transparent">
           نمونه کارهای ما
         </h2>
+        <div className="flex-grow h-px bg-gray-300"></div>
       </div>
 
       <div
         id="testFont"
-        className=" grid grid-cols-1 md:grid-cols-2 gap-8"
+        className="grid grid-cols-2 gap-4 sm:gap-6 md:gap-8"
         dir="rtl"
       >
         {portfolioItems.map((item, index) => (

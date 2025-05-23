@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import './IransansFont.css';
+
 // Define types for form data
 interface JobFormData {
   jobTitle: string;
@@ -55,7 +56,7 @@ const JobPostingWizard: React.FC<JobPostingWizardProps> = ({
   const prevStep = () => setCurrentStep(prev => Math.max(prev - 1, 1));
 
   return (
-    <div className="p-6">
+    <div className="p-6 md:p-8">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-2xl font-bold text-white">ثبت آگهی استخدام</h3>
         <button onClick={closeModal} className="text-gray-400 hover:text-white">
@@ -236,32 +237,32 @@ const JobMarketplace: React.FC = () => {
   };
 
   return (
-    <section className="py-24 px-6 font-[vazir]" dir="rtl">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold mb-6 text-white">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 font-[vazir]" dir="rtl">
+      <div className="text-center mb-10 sm:mb-16">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 text-white">
           بازار کار یوتیوب کلاب
         </h2>
-        <p className="text-lg text-white max-w-3xl mx-auto">
+        <p className="text-base sm:text-lg text-white max-w-3xl mx-auto px-2">
           فرصت‌های شغلی مرتبط با تولید محتوا و یوتیوب را در اینجا پیدا کنید یا
           آگهی استخدام خود را ثبت کنید
         </p>
       </div>
 
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-center gap-10">
+      <div className="max-w-7xl mx-auto flex flex-col gap-6 sm:gap-10">
         {/* Job Seeker Button */}
         <div
           onClick={goToJobFinder}
-          className="w-full md:w-[633px] h-[274px] bg-[#242525] rounded-xl flex overflow-hidden hover:bg-[#0165FC] transition-colors cursor-pointer"
+          className="w-full h-[200px] sm:h-[274px] bg-[#242525] rounded-xl flex overflow-hidden hover:bg-[#0165FC] transition-colors cursor-pointer"
         >
           {/* Left side - Text */}
-          <div className="w-1/2 p-8 flex flex-col justify-center">
-            <h3 className="IranSans text-2xl font-bold mb-3 text-white">
+          <div className="w-1/2 p-4 sm:p-8 flex flex-col justify-center">
+            <h3 className="IranSans text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-white">
               کارجو هستم
             </h3>
-            <p className="text-white mb-6">
+            <p className="text-white text-sm sm:text-base mb-3 sm:mb-6">
               به دنبال فرصت‌های شغلی در حوزه تولید محتوا و یوتیوب
             </p>
-            <div className="flex items-center text-white">
+            <div className="flex items-center text-white text-sm sm:text-base">
               <FaSearch className="ml-2" />
               <span>مشاهده فرصت‌های شغلی</span>
             </div>
@@ -281,17 +282,17 @@ const JobMarketplace: React.FC = () => {
         {/* Employer Button */}
         <div
           onClick={openModal}
-          className="w-full md:w-[633px] h-[274px] bg-[#242525] rounded-xl flex overflow-hidden hover:bg-[#0165FC] transition-colors cursor-pointer"
+          className="w-full h-[200px] sm:h-[274px] bg-[#242525] rounded-xl flex overflow-hidden hover:bg-[#0165FC] transition-colors cursor-pointer"
         >
           {/* Left side - Text */}
-          <div className="w-1/2 p-8 flex flex-col justify-center">
-            <h3 className="IranSans text-2xl font-bold mb-3 text-white">
+          <div className="w-1/2 p-4 sm:p-8 flex flex-col justify-center">
+            <h3 className="IranSans text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-white">
               کارفرما هستم
             </h3>
-            <p className="text-white mb-6">
+            <p className="text-white text-sm sm:text-base mb-3 sm:mb-6">
               ثبت آگهی استخدام و جذب متخصصان حوزه تولید محتوا
             </p>
-            <div className="flex items-center text-white">
+            <div className="flex items-center text-white text-sm sm:text-base">
               <FaEdit className="ml-2" />
               <span>ثبت آگهی استخدام</span>
             </div>

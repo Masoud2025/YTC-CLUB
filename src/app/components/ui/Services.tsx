@@ -51,14 +51,14 @@ const Services: React.FC = () => {
         <div className="w-24 h-1 bg-[#0165FC] mx-auto mt-8"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
         {/* Left side - Dropdowns */}
-        <div className="w-full md:w-1/2 p-6">
+        <div className="w-full md:w-1/2 p-6 flex flex-col justify-center">
           {services.map(service => (
-            <div key={service.id} className="mb-4">
+            <div key={service.id} className="mb-6">
               <button
                 onClick={() => toggleDropdown(service.id)}
-                className="w-full flex items-center justify-between bg-[#141843]/20 p-4 rounded-lg text-white"
+                className="w-full flex items-center justify-between bg-[#333737]/20 p-4 rounded-lg text-white"
               >
                 <div className="flex items-center">
                   <h3 className="text-xl font-bold">{service.title}</h3>
@@ -71,11 +71,11 @@ const Services: React.FC = () => {
               </button>
 
               {openDropdown === service.id && (
-                <div className="bg-[#141843]/10 p-4 rounded-b-lg mt-1">
+                <div className="bg-[#353737]/10 p-4 rounded-b-lg mt-1">
                   <p className="text-white leading-relaxed">
                     {service.description}
                   </p>
-                  <button className="mt-4 bg-[#0165FC] text-white font-medium py-2 px-6 rounded-lg hover:bg-[#141843] transition-colors">
+                  <button className="mt-4 bg-[#0165FC] text-white font-medium py-2 px-6 rounded-lg hover:bg-[#353737] transition-colors">
                     اطلاعات بیشتر
                   </button>
                 </div>
@@ -85,15 +85,15 @@ const Services: React.FC = () => {
         </div>
 
         {/* Right side - Big Image */}
-        <div className="w-full md:w-1/2 p-6">
-          <div className="relative h-[500px] w-full rounded-2xl overflow-hidden ">
+        <div className="w-full md:w-1/2 p-6 flex justify-center items-center">
+          <div className="relative h-[500px] w-full rounded-2xl overflow-hidden flex justify-center">
             <Image
               src="/services.png"
               alt="Our Services"
-              width={500}
+              width={600}
               height={500}
+              className="object-contain"
             />
-            <div className="absolute" />
           </div>
         </div>
       </div>

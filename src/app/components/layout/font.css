@@ -8,7 +8,27 @@
 }
 #testFont {
   font-family: 'Morabba' !important;
-  font-size: 30px;
+  /* font-size: 30px; */
+}
+/* For small screens and up */
+@media (min-width: 640px) {
+  #testFont {
+    font-size: 18px !important;
+  }
+}
+
+/* For medium screens and up */
+@media (min-width: 768px) {
+  #testFont {
+    font-size: 18px !important;
+  }
+}
+
+/* For large screens and up */
+@media (min-width: 1024px) {
+  #testFont {
+    font-size: 30px !important;
+  }
 }
 /* @font-face {
   font-family: 'Rubik';
