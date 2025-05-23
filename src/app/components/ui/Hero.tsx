@@ -12,7 +12,7 @@ const Hero: React.FC = () => {
           <div className="relative w-full flex flex-col items-center justify-center">
             <div className="relative w-full h-auto sm:h-screen">
               {/* Mobile view (compact) */}
-              <div className="block sm:hidden w-full">
+              <div className="block sm:hidden w-full mt-[4em]">
                 <Image
                   src="/HeroImage.png"
                   alt="یوتیوب کلاب"
