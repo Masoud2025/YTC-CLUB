@@ -69,8 +69,8 @@ const FAQ: React.FC = () => {
                 onClick={() => toggleQuestion(item.id)}
                 className={`w-full text-right p-5 flex justify-between items-center transition-colors ${
                   openQuestion === item.id
-                    ? 'bg-[#141843] text-white'
-                    : 'bg-white text-black hover:bg-gray-50'
+                    ? 'bg-[#353737] text-white'
+                    : 'bg-[#353737] text-white hover:bg-gray-50'
                 }`}
               >
                 <span className="font-bold text-lg">{item.question}</span>
@@ -95,7 +95,7 @@ const FAQ: React.FC = () => {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="p-5 bg-gray-50 border-t border-gray-200 text-gray-700 leading-relaxed">
+                    <div className="p-5 bg-[#353737] border-t border-gray-200 text-white leading-relaxed">
                       {item.answer}
                     </div>
                   </motion.div>

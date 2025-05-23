@@ -392,10 +392,14 @@ const Navbar: React.FC = () => {
                 className="LOGO flex items-center"
                 onClick={closeMenu}
               >
-                <span className="testFont mr-2 text-2xl">
-                  <span className={`    text-white`}>یوتیوب </span>
+                <span id="testFont" className=" mr-2">
+                  <span id="testFont" className={`  text-white`}>
+                    یوتیوب{' '}
+                  </span>
 
-                  <span className={`LOGO text-[#468FD5]`}>کلاب</span>
+                  <span id="testFont" className={`LOGO text-[#468FD5]`}>
+                    کلاب
+                  </span>
                 </span>
               </Link>
             </div>

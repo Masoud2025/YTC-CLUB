@@ -67,7 +67,11 @@ const PortfolioSection: React.FC = () => {
         </h2>
       </div>
 
-      <div className="testFont grid grid-cols-1 md:grid-cols-2 gap-8" dir="rtl">
+      <div
+        id="testFont"
+        className=" grid grid-cols-1 md:grid-cols-2 gap-8"
+        dir="rtl"
+      >
         {portfolioItems.map((item, index) => (
           <PortfolioItem
             key={index}

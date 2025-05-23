@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 // import { Lalezar } from 'next/font/google';
 import Navbar from './components/layout/Header';
 import Footer from './components/layout/Footer';
-import ThemeProvider from './components/Theme/ThemProvider';
+// import ThemeProvider from './components/Theme/ThemProvider';
 import './globals.css';
 // import LoadingProvider from './components/ui/LoadingProvider';
 
@@ -19,13 +19,13 @@ export default function RootLayout({
   return (
     <html lang="fa">
       <body className={`AnjomanFont antialiased min-h-screen bg-[#282A2A]`}>
-        <ThemeProvider>
-          {/* <LoadingProvider> */}
-          <Navbar />
-          <main className="min-h-[calc(100vh-160px)]">{children}</main>
-          <Footer />
-          {/* </LoadingProvider> */}
-        </ThemeProvider>
+        {/* <ThemeProvider> */}
+        {/* <LoadingProvider> */}
+        <Navbar />
+        <main className="min-h-[calc(100vh-160px)]">{children}</main>
+        <Footer />
+        {/* </LoadingProvider> */}
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );
