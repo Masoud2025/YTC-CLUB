@@ -67,7 +67,7 @@ const Services: React.FC = () => {
         <div className="block lg:hidden">
           {/* Image first on mobile */}
           <div className="mb-6 sm:mb-8">
-            <div className="relative h-48 sm:h-64 md:h-80 w-full rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-br from-[#0165FC]/10 to-purple-600/10 backdrop-blur-sm border border-white/10">
+            <div className="relative h-48 sm:h-64 md:h-80 w-full rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-br from-[#0165FC]/10 to-purple-600/10 border border-white/10">
               <Image
                 src="/services.png"
                 alt="Our Services"
@@ -84,7 +84,7 @@ const Services: React.FC = () => {
             {services.map((service, index) => (
               <div
                 key={service.id}
-                className="bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl border border-white/10 overflow-hidden transition-all duration-300 hover:bg-white/10 hover:border-[#0165FC]/30 hover:shadow-lg hover:shadow-[#0165FC]/10"
+                className="bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl border border-white/10 overflow-hidden transition-all duration-300 hover:bg-white/10 hover:border-[#0165FC]/30"
               >
                 <button
                   onClick={() => toggleDropdown(service.id)}
@@ -93,10 +93,10 @@ const Services: React.FC = () => {
                 >
                   <div className="flex items-center space-x-3 space-x-reverse">
                     <div
-                      className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-bold transition-all duration-500 ease-out transform ${
+                      className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-bold transition-all duration-300 ease-out ${
                         openDropdown === service.id
-                          ? 'bg-[#0165FC] text-white scale-110 shadow-lg shadow-[#0165FC]/30'
-                          : 'bg-[#0165FC]/20 text-[#0165FC] scale-100'
+                          ? 'bg-[#0165FC] text-white'
+                          : 'bg-[#0165FC]/20 text-[#0165FC]'
                       }`}
                     >
                       {index + 1}
@@ -106,7 +106,7 @@ const Services: React.FC = () => {
                     </h3>
                   </div>
                   <div
-                    className={`transition-all duration-500 ease-out transform ${
+                    className={`transition-transform duration-300 ease-out ${
                       openDropdown === service.id
                         ? 'rotate-180 text-white'
                         : 'rotate-0 text-[#0165FC]'
@@ -118,19 +118,23 @@ const Services: React.FC = () => {
 
                 {/* Animated dropdown content */}
                 <div
-                  className={`transition-all duration-700 ease-out overflow-hidden ${
+                  className={`transition-all duration-400 ease-out overflow-hidden ${
                     openDropdown === service.id
-                      ? 'max-h-96 opacity-100 transform translate-y-0'
-                      : 'max-h-0 opacity-0 transform -translate-y-4'
+                      ? 'max-h-96 opacity-100'
+                      : 'max-h-0 opacity-0'
                   }`}
                 >
                   <div className="bg-gradient-to-r from-[#0165FC]/5 to-[#0165FC]/10 border-t border-[#0165FC]/20 p-3 sm:p-4">
                     <div
-                      className={`transition-all duration-500 delay-200 ${
+                      className={`transition-all duration-300 ease-out ${
                         openDropdown === service.id
                           ? 'opacity-100 transform translate-y-0'
-                          : 'opacity-0 transform translate-y-4'
+                          : 'opacity-0 transform translate-y-2'
                       }`}
+                      style={{
+                        transitionDelay:
+                          openDropdown === service.id ? '100ms' : '0ms',
+                      }}
                     >
                       <p className="text-white/90 leading-relaxed text-sm sm:text-base mb-3">
                         {service.description}
@@ -142,15 +146,16 @@ const Services: React.FC = () => {
                             {service.features.map((feature, idx) => (
                               <span
                                 key={idx}
-                                className={`inline-flex items-center bg-[#0165FC]/10 text-[#0165FC] px-2 py-1 rounded-full text-xs border border-[#0165FC]/20 transition-all duration-300 delay-${
-                                  (idx + 1) * 100
-                                } ${
+                                className={`inline-flex items-center bg-[#0165FC]/10 text-[#0165FC] px-2 py-1 rounded-full text-xs border border-[#0165FC]/20 transition-all duration-300 ease-out ${
                                   openDropdown === service.id
-                                    ? 'opacity-100 transform translate-x-0'
-                                    : 'opacity-0 transform translate-x-4'
+                                    ? 'opacity-100 transform translate-y-0'
+                                    : 'opacity-0 transform translate-y-2'
                                 }`}
                                 style={{
-                                  transitionDelay: `${300 + idx * 100}ms`,
+                                  transitionDelay:
+                                    openDropdown === service.id
+                                      ? `${150 + idx * 50}ms`
+                                      : '0ms',
                                 }}
                               >
                                 <FaCheck className="ml-1 text-xs" />
@@ -162,11 +167,15 @@ const Services: React.FC = () => {
                       )}
 
                       <button
-                        className={`inline-flex items-center bg-gradient-to-r from-[#0165FC] to-[#0165FC]/80 text-white font-medium py-2 px-4 sm:py-2.5 sm:px-6 rounded-lg hover:from-[#0165FC]/90 hover:to-[#0165FC]/70 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#0165FC]/30 text-sm sm:text-base ${
+                        className={`inline-flex items-center bg-gradient-to-r from-[#0165FC] to-[#0165FC]/80 text-white font-medium py-2 px-4 sm:py-2.5 sm:px-6 rounded-lg hover:from-[#0165FC]/90 hover:to-[#0165FC]/70 transition-all duration-300 transform hover:scale-105 text-sm sm:text-base ${
                           openDropdown === service.id
-                            ? 'opacity-100 translate-y-0 delay-500'
-                            : 'opacity-0 translate-y-4'
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-2'
                         }`}
+                        style={{
+                          transitionDelay:
+                            openDropdown === service.id ? '300ms' : '0ms',
+                        }}
                       >
                         اطلاعات بیشتر
                         <FaArrowLeft className="mr-2 text-xs transition-transform duration-300 group-hover:translate-x-1" />
@@ -186,7 +195,7 @@ const Services: React.FC = () => {
             {services.map((service, index) => (
               <div
                 key={service.id}
-                className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden transition-all duration-300 hover:bg-white/10 hover:border-[#0165FC]/30 hover:shadow-xl hover:shadow-[#0165FC]/10"
+                className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden transition-all duration-300 hover:bg-white/10 hover:border-[#0165FC]/30"
               >
                 <button
                   onClick={() => toggleDropdown(service.id)}
@@ -195,10 +204,10 @@ const Services: React.FC = () => {
                 >
                   <div className="flex items-center space-x-4 space-x-reverse">
                     <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold transition-all duration-500 ease-out transform ${
+                      className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold transition-all duration-300 ease-out ${
                         openDropdown === service.id
-                          ? 'bg-[#0165FC] text-white scale-110 shadow-lg shadow-[#0165FC]/30'
-                          : 'bg-[#0165FC]/20 text-[#0165FC] scale-100'
+                          ? 'bg-[#0165FC] text-white'
+                          : 'bg-[#0165FC]/20 text-[#0165FC]'
                       }`}
                     >
                       {index + 1}
@@ -208,7 +217,7 @@ const Services: React.FC = () => {
                     </h3>
                   </div>
                   <div
-                    className={`transition-all duration-500 ease-out transform ${
+                    className={`transition-transform duration-300 ease-out ${
                       openDropdown === service.id
                         ? 'rotate-180 text-white'
                         : 'rotate-0 text-[#0165FC]'
@@ -220,19 +229,23 @@ const Services: React.FC = () => {
 
                 {/* Animated dropdown content */}
                 <div
-                  className={`transition-all duration-700 ease-out overflow-hidden ${
+                  className={`transition-all duration-400 ease-out overflow-hidden ${
                     openDropdown === service.id
-                      ? 'max-h-96 opacity-100 transform translate-y-0'
-                      : 'max-h-0 opacity-0 transform -translate-y-4'
+                      ? 'max-h-96 opacity-100'
+                      : 'max-h-0 opacity-0'
                   }`}
                 >
                   <div className="bg-gradient-to-r from-[#0165FC]/5 to-[#0165FC]/10 border-t border-[#0165FC]/20 p-6">
                     <div
-                      className={`transition-all duration-500 delay-200 ${
+                      className={`transition-all duration-300 ease-out ${
                         openDropdown === service.id
                           ? 'opacity-100 transform translate-y-0'
-                          : 'opacity-0 transform translate-y-4'
+                          : 'opacity-0 transform translate-y-2'
                       }`}
+                      style={{
+                        transitionDelay:
+                          openDropdown === service.id ? '100ms' : '0ms',
+                      }}
                     >
                       <p className="text-white/90 leading-relaxed text-lg xl:text-xl mb-4">
                         {service.description}
@@ -244,13 +257,16 @@ const Services: React.FC = () => {
                             {service.features.map((feature, idx) => (
                               <span
                                 key={idx}
-                                className={`inline-flex items-center bg-[#0165FC]/10 text-[#0165FC] px-3 py-1.5 rounded-full text-sm border border-[#0165FC]/20 transition-all duration-300 ${
+                                className={`inline-flex items-center bg-[#0165FC]/10 text-[#0165FC] px-3 py-1.5 rounded-full text-sm border border-[#0165FC]/20 transition-all duration-300 ease-out ${
                                   openDropdown === service.id
-                                    ? 'opacity-100 transform translate-x-0'
-                                    : 'opacity-0 transform translate-x-4'
+                                    ? 'opacity-100 transform translate-y-0'
+                                    : 'opacity-0 transform translate-y-2'
                                 }`}
                                 style={{
-                                  transitionDelay: `${300 + idx * 100}ms`,
+                                  transitionDelay:
+                                    openDropdown === service.id
+                                      ? `${150 + idx * 50}ms`
+                                      : '0ms',
                                 }}
                               >
                                 <FaCheck className="ml-2 text-xs" />
@@ -262,11 +278,15 @@ const Services: React.FC = () => {
                       )}
 
                       <button
-                        className={`group inline-flex items-center bg-gradient-to-r from-[#0165FC] to-[#0165FC]/80 text-white font-medium py-3 px-8 rounded-lg hover:from-[#0165FC]/90 hover:to-[#0165FC]/70 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-[#0165FC]/30 ${
+                        className={`group inline-flex items-center bg-gradient-to-r from-[#0165FC] to-[#0165FC]/80 text-white font-medium py-3 px-8 rounded-lg hover:from-[#0165FC]/90 hover:to-[#0165FC]/70 transition-all duration-300 transform hover:scale-105 ${
                           openDropdown === service.id
-                            ? 'opacity-100 translate-y-0 delay-500'
-                            : 'opacity-0 translate-y-4'
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-2'
                         }`}
+                        style={{
+                          transitionDelay:
+                            openDropdown === service.id ? '300ms' : '0ms',
+                        }}
                       >
                         اطلاعات بیشتر
                         <FaArrowLeft className="mr-3 transition-transform duration-300 group-hover:translate-x-1" />
@@ -280,12 +300,12 @@ const Services: React.FC = () => {
 
           {/* Right side - Big Image */}
           <div className="w-1/2 sticky top-8">
-            <div className="relative h-96 xl:h-[500px] w-full rounded-2xl overflow-hidden bg-gradient-to-br from-[#0165FC]/10 to-purple-600/10 backdrop-blur-sm border border-white/10 hover:border-[#0165FC]/30 transition-all duration-300">
+            <div className="relative h-96 xl:h-[500px] w-full rounded-2xl overflow-hidden bg-gradient-to-br from-[#0165FC]/10 to-purple-600/10 border border-white/10">
               <Image
                 src="/services.png"
                 alt="Our Services"
                 fill
-                className="object-contain p-6 transition-transform duration-300 hover:scale-105"
+                className="object-contain p-6"
                 sizes="50vw"
                 priority
               />
