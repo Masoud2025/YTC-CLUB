@@ -7,7 +7,7 @@ import Services from './components/ui/Services';
 import StatsBanner from './components/ui/StatusBanner';
 import YouTubeClubIntro from './components/ui/VideoIntro';
 import CircularScroller from './components/ui/YouTubeChannelScroller';
-import RandomDiscountGenerator from './components/ui/RandomDiscountGenerator.';
+import LuckyWheelModal from './components/ui/RandomDiscountGenerator.';
 export default function Home() {
   return (
     <div>
@@ -19,8 +19,8 @@ export default function Home() {
       <YouTubeClubIntro />
       <JobMarketplace />
       <PortfolioSection />
+      <LuckyWheelModal />
       <FAQ />
-      <RandomDiscountGenerator minDiscount={5} maxDiscount={30} />
     </div>
   );
 }
