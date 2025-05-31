@@ -111,7 +111,7 @@ const FAQ: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.8 }}
           className="mt-12 text-center"
         >
-          <p className="text-gray-600 mb-6">
+          <p className="text-white mb-6">
             سوال دیگری دارید؟ با ما در تماس باشید
           </p>
           <motion.button
