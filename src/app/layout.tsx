@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 // import { Lalezar } from 'next/font/google';
-import Navbar from './components/layout/Header';
-import Footer from './components/layout/Footer';
+// import Navbar from './components/layout/Header';
+// import Footer from './components/layout/Footer';
 // import ThemeProvider from './components/Theme/ThemProvider';
 import './globals.css';
+import SiteLayout from './components/ui/ClientNvabarFooter';
 // import LoadingProvider from './components/ui/LoadingProvider';
 
 export const metadata: Metadata = {
@@ -47,9 +48,9 @@ export default function RootLayout({
 
         {/* Main Content */}
         <div className="relative z-10">
-          <Navbar />
-          <main className="min-h-[calc(100vh-160px)]">{children}</main>
-          <Footer />
+          <main className="min-h-[calc(100vh-160px)]">
+            <SiteLayout>{children}</SiteLayout>
+          </main>
         </div>
       </body>
     </html>
