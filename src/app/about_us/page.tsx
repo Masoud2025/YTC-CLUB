@@ -78,8 +78,7 @@ export default function AboutUs() {
                 src="/aboutUs.png"
                 alt="یوتیوب کلاب"
                 fill
-                style={{ objectFit: 'contain' }}
-                className="animate-spin"
+                style={{ objectFit: 'contain', transform: 'scaleX(-1)' }}
                 priority
               />
             </div>
@@ -184,20 +183,6 @@ export default function AboutUs() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes spin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        .animate-spin {
-          animation: spin 4s linear infinite;
-        }
-      `}</style>
     </div>
   );
 }
