@@ -477,7 +477,7 @@ const Navbar: React.FC = () => {
                   aria-hidden="true"
                 />
                 <span className="hidden xs:inline">ورود / ثبت نام</span>
-                <span className="xs:hidden">ورود</span>
+                <span className="xs:hidden">ورود|ثبت نام</span>
               </Link>
 
               {/* Desktop icons */}
