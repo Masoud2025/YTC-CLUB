@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+interface UserData {
+  name: string;
+  phone: string;
+  timestamp: number;
+}
 
 export default function LoginPage() {
   const [name, setName] = useState('');
@@ -9,6 +15,58 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [phoneError, setPhoneError] = useState('');
   const [nameError, setNameError] = useState('');
+
+  // Load user data from localStorage on component mount
+  useEffect(() => {
+    const savedUserData = localStorage.getItem('USER_DATA');
+    if (savedUserData) {
+      try {
+        const userData: UserData = JSON.parse(savedUserData);
+        setName(userData.name || '');
+        setPhone(formatPhoneNumber(userData.phone || ''));
+      } catch (error) {
+        console.error('Error parsing saved user data:', error);
+        // Clear corrupted data
+        localStorage.removeItem('USER_DATA');
+      }
+    }
+  }, []);
+
+  // Save user data to localStorage
+  const saveUserDataToStorage = (userData: { name: string; phone: string }) => {
+    try {
+      const userDataWithTimestamp: UserData = {
+        name: userData.name,
+        phone: userData.phone,
+        timestamp: Date.now(),
+      };
+      localStorage.setItem('USER_DATA', JSON.stringify(userDataWithTimestamp));
+    } catch (error) {
+      console.error('Error saving user data to localStorage:', error);
+    }
+  };
+
+  // Get user data from localStorage
+  const getUserDataFromStorage = (): UserData | null => {
+    try {
+      const savedData = localStorage.getItem('USER_DATA');
+      if (savedData) {
+        return JSON.parse(savedData);
+      }
+    } catch (error) {
+      console.error('Error getting user data from localStorage:', error);
+    }
+    return null;
+  };
+
+  // Clear user data from localStorage
+  const clearUserDataFromStorage = () => {
+    try {
+      localStorage.removeItem('USER_DATA');
+    } catch (error) {
+      console.error('Error clearing user data from localStorage:', error);
+    }
+  };
 
   // Iranian phone number validation
   const validateIranianPhone = (phoneNumber: string): boolean => {
@@ -129,6 +187,12 @@ export default function LoginPage() {
     try {
       const normalizedPhone = normalizePhoneNumber(phone);
 
+      // Save user data to localStorage before API call
+      saveUserDataToStorage({
+        name: name.trim(),
+        phone: normalizedPhone,
+      });
+
       const res = await fetch('/api/auth', {
         method: 'POST',
         body: JSON.stringify({
@@ -140,15 +204,23 @@ export default function LoginPage() {
 
       const data = await res.json();
       setMsg(data.message || data.error);
+
+      // If there's an error, you might want to clear the stored data
+      if (data.error) {
+        // Optionally clear data on error
+        // clearUserDataFromStorage();
+      }
     } catch (error) {
       setMsg('خطا در اتصال به سرور');
+      // Optionally clear data on network error
+      // clearUserDataFromStorage();
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen  flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 mt-[-12em]">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
@@ -168,18 +240,17 @@ export default function LoginPage() {
             </svg>
           </div>
           <h1 className="text-3xl font-bold text-white mb-2">خوش آمدید</h1>
-          <p className="text-white">برای ادامه وارد حساب کاربری خود شوید</p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+        <div className="rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
           <div className="p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Input */}
               <div className="space-y-2">
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 text-right"
+                  className="block text-sm font-medium text-white text-right"
                 >
                   نام کامل
                 </label>
@@ -237,7 +308,7 @@ export default function LoginPage() {
               <div className="space-y-2">
                 <label
                   htmlFor="phone"
-                  className="block text-sm font-medium text-gray-700 text-right"
+                  className="block text-sm font-medium text-white text-right"
                 >
                   شماره موبایل
                 </label>
@@ -292,12 +363,6 @@ export default function LoginPage() {
                     <span>{phoneError}</span>
                   </p>
                 )}
-                <div className="text-xs text-gray-500 text-right">
-                  <p>فرمت‌های مجاز:</p>
-                  <p>• 09123456789</p>
-                  <p>• +989123456789</p>
-                  <p>• 00989123456789</p>
-                </div>
               </div>
 
               {/* Submit Button */}
@@ -330,33 +395,6 @@ export default function LoginPage() {
               )}
             </form>
           </div>
-
-          {/* Footer */}
-          <div className="px-8 py-6 bg-gray-50 border-t border-gray-100">
-            <p className="text-center text-sm text-gray-600">
-              با ورود به سایت، شما{' '}
-              <a
-                href="#"
-                className="text-blue-500 hover:text-blue-600 font-medium"
-              >
-                قوانین و مقررات
-              </a>{' '}
-              را می‌پذیرید
-            </p>
-          </div>
-        </div>
-
-        {/* Additional Info */}
-        <div className="mt-6 text-center">
-          <p className="text-gray-500 text-sm">
-            نیاز به کمک دارید؟{' '}
-            <a
-              href="#"
-              className="text-blue-500 hover:text-blue-600 font-medium"
-            >
-              تماس با پشتیبانی
-            </a>
-          </p>
         </div>
       </div>
     </div>

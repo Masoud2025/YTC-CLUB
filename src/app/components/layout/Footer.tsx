@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
-import { FiMail, FiPhone, FiMapPin, FiSun, FiMoon } from 'react-icons/fi';
-import { FaInstagram, FaYoutube } from 'react-icons/fa';
+import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
+import { FaInstagram } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
   const [mounted, setMounted] = useState<boolean>(false);
@@ -32,13 +32,7 @@ const Footer: React.FC = () => {
           onClick={toggleTheme}
           className="p-2 rounded-full  text-white hover:bg-indigo-600 transition-colors duration-200 flex items-center justify-center"
           aria-label={theme === 'dark' ? 'روشن کردن تم' : 'تاریک کردن تم'}
-        >
-          {theme === 'dark' ? (
-            <FiSun className="h-5 w-5" />
-          ) : (
-            <FiMoon className="h-5 w-5" />
-          )}
-        </button>
+        ></button>
       </div>
 
       {/* Footer Content */}
@@ -52,9 +46,9 @@ const Footer: React.FC = () => {
               </h3>
               <p className="text-indigo-100 mb-6 text-sm leading-relaxed">
                 یوتیوب کلاب یک پلتفرم آموزشی آنلاین است که با هدف ارتقای سطح
-                دانش و مهارت‌های برنامه‌نویسی و طراحی وب در ایران راه‌اندازی شده
-                است. ما به شما کمک می‌کنیم تا با آموزش‌های کاربردی و پروژه‌محور،
-                مسیر یادگیری خود را سریع‌تر طی کنید.
+                دانش و مهارت های طراحی و ساخت تامنیل ادیت ویدیو در ایران راه
+                اندازی شده است ، ما به شما کمک میکنیم تا با آموزش های کاربردی و
+                پروژه محور ، مسیر یادگیری خود را سریع تر کنند.
               </p>
               <div className="flex space-x-4 space-x-reverse">
                 <Link
@@ -65,15 +59,6 @@ const Footer: React.FC = () => {
                   aria-label="Instagram"
                 >
                   <FaInstagram className="h-5 w-5" />
-                </Link>
-                <Link
-                  href="https://youtube.com/youtubeclub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-red-300 transition-colors p-2 bg-indigo-800 rounded-full"
-                  aria-label="YouTube"
-                >
-                  <FaYoutube className="h-5 w-5" />
                 </Link>
               </div>
             </div>
@@ -86,10 +71,13 @@ const Footer: React.FC = () => {
               <ul className="space-y-3">
                 {[
                   { name: 'صفحه اصلی', href: '/' },
-                  { name: 'دوره‌های آموزشی', href: '/courses' },
-                  { name: 'مقالات', href: '/blog' },
-                  { name: 'درباره ما', href: '/about' },
-                  { name: 'تماس با ما', href: '/contact' },
+                  { name: 'دوره‌های آموزشی', href: '/training_courses' },
+                  {
+                    name: 'خدمات طراحی و ادیت',
+                    href: '/design_and_editing_services',
+                  },
+                  { name: 'درباره ما', href: '/about_us' },
+                  { name: '  آموزش رایگان', href: '/free_design_tutorial' },
                   { name: 'قوانین و مقررات', href: '/terms' },
                 ].map((link, index) => (
                   <li key={index}>
@@ -114,8 +102,8 @@ const Footer: React.FC = () => {
                 <li className="flex items-start">
                   <FiMapPin className="h-5 w-5 text-indigo-300 mt-0.5 ml-3 flex-shrink-0" />
                   <span className="text-indigo-100 text-sm">
-                    تهران، خیابان ولیعصر، بالاتر از میدان ونک، برج نگین، طبقه
-                    ۱۰، واحد ۱۰۰۵
+                    تهران، خیابان آزادی ، خیابان استاد معین ، خیابن 21 متری جی ،
+                    کوچه اخوان ، پلاک ، واحد
                   </span>
                 </li>
                 <li className="flex items-center">

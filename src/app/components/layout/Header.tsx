@@ -11,6 +11,7 @@ import {
   FiX,
   FiSearch,
   FiShoppingCart,
+  FiLogOut,
 } from 'react-icons/fi';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import './font.css';
@@ -25,6 +26,12 @@ type NavLink = {
   href: string;
   dropdown?: DropdownItem[];
 };
+
+interface UserData {
+  name: string;
+  phone: string;
+  timestamp: number;
+}
 
 const navLinks: NavLink[] = [
   {
@@ -77,6 +84,10 @@ const Navbar: React.FC = () => {
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
   const pathname = usePathname();
 
+  // User authentication states
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState<boolean>(false);
+
   // Search functionality states
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -88,6 +99,34 @@ const Navbar: React.FC = () => {
   const [highlightedElements, setHighlightedElements] = useState<HTMLElement[]>(
     [],
   );
+
+  // Check for user data in localStorage on component mount
+  useEffect(() => {
+    const checkUserData = () => {
+      try {
+        const savedUserData = localStorage.getItem('USER_DATA');
+        if (savedUserData) {
+          const parsedUserData: UserData = JSON.parse(savedUserData);
+          setUserData(parsedUserData);
+        }
+      } catch (error) {
+        console.error('Error parsing user data from localStorage:', error);
+        localStorage.removeItem('USER_DATA');
+      }
+    };
+
+    checkUserData();
+
+    // Listen for storage changes (in case user logs in/out in another tab)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'USER_DATA') {
+        checkUserData();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   // Handle navbar visibility on scroll
   useEffect(() => {
@@ -158,10 +197,29 @@ const Navbar: React.FC = () => {
   const closeMenu = (): void => {
     setIsOpen(false);
     setActiveDropdown(null);
+    setIsUserDropdownOpen(false);
   };
 
   const isActive = (href: string): boolean => {
     return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  // Handle user logout
+  const handleLogout = (): void => {
+    try {
+      localStorage.removeItem('USER_DATA');
+      setUserData(null);
+      closeMenu();
+      // Optionally redirect to home page
+      window.location.href = '/';
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
+
+  // Get first name from full name
+  const getFirstName = (fullName: string): string => {
+    return fullName.split(' ')[0];
   };
 
   const handleOpenSearch = (): void => {
@@ -467,18 +525,91 @@ const Navbar: React.FC = () => {
 
             {/* Auth Buttons and Icons - Left Side */}
             <div className="flex items-center">
-              {/* Login button visible on both mobile and desktop */}
-              <Link
-                href="/login"
-                className="px-2 sm:px-3 md:px-5 py-1 sm:py-1.5 md:py-2.5 ml-2 sm:ml-3 md:ml-[4em] text-[10px] xs:text-xs sm:text-sm md:text-base font-medium text-white bg-[#175299] rounded-md sm:rounded-lg md:rounded-xl hover:bg-[#0f3f77] focus:outline-none shadow-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center transition-colors mr-1 sm:mr-2 md:mr-4 lg:mr-8"
-              >
-                <FiUser
-                  className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-5 md:w-5"
-                  aria-hidden="true"
-                />
-                <span className="hidden xs:inline">ورود / ثبت نام</span>
-                <span className="xs:hidden">ورود|ثبت نام</span>
-              </Link>
+              {/* User Authentication Section */}
+              {userData ? (
+                // User is logged in - show user name with dropdown
+                <div className="relative">
+                  <button
+                    onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
+                    className="px-2 sm:px-3 md:px-5 py-1 sm:py-1.5 md:py-2.5 ml-2 sm:ml-3 md:ml-[4em] text-[10px] xs:text-xs sm:text-sm md:text-base font-medium text-white bg-[#175299] rounded-md sm:rounded-lg md:rounded-xl hover:bg-[#0f3f77] focus:outline-none shadow-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center transition-colors mr-1 sm:mr-2 md:mr-4 lg:mr-8"
+                  >
+                    <FiUser
+                      className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-5 md:w-5"
+                      aria-hidden="true"
+                    />
+                    <span className="max-w-[80px] sm:max-w-[100px] md:max-w-[120px] truncate">
+                      {getFirstName(userData.name)}
+                    </span>
+                    <FiChevronDown
+                      className={`mr-1 h-3 w-3 sm:h-4 sm:w-4 transition-transform ${
+                        isUserDropdownOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+
+                  {/* User Dropdown Menu */}
+                  <AnimatePresence>
+                    {isUserDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-[#282A2A] ring-1 ring-black ring-opacity-5 z-10"
+                        role="menu"
+                      >
+                        <div className="py-1" role="none">
+                          <div className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-600">
+                            <p className="font-medium truncate">
+                              {userData.name}
+                            </p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                              {userData.phone}
+                            </p>
+                          </div>
+                          <Link
+                            href="/profile"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
+                            onClick={closeMenu}
+                            role="menuitem"
+                          >
+                            پروفایل کاربری
+                          </Link>
+                          <Link
+                            href="/dashboard"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
+                            onClick={closeMenu}
+                            role="menuitem"
+                          >
+                            داشبورد
+                          </Link>
+                          <button
+                            onClick={handleLogout}
+                            className="w-full text-right px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 transition-colors flex items-center"
+                            role="menuitem"
+                          >
+                            <FiLogOut className="ml-2 h-4 w-4" />
+                            خروج از حساب
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                // User is not logged in - show login button
+                <Link
+                  href="/login"
+                  className="px-2 sm:px-3 md:px-5 py-1 sm:py-1.5 md:py-2.5 ml-2 sm:ml-3 md:ml-[4em] text-[10px] xs:text-xs sm:text-sm md:text-base font-medium text-white bg-[#175299] rounded-md sm:rounded-lg md:rounded-xl hover:bg-[#0f3f77] focus:outline-none shadow-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center transition-colors mr-1 sm:mr-2 md:mr-4 lg:mr-8"
+                >
+                  <FiUser
+                    className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-5 md:w-5"
+                    aria-hidden="true"
+                  />
+                  <span className="hidden xs:inline">ورود / ثبت نام</span>
+                  <span className="xs:hidden">ورود|ثبت نام</span>
+                </Link>
+              )}
 
               {/* Desktop icons */}
               <div className="hidden md:flex items-center space-x-4 lg:space-x-6 space-x-reverse">
@@ -564,12 +695,44 @@ const Navbar: React.FC = () => {
                     )}
                   </div>
                 ))}
+
+                {/* Mobile User Section */}
+                {userData && (
+                  <div className="border-t border-gray-600 pt-2 mt-2">
+                    <div className="px-2 py-2 text-gray-300">
+                      <p className="text-sm font-medium">{userData.name}</p>
+                      <p className="text-xs text-gray-400">{userData.phone}</p>
+                    </div>
+                    <Link
+                      href="/profile"
+                      className="block px-2 py-1.5 text-xs sm:text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
+                      onClick={closeMenu}
+                    >
+                      پروفایل کاربری
+                    </Link>
+                    <Link
+                      href="/dashboard"
+                      className="block px-2 py-1.5 text-xs sm:text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
+                      onClick={closeMenu}
+                    >
+                      داشبورد
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-right px-2 py-1.5 text-xs sm:text-sm font-medium text-red-400 hover:bg-red-900/20 hover:text-red-300 transition-colors flex items-center"
+                    >
+                      <FiLogOut className="ml-2 h-4 w-4" />
+                      خروج از حساب
+                    </button>
+                  </div>
+                )}
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </nav>
 
+      {/* Search Modal - Very light overlay
       {/* Search Modal - Very light overlay */}
       <AnimatePresence>
         {isSearchOpen && (
