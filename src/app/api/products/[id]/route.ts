@@ -6,10 +6,10 @@ const filePath = path.join(process.cwd(), 'data', 'products.json');
 
 export async function DELETE(
   req: Request,
-  contextPromise: Promise<{ params: { id: string } }>,
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const { params } = await contextPromise;
-  const id = parseInt(params.id);
+  const { id } = await params;
+  const productId = parseInt(id);
 
   if (!fs.existsSync(filePath)) {
     return NextResponse.json({ error: 'File not found' }, { status: 404 });
@@ -18,7 +18,7 @@ export async function DELETE(
   const data = fs.readFileSync(filePath, 'utf8');
   let products = JSON.parse(data);
 
-  products = products.filter((p: { id: number }) => p.id !== id);
+  products = products.filter((p: { id: number }) => p.id !== productId);
 
   fs.writeFileSync(filePath, JSON.stringify(products, null, 2));
 

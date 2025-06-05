@@ -1,8 +1,9 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function VerifyPage() {
+function VerifyContent() {
   const [message, setMessage] = useState('در حال بررسی پرداخت...');
   const searchParams = useSearchParams();
 
@@ -38,5 +39,24 @@ export default function VerifyPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+          <div className="bg-white rounded-lg shadow-md p-10 max-w-md text-center border border-gray-300">
+            <h1 className="text-3xl font-semibold mb-6 text-gray-800">
+              نتیجه پرداخت
+            </h1>
+            <p className="text-lg text-gray-600">در حال بارگذاری...</p>
+          </div>
+        </div>
+      }
+    >
+      <VerifyContent />
+    </Suspense>
   );
 }
