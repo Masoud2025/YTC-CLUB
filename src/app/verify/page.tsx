@@ -1,41 +1,42 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 export default function VerifyPage() {
-  const params = useSearchParams();
   const [message, setMessage] = useState('در حال بررسی پرداخت...');
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    const authority = params.get('payman_authority');
-    const status = params.get('status');
+    const authority = searchParams.get('Authority');
+    const status = searchParams.get('Status');
 
-    if (!authority || status !== 'OK') {
-      setMessage('پرداخت ناموفق بود یا لغو شد.');
-      return;
-    }
-
-    const verify = async () => {
-      const res = await fetch('/api/zarinpal/verify', {
-        method: 'POST',
-        body: JSON.stringify({ authority }),
+    fetch(`/api/zarinpal/verify?Authority=${authority}&Status=${status}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setMessage(`پرداخت با موفقیت انجام شد! کد رهگیری: ${data.ref_id}`);
+        } else {
+          setMessage(`پرداخت ناموفق بود: ${data.message}`);
+        }
       });
-      const data = await res.json();
-
-      if (data.success) {
-        setMessage('پرداخت موفق بود ✅. کد پیگیری: ' + data.signature);
-      } else {
-        setMessage('خطا در تأیید پرداخت ❌');
-      }
-    };
-
-    verify();
-  }, []);
+  }, [searchParams]);
 
   return (
-    <div className="p-6 text-center text-[5em]  text-red-400">
-      <h1>{message}</h1>
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+      <div className="bg-white rounded-lg shadow-md p-10 max-w-md text-center border border-gray-300">
+        <h1 className="text-3xl font-semibold mb-6 text-gray-800">
+          نتیجه پرداخت
+        </h1>
+        <p className="text-lg text-gray-600">{message}</p>
+        <div className="mt-8">
+          <a
+            href="/"
+            className="inline-block px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
+          >
+            بازگشت به صفحه اصلی
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
