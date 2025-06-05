@@ -2,7 +2,7 @@
 
 Welcome to **YTC-Club**, the ultimate platform designed for YouTube creators, editors, and creative professionals. Whether you're looking to boost your editing skills or enhance your channel’s visual appeal, YTC-Club has everything you need — all in one place.
 
-### 🚀 What is YTC-Club?
+#### 🚀 What is YTC-Club?
 
 YTC-Club is a creative hub built to support YouTubers and freelancers with high-quality tools, services, and training. This platform connects video editors, thumbnail designers, and content creators, offering them:
 
