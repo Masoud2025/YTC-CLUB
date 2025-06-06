@@ -7,7 +7,7 @@
   "disks": [
     {
       "name": "ytc-images",
-      "mountTo": "public"
+      "mountTo": "../../public"
     }
   ]
 }
