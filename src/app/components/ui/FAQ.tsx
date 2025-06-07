@@ -48,7 +48,7 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <section className="py-20 px-6  " dir="rtl">
+    <section className="py-20 px-6" dir="rtl">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4 text-white">سوالات متداول</h2>
@@ -63,14 +63,14 @@ const FAQ: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: item.id * 0.1 }}
-              className="border  rounded-xl overflow-hidden"
+              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <button
                 onClick={() => toggleQuestion(item.id)}
-                className={`w-full text-right p-5 flex justify-between items-center transition-colors ${
+                className={`w-full text-right p-5 flex justify-between items-center transition-all duration-300 ${
                   openQuestion === item.id
-                    ? 'bg-[#353737] text-white'
-                    : 'bg-[#353737] text-white hover:bg-gray-700'
+                    ? 'bg-white/20 text-white'
+                    : 'bg-transparent text-white hover:bg-white/10'
                 }`}
               >
                 <span className="font-bold text-lg">{item.question}</span>
@@ -79,7 +79,7 @@ const FAQ: React.FC = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <FaChevronDown
-                    className={`${
+                    className={`transition-colors duration-300 ${
                       openQuestion === item.id ? 'text-white' : 'text-[#0165FC]'
                     }`}
                   />
@@ -95,7 +95,7 @@ const FAQ: React.FC = () => {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="p-5 bg-[#353737] border-t border-gray-200 text-white leading-relaxed">
+                    <div className="p-5 bg-white/5 backdrop-blur-sm border-t border-white/10 text-white leading-relaxed">
                       {item.answer}
                     </div>
                   </motion.div>

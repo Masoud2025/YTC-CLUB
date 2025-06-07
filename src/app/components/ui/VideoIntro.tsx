@@ -191,21 +191,23 @@ const YouTubeClubIntro: React.FC = () => {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="w-full md:w-1/2 order-1 md:order-2"
           >
-            <h2 className="text-4xl font-bold mb-6 text-white">
+            <h2 className="text-4xl font-bold mb-6 text-white text-center">
               معرفی کامل یوتیوب کلاب
             </h2>
-            <p className="text-lg text-white mb-6 leading-relaxed">
+            <p className="text-lg text-white mb-6 leading-relaxed text-right">
               داخل این ویدیو شما به طور کامل با سایت یوتیوب کلاب و قسمت های
               مختلف سایت و کاربرد های مختلف اون آشنا میشیم.
             </p>
             <div className="w-20 h-1 bg-[#0165FC] mb-8"></div>
-            <h3 className="text-2xl font-bold text-white mb-6">خدمات ما</h3>
+            <h3 className="text-2xl font-bold text-white mb-6 text-center">
+              خدمات ما
+            </h3>
             <motion.button
               whileHover={{ scale: 1.05, backgroundColor: '#141843' }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               onClick={togglePlay}
-              className="bg-[#0165FC] text-white font-medium py-3 px-8 rounded-lg hover:bg-[#141843] transition-colors mt-4"
+              className="bg-[#0165FC] text-white font-medium py-3 px-8 rounded-lg hover:bg-[#141843] transition-colors mt-4 text-center"
             >
               مشاهده ویدیو
             </motion.button>

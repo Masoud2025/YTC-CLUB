@@ -33,7 +33,7 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
       <div className="flex justify-center w-full">
         <Link
           href={buttonHref}
-          className="bg-[#323434] text-blue-400 py-2 px-6 rounded-md hover:bg-[#1d4080] transition-colors"
+          className="bg-[#323434] text-blue-400 py-2 px-6 rounded-md hover:bg-[#1d4080] transition-colors max-w-[200px] sm:max-w-none truncate"
         >
           {buttonText}
         </Link>
