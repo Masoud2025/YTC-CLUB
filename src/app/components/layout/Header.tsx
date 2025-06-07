@@ -420,7 +420,7 @@ const Navbar: React.FC = () => {
   return (
     <div className="flex justify-center mt-2 sm:mt-3 md:mt-5 px-2 sm:px-4">
       <nav
-        className={`z-50 bg-[#353737] shadow-[5px_5px_15px_rgba(0,0,0,0.3)] rounded-[12px] sm:rounded-[20px] md:rounded-[30px] w-full max-w-[1490px] h-[50px] sm:h-[60px] md:h-[85px] lg:h-[100px] transition-all duration-300 ${
+        className={`fixed top-2 sm:top-3 md:top-5 z-50 bg-[#353737] shadow-[5px_5px_15px_rgba(0,0,0,0.3)] rounded-[12px] sm:rounded-[20px] md:rounded-[30px] w-full max-w-[calc(100%-16px)] sm:max-w-[calc(100%-32px)] md:max-w-[1490px] h-[50px] sm:h-[60px] md:h-[85px] lg:h-[100px] transition-all duration-300 ${
           isVisible ? 'translate-y-0' : '-translate-y-full'
         }`}
         dir="rtl"
@@ -461,7 +461,7 @@ const Navbar: React.FC = () => {
               >
                 <span
                   id="testFont"
-                  className="mr-1 text-[18px] xs:text-[10px] sm:text-sm md:text-lg lg:text-2xl"
+                  className="mr-1 text-[14px] xs:text-[16px] sm:text-sm md:text-lg lg:text-2xl whitespace-nowrap"
                 >
                   <span id="testFont" className="text-white">
                     یوتیوب{' '}
@@ -474,15 +474,15 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Desktop Navigation Links - Center */}
-            <div className="hidden md:flex items-center justify-center flex-1">
-              <div className="flex space-x-2 lg:space-x-4 space-x-reverse">
+            <div className="hidden md:flex items-center justify-center flex-1 px-4">
+              <div className="flex space-x-1 lg:space-x-3 xl:space-x-4 space-x-reverse">
                 {navLinks.map((link, index) => (
                   <div key={index} className="relative group">
                     <button
-                      className={`px-2 lg:px-3 py-2 rounded-md text-sm lg:text-base font-medium flex items-center transition-colors
+                      className={`px-1.5 lg:px-2 xl:px-3 py-2 rounded-md text-xs lg:text-sm xl:text-base font-medium flex items-center transition-colors whitespace-nowrap
                         ${
                           isActive(link.href)
-                            ? 'text-white  bg-opacity-40'
+                            ? 'text-white bg-opacity-40'
                             : 'text-gray-300 hover:bg-gray-700 hover:bg-opacity-40'
                         }`}
                       aria-expanded={
@@ -492,7 +492,7 @@ const Navbar: React.FC = () => {
                       {link.name}
                       {link.dropdown && (
                         <RiArrowDropDownLine
-                          className="mr-0.5 h-5 w-5 transition-transform group-hover:rotate-180"
+                          className="mr-0.5 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:rotate-180"
                           aria-hidden="true"
                         />
                       )}
@@ -532,13 +532,13 @@ const Navbar: React.FC = () => {
                 <div className="relative">
                   <button
                     onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
-                    className="px-2 sm:px-3 md:px-5 py-1 sm:py-1.5 md:py-2.5 ml-2 sm:ml-3 md:ml-[4em] text-[10px] xs:text-xs sm:text-sm md:text-base font-medium text-white bg-[#175299] rounded-md sm:rounded-lg md:rounded-xl hover:bg-[#0f3f77] focus:outline-none shadow-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center transition-colors mr-1 sm:mr-2 md:mr-4 lg:mr-8"
+                    className="px-2 sm:px-3 md:px-4 lg:px-5 py-1 sm:py-1.5 md:py-2 lg:py-2.5 ml-2 sm:ml-3 md:ml-4 lg:ml-6 text-[10px] xs:text-xs sm:text-sm md:text-base font-medium text-white bg-[#175299] rounded-md sm:rounded-lg md:rounded-xl hover:bg-[#0f3f77] focus:outline-none shadow-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center transition-colors"
                   >
                     <FiUser
-                      className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-5 md:w-5"
+                      className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 lg:h-5 lg:w-5"
                       aria-hidden="true"
                     />
-                    <span className="max-w-[80px] sm:max-w-[100px] md:max-w-[120px] truncate">
+                    <span className="max-w-[60px] sm:max-w-[80px] md:max-w-[100px] lg:max-w-[120px] truncate">
                       {getFirstName(userData.name)}
                     </span>
                     <FiChevronDown
@@ -601,33 +601,49 @@ const Navbar: React.FC = () => {
                 // User is not logged in - show login button
                 <Link
                   href="/login"
-                  className="px-2 sm:px-3 md:px-5 py-1 sm:py-1.5 md:py-2.5 ml-2 sm:ml-3 md:ml-[4em] text-[10px] xs:text-xs sm:text-sm md:text-base font-medium text-white bg-[#175299] rounded-md sm:rounded-lg md:rounded-xl hover:bg-[#0f3f77] focus:outline-none shadow-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center transition-colors mr-1 sm:mr-2 md:mr-4 lg:mr-8"
+                  className="px-2 sm:px-3 md:px-4 lg:px-5 py-1 sm:py-1.5 md:py-2 lg:py-2.5 ml-2 sm:ml-3 md:ml-4 lg:ml-6 text-[10px] xs:text-xs sm:text-sm md:text-base font-medium text-white bg-[#175299] rounded-md sm:rounded-lg md:rounded-xl hover:bg-[#0f3f77] focus:outline-none shadow-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center transition-colors whitespace-nowrap"
                 >
                   <FiUser
-                    className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-5 md:w-5"
+                    className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 lg:h-5 lg:w-5"
                     aria-hidden="true"
                   />
                   <span className="hidden xs:inline">ورود / ثبت نام</span>
-                  <span className="xs:hidden">ورود|ثبت نام</span>
+                  <span className="xs:hidden">ورود</span>
                 </Link>
               )}
 
-              {/* Desktop icons */}
-              <div className="hidden md:flex items-center space-x-4 lg:space-x-6 space-x-reverse">
-                <FiShoppingCart className="h-6 w-6 lg:h-7 lg:w-7 text-white cursor-pointer hover:text-gray-300 transition-colors" />
-                <FiSearch
-                  className="h-6 w-6 lg:h-7 lg:w-7 text-white cursor-pointer hover:text-gray-300 transition-colors"
+              {/* Desktop icons with improved spacing */}
+              <div className="hidden md:flex items-center space-x-3 lg:space-x-4 xl:space-x-6 space-x-reverse">
+                <button
+                  className="p-1 rounded-md hover:bg-gray-700 hover:bg-opacity-40 transition-colors"
+                  aria-label="سبد خرید"
+                >
+                  <FiShoppingCart className="h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7 text-white hover:text-gray-300 transition-colors" />
+                </button>
+                <button
                   onClick={handleOpenSearch}
-                />
+                  className="p-1 rounded-md hover:bg-gray-700 hover:bg-opacity-40 transition-colors"
+                  aria-label="جستجو"
+                >
+                  <FiSearch className="h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7 text-white hover:text-gray-300 transition-colors" />
+                </button>
               </div>
 
-              {/* Mobile icons */}
+              {/* Mobile icons with improved spacing */}
               <div className="flex md:hidden items-center space-x-2 sm:space-x-3 space-x-reverse">
-                <FiShoppingCart className="h-4 w-4 sm:h-5 sm:w-5 text-white cursor-pointer" />
-                <FiSearch
-                  className="h-4 w-4 sm:h-5 sm:w-5 text-white cursor-pointer"
+                <button
+                  className="p-1 rounded-md hover:bg-gray-700 hover:bg-opacity-40 transition-colors"
+                  aria-label="سبد خرید"
+                >
+                  <FiShoppingCart className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+                </button>
+                <button
                   onClick={handleOpenSearch}
-                />
+                  className="p-1 rounded-md hover:bg-gray-700 hover:bg-opacity-40 transition-colors"
+                  aria-label="جستجو"
+                >
+                  <FiSearch className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+                </button>
               </div>
             </div>
           </div>
@@ -733,8 +749,7 @@ const Navbar: React.FC = () => {
         </AnimatePresence>
       </nav>
 
-      {/* Search Modal - Very light overlay
-      {/* Search Modal - Very light overlay */}
+      {/* Search Modal */}
       <AnimatePresence>
         {isSearchOpen && (
           <>
@@ -759,7 +774,7 @@ const Navbar: React.FC = () => {
                 stiffness: 300,
                 damping: 30,
               }}
-              className="fixed top-4 left-1/2 transform -translate-x-1/2 w-full max-w-md sm:max-w-lg md:max-w-2xl z-50"
+              className="fixed top-4 left-1/2 transform -translate-x-1/2 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl z-50"
             >
               <div className="bg-[#353737] rounded-xl shadow-lg overflow-hidden mx-4">
                 <div className="p-2 sm:p-3 md:p-4">
@@ -777,8 +792,9 @@ const Navbar: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => navigateResults('prev')}
-                        className="text-gray-400 hover:text-white p-0.5 sm:p-1 mr-0.5 sm:mr-1 transition-colors"
+                        className="text-gray-400 hover:text-white p-0.5 sm:p-1 mr-0.5 sm:mr-1 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         disabled={highlightedElements.length === 0}
+                        aria-label="نتیجه قبلی"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -798,8 +814,9 @@ const Navbar: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => navigateResults('next')}
-                        className="text-gray-400 hover:text-white p-0.5 sm:p-1 mr-0.5 sm:mr-1 transition-colors"
+                        className="text-gray-400 hover:text-white p-0.5 sm:p-1 mr-0.5 sm:mr-1 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         disabled={highlightedElements.length === 0}
+                        aria-label="نتیجه بعدی"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -819,6 +836,7 @@ const Navbar: React.FC = () => {
                       <button
                         type="submit"
                         className="text-blue-500 hover:text-blue-400 p-0.5 sm:p-1 transition-colors"
+                        aria-label="جستجو"
                       >
                         <FiSearch className="h-3 w-3 sm:h-4 sm:w-4" />
                       </button>
@@ -828,6 +846,7 @@ const Navbar: React.FC = () => {
                         type="button"
                         onClick={handleCloseSearch}
                         className="text-gray-400 hover:text-white transition-colors"
+                        aria-label="بستن جستجو"
                       >
                         <FiX className="h-3 w-3 sm:h-4 sm:w-4" />
                       </button>
@@ -849,6 +868,13 @@ const Navbar: React.FC = () => {
                       )}{' '}
                       مورد یافت شد
                     </span>
+                  </div>
+                )}
+
+                {/* No results message */}
+                {searchTerm && searchResults.length === 0 && (
+                  <div className="px-3 py-2 sm:px-4 sm:py-3 bg-[#282A2A] text-gray-400 text-xs sm:text-sm text-center">
+                    نتیجه‌ای یافت نشد
                   </div>
                 )}
               </div>

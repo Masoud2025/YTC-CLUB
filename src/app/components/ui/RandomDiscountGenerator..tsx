@@ -40,22 +40,6 @@ const LuckyWheelModal: React.FC = () => {
     },
     {
       id: 2,
-      label: '15%',
-      percentage: 15,
-      color: '#004E89',
-      angle: 45,
-      textColor: '#FFFFFF',
-    },
-    {
-      id: 3,
-      label: '2%',
-      percentage: 2,
-      color: '#00A896',
-      angle: 45,
-      textColor: '#FFFFFF',
-    },
-    {
-      id: 4,
       label: '10%',
       percentage: 10,
       color: '#FFD23F',
@@ -63,34 +47,50 @@ const LuckyWheelModal: React.FC = () => {
       textColor: '#2D3436',
     },
     {
-      id: 5,
-      label: '25%',
-      percentage: 25,
+      id: 3,
+      label: '15%',
+      percentage: 15,
       color: '#EE6C4D',
       angle: 45,
       textColor: '#FFFFFF',
     },
     {
-      id: 6,
-      label: '15%',
-      percentage: 15,
+      id: 4,
+      label: '20%',
+      percentage: 20,
       color: '#9B59B6',
       angle: 45,
       textColor: '#FFFFFF',
     },
     {
-      id: 7,
-      label: '30%',
-      percentage: 30,
-      color: '#3498DB',
+      id: 5,
+      label: '25%',
+      percentage: 25,
+      color: '#FF5733',
       angle: 45,
       textColor: '#FFFFFF',
     },
     {
+      id: 6,
+      label: '30%',
+      percentage: 30,
+      color: '#FFC300',
+      angle: 45,
+      textColor: '#2D3436',
+    },
+    {
+      id: 7,
+      label: '35%',
+      percentage: 35,
+      color: '#DAF7A6',
+      angle: 45,
+      textColor: '#2D3436',
+    },
+    {
       id: 8,
-      label: '10%',
-      percentage: 10,
-      color: '#2ECC71',
+      label: '40%',
+      percentage: 40,
+      color: '#C70039',
       angle: 45,
       textColor: '#FFFFFF',
     },
@@ -125,6 +125,23 @@ const LuckyWheelModal: React.FC = () => {
       setIsSpinning(false);
       setShowWinnerModal(true);
       localStorage.setItem('luckyWheelWinner', JSON.stringify(winnerSegment));
+
+      // Add the discount to local storage
+      const userDataString = localStorage.getItem('USER_DATA'); // Retrieve from local storage
+      const userData = userDataString ? JSON.parse(userDataString) : {}; // Check for null
+
+      userData.discount = winnerSegment.percentage; // Store the discount percentage
+      localStorage.setItem('USER_DATA', JSON.stringify(userData));
+
+      // Remove the discount after 1 hour (3600000 milliseconds)
+      setTimeout(() => {
+        const updatedUserDataString = localStorage.getItem('USER_DATA'); // Retrieve from local storage
+        const updatedUserData = updatedUserDataString
+          ? JSON.parse(updatedUserDataString)
+          : {}; // Check for null
+        delete updatedUserData.discount; // Remove the discount
+        localStorage.setItem('USER_DATA', JSON.stringify(updatedUserData));
+      }, 3600000); // 1 hour
     }, 4000);
   };
 
@@ -234,7 +251,8 @@ const LuckyWheelModal: React.FC = () => {
                       <FiGift className="text-orange-500 mr-3" />
                       <p className="text-orange-800 text-sm font-medium">
                         {winner
-                          ? `تبریک! شما ${winner.label} تخفیف برنده شدید 🎉`
+                          ? `تبریک! شما ${winner.label} تخفیف برنده شدید 🎉
+                          کد تخفیف به طور خودکار رو خرید شما اعمال میشود ، توجه در 24 ساعت آینده کد غیر فعال میشود`
                           : 'شما قبلاً در این قرعه‌کشی شرکت کرده‌اید'}
                       </p>
                     </div>
@@ -297,6 +315,7 @@ const LuckyWheelModal: React.FC = () => {
                                   angle + 360 / segments.length / 2
                                 }deg)`,
                                 transformOrigin: '50% 50%',
+                                zIndex: 10,
                               }}
                             >
                               <span
@@ -304,6 +323,7 @@ const LuckyWheelModal: React.FC = () => {
                                 style={{
                                   color: segment.textColor,
                                   transform: 'translateY(-55px) rotate(0deg)',
+                                  textAlign: 'right', // Align text to the right
                                   textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                                 }}
                               >
@@ -376,26 +396,6 @@ const LuckyWheelModal: React.FC = () => {
                     شروع مجدد
                   </motion.button>
                 </div>
-
-                {/* Info */}
-                <div className="mt-6 text-center">
-                  {!hasSpun ? (
-                    <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
-                      <p className="text-blue-800 text-sm font-medium mb-1">
-                        💡 نکته مهم
-                      </p>
-                      <p className="text-blue-700 text-xs">
-                        هر کاربر فقط یک بار می‌تواند در این قرعه‌کشی شرکت کند
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="bg-green-50 p-4 rounded-xl border border-green-200">
-                      <p className="text-green-800 text-sm">
-                        ✅ شما در این قرعه‌کشی شرکت کرده‌اید
-                      </p>
-                    </div>
-                  )}
-                </div>
               </div>
             </motion.div>
           </>
@@ -451,7 +451,11 @@ const LuckyWheelModal: React.FC = () => {
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ delay: 0.4, type: 'spring', stiffness: 200 }}
+                  transition={{
+                    delay: 0.4,
+                    type: 'spring',
+                    stiffness: 200,
+                  }}
                   className="text-5xl font-bold mb-4 p-4 rounded-2xl text-white shadow-lg"
                   style={{ backgroundColor: winner.color }}
                 >

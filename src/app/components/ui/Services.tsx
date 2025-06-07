@@ -9,6 +9,7 @@ interface ServiceItem {
   title: string;
   description: string;
   features?: string[];
+  desktopOnly?: boolean;
 }
 
 const Services: React.FC = () => {
@@ -43,7 +44,18 @@ const Services: React.FC = () => {
         'ارائه خدمات با قیمت مناسب برای تمامی افراد به خصوص یوتیوبر های تازه کار',
       features: ['قیمت رقابتی', 'پکیج‌های متنوع', 'تخفیف ویژه'],
     },
+    {
+      id: 4,
+      title: 'سطح تدریس بالا',
+      description:
+        'ارائه آموزش‌های تخصصی و حرفه‌ای برای ارتقای مهارت‌های شما در زمینه تولید محتوا',
+      features: ['آموزش تخصصی', 'مربیان مجرب', 'پشتیبانی آموزشی'],
+      desktopOnly: true,
+    },
   ];
+
+  // Filter services for mobile (exclude desktop-only)
+  const mobileServices = services.filter(service => !service.desktopOnly);
 
   return (
     <section
@@ -79,9 +91,9 @@ const Services: React.FC = () => {
             </div>
           </div>
 
-          {/* Services dropdowns */}
+          {/* Services dropdowns - Only show mobile services */}
           <div className="space-y-3 sm:space-y-4">
-            {services.map((service, index) => (
+            {mobileServices.map((service, index) => (
               <div
                 key={service.id}
                 className="bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl border border-white/10 overflow-hidden transition-all duration-300 hover:bg-white/10 hover:border-[#0165FC]/30"
@@ -190,7 +202,7 @@ const Services: React.FC = () => {
 
         {/* Desktop Layout */}
         <div className="hidden lg:flex lg:items-start lg:gap-8 xl:gap-12">
-          {/* Left side - Dropdowns */}
+          {/* Left side - Dropdowns - Show all services including desktop-only */}
           <div className="w-1/2 space-y-6">
             {services.map((service, index) => (
               <div
