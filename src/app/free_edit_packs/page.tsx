@@ -143,13 +143,19 @@ function DownloadCard({ resource }: DownloadCardProps) {
       className="backdrop-blur-2xl bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group aspect-square flex flex-col"
     >
       {/* Square Image - Takes most of the card */}
-      <div className="relative flex-1 overflow-hidden">
+      <div className="relative flex-1 w-full h-full">
         <Image
           src={resource.image}
           alt={resource.title}
           fill
-          className="object-cover object-center group-hover:scale-110 transition-transform duration-700"
+          style={
+            {
+              // objectFit: 'cover',
+              // objectPosition: 'center'
+            }
+          }
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+          className="group-hover:scale-110 transition-transform duration-700"
         />
 
         {/* Gradient Overlay */}

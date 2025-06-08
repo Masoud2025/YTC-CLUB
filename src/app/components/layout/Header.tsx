@@ -54,7 +54,7 @@ const navLinks: NavLink[] = [
     icon: <FiPackage className="w-5 h-5" />,
     dropdown: [
       { name: 'پک های رایگان طراحی', href: '/free_design_packs' },
-      { name: 'آموزش رایگان طراحی', href: '/free_design_tutorial' },
+      { name: 'آموزش های رایگان طراحی  ', href: '/free_design_tutorial' },
     ],
   },
   {

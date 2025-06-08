@@ -204,15 +204,15 @@ export default function JobsPage() {
           </div>
         </div>
 
-        {/* Jobs List - Now in a single column layout */}
+        {/* Jobs List - Single column layout with scroll */}
         {jobs.length > 0 ? (
           <div className="flex flex-col gap-6">
-            {jobs.map(job => (
+            {jobs.map((job, index) => (
               <motion.div
                 key={job.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
                 className="bg-[#353737] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.01]"
               >
                 <div className="p-6">
@@ -358,51 +358,6 @@ export default function JobsPage() {
             <p className="text-gray-400">
               لطفا معیارهای جستجوی خود را تغییر دهید.
             </p>
-          </div>
-        )}
-
-        {/* Pagination (simplified) */}
-        {jobs.length > 0 && (
-          <div className="flex justify-center mt-10">
-            <div className="flex space-x-2 space-x-reverse">
-              <button className="bg-gray-700 hover:bg-gray-600 text-white w-10 h-10 rounded-lg flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-              <button className="bg-[#0F3F77] text-white w-10 h-10 rounded-lg flex items-center justify-center">
-                1
-              </button>
-              <button className="bg-gray-700 hover:bg-gray-600 text-white w-10 h-10 rounded-lg flex items-center justify-center">
-                2
-              </button>
-              <button className="bg-gray-700 hover:bg-gray-600 text-white w-10 h-10 rounded-lg flex items-center justify-center">
-                3
-              </button>
-              <button className="bg-gray-700 hover:bg-gray-600 text-white w-10 h-10 rounded-lg flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-            </div>
           </div>
         )}
       </div>

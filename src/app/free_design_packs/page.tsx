@@ -2,6 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 // Sample card data - replace with your actual data
 const cardData = [
@@ -10,7 +11,6 @@ const cardData = [
     title: 'دوره جامع یوتیوب',
     description: 'آموزش کامل ساخت و مدیریت کانال یوتیوب از صفر تا صد',
     image: '/footbaly.jpg',
-    price: '۲,۹۹۰,۰۰۰ تومان',
     slug: 'youtube-course',
   },
   {
@@ -18,7 +18,6 @@ const cardData = [
     title: 'پک طراحی تامبنیل',
     description: 'مجموعه کامل قالب‌های آماده برای طراحی تامبنیل حرفه‌ای',
     image: '/footbaly.jpg',
-    price: '۱,۴۹۰,۰۰۰ تومان',
     slug: 'thumbnail-pack',
   },
   {
@@ -26,7 +25,6 @@ const cardData = [
     title: 'آموزش ادیت ویدیو',
     description: 'تدوین حرفه‌ای ویدیو با پریمیر و افترافکت',
     image: '/footbaly.jpg',
-    price: '۱,۹۹۰,۰۰۰ تومان',
     slug: 'video-editing',
   },
   {
@@ -34,7 +32,6 @@ const cardData = [
     title: 'پک موشن گرافیک',
     description: 'مجموعه انیمیشن‌های آماده برای ویدیوهای یوتیوب',
     image: '/footbaly.jpg',
-    price: '۱,۲۹۰,۰۰۰ تومان',
     slug: 'motion-graphics',
   },
   {
@@ -42,7 +39,6 @@ const cardData = [
     title: 'دوره مانتیزه کردن',
     description: 'آموزش کسب درآمد از یوتیوب و استراتژی‌های مانتیزه کردن',
     image: '/footbaly.jpg',
-    price: '۲,۴۹۰,۰۰۰ تومان',
     slug: 'monetization',
   },
   {
@@ -50,22 +46,19 @@ const cardData = [
     title: 'پک صوتی یوتیوب',
     description: 'مجموعه موسیقی و افکت‌های صوتی مخصوص ویدیوهای یوتیوب',
     image: '/footbaly.jpg',
-    price: '۹۹۰,۰۰۰ تومان',
     slug: 'audio-pack',
   },
 ];
 
 export default function CoursesPage() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-3xl font-heading font-bold text-center mb-12 text-blue-700">
-        دوره‌ها و پک‌های آموزشی
-      </h1>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {cardData.map(card => (
-          <Card key={card.id} card={card} />
-        ))}
+    <div className="min-h-screen bg-[#282A2A] text-gray-100 mt-[5em]">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {cardData.map((card, index) => (
+            <Card key={card.id} card={card} index={index} />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -77,40 +70,47 @@ interface CardProps {
     title: string;
     description: string;
     image: string;
-    price: string;
     slug: string;
   };
+  index: number;
 }
 
-function Card({ card }: CardProps) {
+function Card({ card, index }: CardProps) {
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:transform hover:scale-105">
-      <div className="relative h-48 w-full">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, delay: index * 0.1 }}
+      className="bg-[#353737]/80 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] border border-gray-700/50"
+    >
+      {/* Square Image Container */}
+      <div className="relative aspect-square w-full">
         <Image
           src={card.image}
           alt={card.title}
           fill
           style={{ objectFit: 'cover' }}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+          className="transition-transform duration-300 hover:scale-110"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       </div>
 
-      <div className="p-6">
-        <h2 className="text-xl font-heading font-bold mb-2">{card.title}</h2>
-        <p className="text-gray-600 mb-4 text-sm h-12 overflow-hidden">
+      <div className="p-4">
+        <h2 className="text-lg font-bold mb-2 text-white line-clamp-2">
+          {card.title}
+        </h2>
+        <p className="text-gray-300 mb-4 text-sm line-clamp-3 leading-relaxed">
           {card.description}
         </p>
 
-        <div className="flex justify-between items-center">
-          <span className="text-blue-600 font-bold">{card.price}</span>
-          <Link
-            href={`/courses/${card.slug}`}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
-          >
-            مشاهده دوره
-          </Link>
-        </div>
+        <Link
+          href={`/courses/${card.slug}`}
+          className="block w-full bg-[#0F3F77] hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded-lg transition-all duration-300 text-center hover:shadow-lg"
+        >
+          مشاهده دوره
+        </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }
