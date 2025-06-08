@@ -1,0 +1,40 @@
+{
+  "subscriptions": [],
+  "transactions": [
+    {
+      "id": "txn_1749384461603_sxvnv5uqm",
+      "authority": "A000000000000000000000000000eelxrzyy",
+      "planId": "plus",
+      "planName": "پلاس",
+      "amount": 1490000,
+      "status": "pending",
+      "createdAt": "2025-06-08T12:07:42.220Z"
+    },
+    {
+      "id": "txn_1749384701331_390c9qslv",
+      "authority": "A000000000000000000000000000y5v26q1z",
+      "planId": "plus",
+      "planName": "پلاس",
+      "amount": 1490000,
+      "status": "pending",
+      "createdAt": "2025-06-08T12:11:41.651Z"
+    }
+  ],
+  "purchases": [
+    {
+      "id": "pack_1749385691616_k46ujis86",
+      "authority": "A000000000000000000000000000xqymyvnq",
+      "packId": "premiere-pro-basics",
+      "packTitle": "پک آموزش مقدماتی پریمیر پرو",
+      "amount": 3900000,
+      "userData": {
+        "name": "Jack Hernandez",
+        "phone": "09145358948",
+        "email": null
+      },
+      "status": "pending",
+      "type": "pack_purchase",
+      "createdAt": "2025-06-08T12:28:11.979Z"
+    }
+  ]
+}
