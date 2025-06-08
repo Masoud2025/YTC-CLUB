@@ -1,7 +1,7 @@
 'use client';
 // components/Services.tsx
 import React, { useState } from 'react';
-import { FaChevronDown, FaArrowLeft, FaCheck } from 'react-icons/fa';
+import { FaChevronDown, FaCheck } from 'react-icons/fa';
 import Image from 'next/image';
 
 interface ServiceItem {
@@ -153,7 +153,7 @@ const Services: React.FC = () => {
                       </p>
 
                       {service.features && (
-                        <div className="mb-4">
+                        <div>
                           <div className="flex flex-wrap gap-2">
                             {service.features.map((feature, idx) => (
                               <span
@@ -177,21 +177,6 @@ const Services: React.FC = () => {
                           </div>
                         </div>
                       )}
-
-                      <button
-                        className={`inline-flex items-center bg-gradient-to-r from-[#0165FC] to-[#0165FC]/80 text-white font-medium py-2 px-4 sm:py-2.5 sm:px-6 rounded-lg hover:from-[#0165FC]/90 hover:to-[#0165FC]/70 transition-all duration-300 transform hover:scale-105 text-sm sm:text-base ${
-                          openDropdown === service.id
-                            ? 'opacity-100 translate-y-0'
-                            : 'opacity-0 translate-y-2'
-                        }`}
-                        style={{
-                          transitionDelay:
-                            openDropdown === service.id ? '300ms' : '0ms',
-                        }}
-                      >
-                        اطلاعات بیشتر
-                        <FaArrowLeft className="mr-2 text-xs transition-transform duration-300 group-hover:translate-x-1" />
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -264,7 +249,7 @@ const Services: React.FC = () => {
                       </p>
 
                       {service.features && (
-                        <div className="mb-6">
+                        <div>
                           <div className="flex flex-wrap gap-3">
                             {service.features.map((feature, idx) => (
                               <span
@@ -288,21 +273,6 @@ const Services: React.FC = () => {
                           </div>
                         </div>
                       )}
-
-                      <button
-                        className={`group inline-flex items-center bg-gradient-to-r from-[#0165FC] to-[#0165FC]/80 text-white font-medium py-3 px-8 rounded-lg hover:from-[#0165FC]/90 hover:to-[#0165FC]/70 transition-all duration-300 transform hover:scale-105 ${
-                          openDropdown === service.id
-                            ? 'opacity-100 translate-y-0'
-                            : 'opacity-0 translate-y-2'
-                        }`}
-                        style={{
-                          transitionDelay:
-                            openDropdown === service.id ? '300ms' : '0ms',
-                        }}
-                      >
-                        اطلاعات بیشتر
-                        <FaArrowLeft className="mr-3 transition-transform duration-300 group-hover:translate-x-1" />
-                      </button>
                     </div>
                   </div>
                 </div>

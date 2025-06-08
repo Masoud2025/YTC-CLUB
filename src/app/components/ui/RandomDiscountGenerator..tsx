@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -223,15 +224,8 @@ const LuckyWheelModal: React.FC = () => {
             >
               <div className="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-6 md:p-10 max-w-lg w-full shadow-2xl border border-gray-200">
                 {/* Header */}
-                <div className="flex justify-between items-center mb-8">
-                  <div>
-                    <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-1">
-                      چرخ شانس 🎯
-                    </h1>
-                    <p className="text-gray-600 text-sm">
-                      شانس خود را امتحان کنید!
-                    </p>
-                  </div>
+                <div className="flex justify-between items-center mb-8 ">
+                  <div></div>
                   <button
                     onClick={closeModal}
                     className="text-gray-400 hover:text-gray-600 transition-colors p-2 rounded-full hover:bg-gray-100"
@@ -384,16 +378,6 @@ const LuckyWheelModal: React.FC = () => {
                       : hasSpun
                       ? 'شما قبلاً شرکت کرده‌اید'
                       : 'شروع بازی'}
-                  </motion.button>
-
-                  <motion.button
-                    onClick={resetWheel}
-                    className="w-full py-2 px-4 bg-gray-100 text-gray-600 rounded-xl hover:bg-gray-200 transition-colors text-sm flex items-center justify-center gap-2"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <FiRefreshCw className="text-sm" />
-                    شروع مجدد
                   </motion.button>
                 </div>
               </div>

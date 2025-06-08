@@ -642,26 +642,8 @@ const Navbar: React.FC = () => {
                               {userData.phone}
                             </p>
                           </div>
-                          <motion.div whileHover={{ x: 5 }}>
-                            <Link
-                              href="/profile"
-                              className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 rounded-lg mx-2 mt-2"
-                              onClick={closeMenu}
-                              role="menuitem"
-                            >
-                              پروفایل کاربری
-                            </Link>
-                          </motion.div>
-                          <motion.div whileHover={{ x: 5 }}>
-                            <Link
-                              href="/dashboard"
-                              className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 rounded-lg mx-2"
-                              onClick={closeMenu}
-                              role="menuitem"
-                            >
-                              داشبورد
-                            </Link>
-                          </motion.div>
+                          <motion.div whileHover={{ x: 5 }}></motion.div>
+                          <motion.div whileHover={{ x: 5 }}></motion.div>
                           <motion.div whileHover={{ x: 5 }}>
                             <button
                               onClick={handleLogout}

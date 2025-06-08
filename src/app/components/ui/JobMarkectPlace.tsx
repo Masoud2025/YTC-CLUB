@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 // components/JobMarketplace.tsx
 import React, { useState } from 'react';
@@ -253,6 +254,11 @@ const JobMarketplace: React.FC = () => {
     router.push('/job_finder');
   };
 
+  // Updated function to redirect to job_finder for employer button
+  const goToEmployerSection = () => {
+    router.push('/job_finder');
+  };
+
   return (
     <section
       className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 font-[vazir]"
@@ -300,9 +306,9 @@ const JobMarketplace: React.FC = () => {
           </div>
         </div>
 
-        {/* Employer Button */}
+        {/* Employer Button - Now redirects to job_finder */}
         <div
-          onClick={openModal}
+          onClick={goToEmployerSection}
           className="w-full h-[120px] xs:h-[140px] sm:h-[180px] md:h-[220px] lg:h-[260px] xl:h-[280px] bg-[#242525] rounded-xl flex overflow-hidden hover:bg-[#0165FC] transition-all duration-300 cursor-pointer group"
         >
           {/* Left side - Text - Dynamic width based on screen size */}
@@ -332,7 +338,7 @@ const JobMarketplace: React.FC = () => {
         </div>
       </div>
 
-      {/* Modal with job posting wizard */}
+      {/* Modal with job posting wizard - Kept for potential future use */}
       <AnimatePresence>
         {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black bg-opacity-70">

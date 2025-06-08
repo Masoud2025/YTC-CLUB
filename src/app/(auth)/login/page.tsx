@@ -197,6 +197,14 @@ export default function LoginPage() {
 
       const data = await res.json();
       setMsg(data.message || data.error);
+
+      // Check if login was successful
+      if (res.ok && !data.error) {
+        // Show success message briefly then redirect
+        setTimeout(() => {
+          window.location.href = '/'; // Redirect to home page
+        }, 1500); // Wait 1.5 seconds to show success message
+      }
     } catch (error) {
       setMsg('خطا در اتصال به سرور');
     } finally {
@@ -227,45 +235,15 @@ export default function LoginPage() {
     },
   };
 
-  const floatingVariants = {
-    animate: {
-      y: [-10, 10, -10],
-      transition: {
-        duration: 6,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      },
-    },
-  };
-
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-        {/* Floating Elements */}
-        <motion.div
-          variants={floatingVariants}
-          animate="animate"
-          className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-xl"
-        />
-        <motion.div
-          variants={floatingVariants}
-          animate="animate"
-          style={{ animationDelay: '2s' }}
-          className="absolute top-40 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-xl"
-        />
-        <motion.div
-          variants={floatingVariants}
-          animate="animate"
-          style={{ animationDelay: '4s' }}
-          className="absolute bottom-20 left-1/3 w-80 h-80 bg-cyan-500/10 rounded-full blur-xl"
-        />
-      </div>
-      {/* Grid Pattern */}
-      {/* Alternative: Simple dot pattern */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-20"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent opacity-20"></div>
+    <div className="min-h-screen relative overflow-hidden bg-gray-900">
+      {/* Simple Background */}
+      <div className="absolute inset-0 bg-gray-900">
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent"></div>
+        </div>
       </div>
 
       {/* Main Content */}
@@ -520,21 +498,6 @@ export default function LoginPage() {
                 </AnimatePresence>
               </form>
             </div>
-          </motion.div>
-
-          {/* Footer */}
-          <motion.div variants={itemVariants} className="text-center mt-8">
-            <p className="text-white/60 text-sm">
-              با ورود، شما با{' '}
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                href="#"
-                className="text-blue-400 hover:text-blue-300 transition-colors underline"
-              >
-                قوانین و مقررات
-              </motion.a>{' '}
-              ما موافقت می‌کنید
-            </p>
           </motion.div>
         </motion.div>
       </div>
