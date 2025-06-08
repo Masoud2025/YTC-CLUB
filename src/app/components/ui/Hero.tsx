@@ -7,8 +7,8 @@ const Hero: React.FC = () => {
   return (
     <section className="relative w-full overflow-hidden">
       {/* Main container */}
-      <div className="w-full flex flex-col items-center mt-[2em] sm:mt-[4em]">
-        {/* Image container - bigger size */}
+      <div className="w-full flex flex-col items-center mt-[5em] sm:mt-[10em]">
+        {/* Image container - smaller desktop size */}
         <div className="relative w-full max-w-none px-0">
           {/* Mobile view */}
           <div className="block sm:hidden w-full mt-[4em]">
@@ -22,8 +22,8 @@ const Hero: React.FC = () => {
             />
           </div>
 
-          {/* Desktop view - bigger height */}
-          <div className="hidden sm:block relative w-full h-[95vh]">
+          {/* Desktop view - smaller height */}
+          <div className="hidden sm:block relative w-full h-[75vh]">
             <Image
               src="/HeroImage.png"
               alt="یوتیوب کلاب"
