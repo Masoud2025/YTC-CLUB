@@ -580,7 +580,7 @@ const Navbar: React.FC = () => {
                               scale: 0.95,
                               transition: { duration: 0.15 },
                             }}
-                            className="absolute right-0 mt-1 w-48 rounded-xl shadow-xl bg-[#282A2A] ring-1 ring-black ring-opacity-5 z-10"
+                            className="absolute right-0 mt-1 w-56 rounded-xl shadow-xl bg-[#282A2A] ring-1 ring-black ring-opacity-5 z-10"
                             role="menu"
                             aria-orientation="vertical"
                           >

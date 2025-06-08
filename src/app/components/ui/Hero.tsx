@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
         {/* Image container - smaller desktop size */}
         <div className="relative w-full max-w-none px-0">
           {/* Mobile view */}
-          <div className="block sm:hidden w-full mt-[6em]">
+          <div className="block sm:hidden w-full mt-[0em]">
             <Image
               src="/HeroImage.png"
               alt="یوتیوب کلاب"

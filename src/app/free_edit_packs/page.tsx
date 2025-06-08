@@ -79,21 +79,7 @@ export default function DownloadResourcesPage() {
         />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl font-bold text-white mb-4">
-            منابع و فایل‌های دانلودی
-          </h1>
-          <p className="text-gray-300 text-lg">
-            مجموعه کاملی از منابع و ابزارهای مفید
-          </p>
-        </motion.div>
-
+      <div className="relative z-10 container mx-auto px-4 py-8 mt-[10%]">
         {/* Resources Grid - Square Layout */}
         <motion.div
           variants={containerVariants}
@@ -136,59 +122,48 @@ function DownloadCard({ resource }: DownloadCardProps) {
   };
 
   return (
-    <motion.div
-      whileHover={{ y: -8, scale: 1.03 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      className="backdrop-blur-2xl bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group aspect-square flex flex-col"
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="backdrop-blur-2xl bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300 group aspect-square flex flex-col transform hover:-translate-y-2 hover:scale-105"
     >
-      {/* Square Image - Takes most of the card */}
-      <div className="relative flex-1 w-full h-full">
-        <Image
-          src={resource.image}
-          alt={resource.title}
-          fill
-          style={
-            {
-              // objectFit: 'cover',
-              // objectPosition: 'center'
-            }
-          }
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-          className="group-hover:scale-110 transition-transform duration-700"
-        />
+      {/* Square Image Container - Takes most of the card */}
+      <div className="relative flex-1 w-full overflow-hidden">
+        {/* Image with padding to keep it contained */}
+        <div className="relative w-full h-full p-3">
+          <div className="relative w-full h-full rounded-lg overflow-hidden">
+            <Image
+              src={resource.image}
+              alt={resource.title}
+              fill
+              className="object-contain transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+            />
+          </div>
+        </div>
 
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div
+          className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-opacity duration-300 ${
+            isHovered ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
 
-        {/* Download Button - Centered */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          className="absolute inset-0 flex items-center justify-center"
+        {/* Single Download Button - Centered */}
+        <div
+          className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
+            isHovered ? 'opacity-100' : 'opacity-0'
+          }`}
         >
-          <motion.button
-            initial={{ scale: 0 }}
-            animate={{ scale: isHovered ? 1 : 0 }}
+          <button
             onClick={handleDownload}
-            className="backdrop-blur-xl bg-green-500/80 hover:bg-green-600/80 border border-white/30 rounded-full p-4 transition-all duration-300 shadow-2xl"
+            className={`backdrop-blur-xl bg-green-500/90 hover:bg-green-600/90 border border-white/30 rounded-full p-4 transition-all duration-200 shadow-2xl transform ${
+              isHovered ? 'scale-100' : 'scale-75'
+            }`}
           >
             <FiDownload className="w-6 h-6 text-white" />
-          </motion.button>
-        </motion.div>
-
-        {/* Download Button - Top Right Corner */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={e => {
-            e.stopPropagation();
-            handleDownload();
-          }}
-          className="absolute top-3 right-3 backdrop-blur-xl bg-green-500/80 hover:bg-green-600/80 border border-white/20 text-white p-2 rounded-full shadow-lg transition-all duration-300"
-        >
-          <FiDownload className="w-3 h-3" />
-        </motion.button>
+          </button>
+        </div>
       </div>
 
       {/* Compact Card Content - Bottom section with centered text */}
@@ -199,11 +174,11 @@ function DownloadCard({ resource }: DownloadCardProps) {
       </div>
 
       {/* Animated Bottom Border */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: isHovered ? 1 : 0 }}
-        className="h-1 bg-gradient-to-r from-gray-400 via-white to-gray-400 origin-center transition-all duration-500"
+      <div
+        className={`h-1 bg-gradient-to-r from-gray-400 via-white to-gray-400 transition-all duration-300 transform origin-center ${
+          isHovered ? 'scale-x-100' : 'scale-x-0'
+        }`}
       />
-    </motion.div>
+    </div>
   );
 }
