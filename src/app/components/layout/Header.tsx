@@ -156,6 +156,20 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (!target.closest('.dropdown-container')) {
+        setActiveDropdown(null);
+        setIsUserDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   // Focus search input when search modal opens
   useEffect(() => {
     if (isSearchOpen && searchInputRef.current) {
@@ -518,10 +532,11 @@ const Navbar: React.FC = () => {
             <div className="hidden md:flex items-center justify-center flex-1 px-4">
               <div className="flex space-x-1 lg:space-x-3 xl:space-x-4 space-x-reverse">
                 {navLinks.map((link, index) => (
-                  <div key={index} className="relative group">
+                  <div key={index} className="relative dropdown-container">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
+                      onClick={() => link.dropdown && toggleDropdown(index)}
                       className={`px-1.5 lg:px-2 xl:px-3 py-2 rounded-md text-xs lg:text-sm xl:text-base font-medium flex items-center transition-all duration-300 whitespace-nowrap
                         ${
                           isActive(link.href)
@@ -550,43 +565,48 @@ const Navbar: React.FC = () => {
 
                     {link.dropdown && (
                       <AnimatePresence>
-                        <motion.div
-                          initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                          animate={{
-                            opacity: 1,
-                            y: 0,
-                            scale: 1,
-                            transition: { duration: 0.2 },
-                          }}
-                          exit={{
-                            opacity: 0,
-                            y: -10,
-                            scale: 0.95,
-                            transition: { duration: 0.15 },
-                          }}
-                          className="absolute right-0 mt-1 w-48 rounded-xl shadow-xl bg-[#282A2A] ring-1 ring-black ring-opacity-5 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
-                          role="menu"
-                          aria-orientation="vertical"
-                        >
-                          <div className="py-2" role="none">
-                            {link.dropdown.map((item, idx) => (
-                              <motion.div
-                                key={idx}
-                                whileHover={{ x: 5 }}
-                                transition={{ type: 'spring', stiffness: 300 }}
-                              >
-                                <Link
-                                  href={item.href}
-                                  className="block px-4 py-2 text-sm lg:text-base text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 rounded-lg mx-2"
-                                  onClick={closeMenu}
-                                  role="menuitem"
+                        {activeDropdown === index && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                            animate={{
+                              opacity: 1,
+                              y: 0,
+                              scale: 1,
+                              transition: { duration: 0.2 },
+                            }}
+                            exit={{
+                              opacity: 0,
+                              y: -10,
+                              scale: 0.95,
+                              transition: { duration: 0.15 },
+                            }}
+                            className="absolute right-0 mt-1 w-48 rounded-xl shadow-xl bg-[#282A2A] ring-1 ring-black ring-opacity-5 z-10"
+                            role="menu"
+                            aria-orientation="vertical"
+                          >
+                            <div className="py-2" role="none">
+                              {link.dropdown.map((item, idx) => (
+                                <motion.div
+                                  key={idx}
+                                  whileHover={{ x: 5 }}
+                                  transition={{
+                                    type: 'spring',
+                                    stiffness: 300,
+                                  }}
                                 >
-                                  {item.name}
-                                </Link>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </motion.div>
+                                  <Link
+                                    href={item.href}
+                                    className="block px-4 py-2 text-sm lg:text-base text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 rounded-lg mx-2"
+                                    onClick={closeMenu}
+                                    role="menuitem"
+                                  >
+                                    {item.name}
+                                  </Link>
+                                </motion.div>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
                       </AnimatePresence>
                     )}
                   </div>
@@ -599,7 +619,7 @@ const Navbar: React.FC = () => {
               {/* User Authentication Section */}
               {userData ? (
                 // User is logged in - show user name with dropdown
-                <div className="relative">
+                <div className="relative dropdown-container">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -733,6 +753,7 @@ const Navbar: React.FC = () => {
                     {isOpen ? 'بستن منو' : 'باز کردن منو'}
                   </span>
                   <motion.div
+                    animate={{ rotate: isOpen ? 45 : 0 }}
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.3 }}
                   >
