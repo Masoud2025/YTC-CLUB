@@ -1,70 +1,112 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { FiDownload } from 'react-icons/fi';
 
 // Sample data for the cards
 const resourceData = [
   {
     id: 1,
     title: 'قالب تامبنیل یوتیوب',
-    image: '/resources/thumbnail-template-1.jpg',
-    fileSize: '۱۵ مگابایت',
-    fileType: 'PSD',
+    image: '/footbaly.jpg',
     downloadUrl: '/downloads/youtube-thumbnail-template-1.zip',
   },
   {
     id: 2,
     title: 'پک آیکون‌های شبکه‌های اجتماعی',
-    image: '/resources/social-icons-pack.jpg',
-    fileSize: '۸ مگابایت',
-    fileType: 'PNG + SVG',
+    image: '/footbaly.jpg',
     downloadUrl: '/downloads/social-icons-pack.zip',
   },
   {
     id: 3,
     title: 'فونت فارسی یکان',
-    image: '/resources/yekan-font.jpg',
-    fileSize: '۲ مگابایت',
-    fileType: 'TTF + WOFF',
+    image: '/footbaly.jpg',
     downloadUrl: '/downloads/yekan-font.zip',
   },
   {
     id: 4,
     title: 'افکت‌های صوتی یوتیوب',
-    image: '/resources/sound-effects.jpg',
-    fileSize: '۴۵ مگابایت',
-    fileType: 'MP3',
+    image: '/footbaly.jpg',
     downloadUrl: '/downloads/youtube-sound-effects.zip',
   },
   {
     id: 5,
     title: 'قالب اینترو آماده',
-    image: '/resources/intro-template.jpg',
-    fileSize: '۱۲۰ مگابایت',
-    fileType: 'AEP',
+    image: '/footbaly.jpg',
     downloadUrl: '/downloads/intro-template.zip',
   },
   {
     id: 6,
     title: 'پک موشن گرافیک',
-    image: '/resources/motion-graphics-pack.jpg',
-    fileSize: '۲۵۰ مگابایت',
-    fileType: 'MOV + AEP',
+    image: '/footbaly.jpg',
     downloadUrl: '/downloads/motion-graphics-pack.zip',
   },
 ];
 
 export default function DownloadResourcesPage() {
-  return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-3xl font-heading font-bold text-center mb-12">
-        منابع و فایل‌های دانلودی
-      </h1>
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {resourceData.map(resource => (
-          <DownloadCard key={resource.id} resource={resource} />
-        ))}
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  };
+
+  return (
+    <div className="min-h-screen bg-transparent relative">
+      {/* Subtle Glass Pattern */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        {/* Very subtle grid pattern */}
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.1) 1px, transparent 0)`,
+            backgroundSize: '40px 40px',
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4 py-8">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-4xl font-bold text-white mb-4">
+            منابع و فایل‌های دانلودی
+          </h1>
+          <p className="text-gray-300 text-lg">
+            مجموعه کاملی از منابع و ابزارهای مفید
+          </p>
+        </motion.div>
+
+        {/* Resources Grid - Square Layout */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+        >
+          {resourceData.map(resource => (
+            <motion.div key={resource.id} variants={itemVariants}>
+              <DownloadCard resource={resource} />
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </div>
   );
@@ -75,18 +117,16 @@ interface DownloadCardProps {
     id: number;
     title: string;
     image: string;
-    fileSize: string;
-    fileType: string;
     downloadUrl: string;
   };
 }
 
 function DownloadCard({ resource }: DownloadCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   const handleDownload = () => {
-    // You can add analytics tracking or other logic here
     console.log(`Downloading ${resource.title}`);
 
-    // Create a direct download link
     const link = document.createElement('a');
     link.href = resource.downloadUrl;
     link.download = resource.downloadUrl.split('/').pop() || 'download';
@@ -96,82 +136,68 @@ function DownloadCard({ resource }: DownloadCardProps) {
   };
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 transition-all hover:shadow-xl">
-      <div className="relative h-48 w-full">
+    <motion.div
+      whileHover={{ y: -8, scale: 1.03 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      className="backdrop-blur-2xl bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group aspect-square flex flex-col"
+    >
+      {/* Square Image - Takes most of the card */}
+      <div className="relative flex-1 overflow-hidden">
         <Image
           src={resource.image}
           alt={resource.title}
           fill
-          style={{ objectFit: 'cover' }}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="transition-transform duration-300 hover:scale-105"
+          className="object-cover object-center group-hover:scale-110 transition-transform duration-700"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
         />
-      </div>
 
-      <div className="p-6">
-        <h2 className="text-xl font-heading font-bold mb-3">
-          {resource.title}
-        </h2>
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-        <div className="flex justify-between items-center mb-5">
-          <div className="flex items-center text-gray-600 text-sm">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4 ml-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-            <span>{resource.fileType}</span>
-          </div>
-
-          <div className="flex items-center text-gray-600 text-sm">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4 ml-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"
-              />
-            </svg>
-            <span>{resource.fileSize}</span>
-          </div>
-        </div>
-
-        <button
-          onClick={handleDownload}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center"
+        {/* Download Button - Centered */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isHovered ? 1 : 0 }}
+          className="absolute inset-0 flex items-center justify-center"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 ml-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+          <motion.button
+            initial={{ scale: 0 }}
+            animate={{ scale: isHovered ? 1 : 0 }}
+            onClick={handleDownload}
+            className="backdrop-blur-xl bg-green-500/80 hover:bg-green-600/80 border border-white/30 rounded-full p-4 transition-all duration-300 shadow-2xl"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-            />
-          </svg>
-          دانلود فایل
-        </button>
+            <FiDownload className="w-6 h-6 text-white" />
+          </motion.button>
+        </motion.div>
+
+        {/* Download Button - Top Right Corner */}
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={e => {
+            e.stopPropagation();
+            handleDownload();
+          }}
+          className="absolute top-3 right-3 backdrop-blur-xl bg-green-500/80 hover:bg-green-600/80 border border-white/20 text-white p-2 rounded-full shadow-lg transition-all duration-300"
+        >
+          <FiDownload className="w-3 h-3" />
+        </motion.button>
       </div>
-    </div>
+
+      {/* Compact Card Content - Bottom section with centered text */}
+      <div className="p-4 flex-shrink-0 flex items-center justify-center text-center">
+        <h3 className="font-bold text-white line-clamp-2 text-sm leading-tight hover:text-gray-300 transition-colors duration-300">
+          {resource.title}
+        </h3>
+      </div>
+
+      {/* Animated Bottom Border */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: isHovered ? 1 : 0 }}
+        className="h-1 bg-gradient-to-r from-gray-400 via-white to-gray-400 origin-center transition-all duration-500"
+      />
+    </motion.div>
   );
 }
