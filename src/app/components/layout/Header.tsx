@@ -13,6 +13,9 @@ import {
   FiSearch,
   FiShoppingCart,
   FiLogOut,
+  FiHome,
+  FiPackage,
+  FiBriefcase,
 } from 'react-icons/fi';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import './font.css';
@@ -26,6 +29,7 @@ type NavLink = {
   name: string;
   href: string;
   dropdown?: DropdownItem[];
+  icon?: React.ReactNode;
 };
 
 interface UserData {
@@ -38,6 +42,7 @@ const navLinks: NavLink[] = [
   {
     name: 'خانه',
     href: '/',
+    icon: <FiHome className="w-5 h-5" />,
     dropdown: [
       { name: 'حساب کاربری', href: '/login' },
       { name: 'آشنایی باتیم', href: '/about_us' },
@@ -46,6 +51,7 @@ const navLinks: NavLink[] = [
   {
     name: 'طراحی',
     href: '/courses',
+    icon: <FiPackage className="w-5 h-5" />,
     dropdown: [
       { name: 'پک های رایگان طراحی', href: '/free_design_packs' },
       { name: 'آموزش رایگان طراحی', href: '/free_design_tutorial' },
@@ -54,6 +60,7 @@ const navLinks: NavLink[] = [
   {
     name: 'ادیت',
     href: '/blog',
+    icon: <FiPackage className="w-5 h-5" />,
     dropdown: [
       { name: 'پک های رایگان ادیت', href: '/free_edit_packs' },
       { name: 'آموزش های رایگان ادیت', href: '/free_edit_thumbnails' },
@@ -62,6 +69,7 @@ const navLinks: NavLink[] = [
   {
     name: 'محصولات',
     href: '/products',
+    icon: <FiPackage className="w-5 h-5" />,
     dropdown: [
       { name: 'پک ها', href: '/edit_packs' },
       { name: 'دوره آموزشی', href: '/training_courses' },
@@ -71,6 +79,7 @@ const navLinks: NavLink[] = [
   {
     name: 'کسب و کار',
     href: '/contact',
+    icon: <FiBriefcase className="w-5 h-5" />,
     dropdown: [
       { name: ' مشاغل یوتیوب', href: '/job_finder' },
       { name: 'اشتراک ویژه', href: '/price_plan' },
@@ -417,6 +426,63 @@ const Navbar: React.FC = () => {
     scrollToResult(newIndex);
   };
 
+  // Animation variants for mobile menu
+  const sidebarVariants = {
+    closed: {
+      x: '100%',
+      transition: {
+        type: 'spring',
+        stiffness: 400,
+        damping: 40,
+      },
+    },
+    open: {
+      x: '0%',
+      transition: {
+        type: 'spring',
+        stiffness: 400,
+        damping: 40,
+      },
+    },
+  };
+
+  const overlayVariants = {
+    closed: {
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
+    open: {
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
+  const menuItemVariants = {
+    closed: {
+      x: 50,
+      opacity: 0,
+    },
+    open: (i: number) => ({
+      x: 0,
+      opacity: 1,
+      transition: {
+        delay: i * 0.1,
+        type: 'spring',
+        stiffness: 300,
+        damping: 24,
+      },
+    }),
+  };
+
+  const iconVariants = {
+    closed: { rotate: 0 },
+    open: { rotate: 180 },
+  };
+
   return (
     <div className="flex justify-center mt-2 sm:mt-3 md:mt-5 px-2 sm:px-4">
       <nav
@@ -427,33 +493,8 @@ const Navbar: React.FC = () => {
       >
         <div className="mx-auto px-2 sm:px-4 lg:px-8 h-full">
           <div className="flex justify-between items-center h-full">
-            {/* Logo - Right Side with Hamburger Menu */}
+            {/* Logo - Right Side */}
             <div className="flex-shrink-0 flex items-center">
-              {/* Mobile menu button on the right side */}
-              <div className="md:hidden flex items-center ml-1 sm:ml-2">
-                <button
-                  onClick={() => setIsOpen(!isOpen)}
-                  className="inline-flex items-center justify-center p-1 sm:p-1.5 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-colors"
-                  aria-expanded={isOpen ? 'true' : 'false'}
-                  aria-controls="mobile-menu"
-                >
-                  <span className="sr-only">
-                    {isOpen ? 'بستن منو' : 'باز کردن منو'}
-                  </span>
-                  {isOpen ? (
-                    <FiX
-                      className="block h-4 w-4 sm:h-5 sm:w-5"
-                      aria-hidden="true"
-                    />
-                  ) : (
-                    <FiMenu
-                      className="block h-4 w-4 sm:h-5 sm:w-5"
-                      aria-hidden="true"
-                    />
-                  )}
-                </button>
-              </div>
-
               <Link
                 href="/"
                 className="LOGO flex items-center"
@@ -478,12 +519,14 @@ const Navbar: React.FC = () => {
               <div className="flex space-x-1 lg:space-x-3 xl:space-x-4 space-x-reverse">
                 {navLinks.map((link, index) => (
                   <div key={index} className="relative group">
-                    <button
-                      className={`px-1.5 lg:px-2 xl:px-3 py-2 rounded-md text-xs lg:text-sm xl:text-base font-medium flex items-center transition-colors whitespace-nowrap
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`px-1.5 lg:px-2 xl:px-3 py-2 rounded-md text-xs lg:text-sm xl:text-base font-medium flex items-center transition-all duration-300 whitespace-nowrap
                         ${
                           isActive(link.href)
-                            ? 'text-white bg-opacity-40'
-                            : 'text-gray-300 hover:bg-gray-700 hover:bg-opacity-40'
+                            ? 'text-white bg-gray-700 shadow-lg'
+                            : 'text-gray-300 hover:bg-gray-700 hover:text-white'
                         }`}
                       aria-expanded={
                         activeDropdown === index ? 'true' : 'false'
@@ -491,33 +534,60 @@ const Navbar: React.FC = () => {
                     >
                       {link.name}
                       {link.dropdown && (
-                        <RiArrowDropDownLine
-                          className="mr-0.5 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:rotate-180"
-                          aria-hidden="true"
-                        />
+                        <motion.div
+                          variants={iconVariants}
+                          initial="closed"
+                          animate={activeDropdown === index ? 'open' : 'closed'}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <RiArrowDropDownLine
+                            className="mr-0.5 h-4 w-4 lg:h-5 lg:w-5"
+                            aria-hidden="true"
+                          />
+                        </motion.div>
                       )}
-                    </button>
+                    </motion.button>
 
                     {link.dropdown && (
-                      <div
-                        className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white dark:bg-[#282A2A] ring-1 ring-black ring-opacity-5 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right scale-95 group-hover:scale-100"
-                        role="menu"
-                        aria-orientation="vertical"
-                      >
-                        <div className="py-1" role="none">
-                          {link.dropdown.map((item, idx) => (
-                            <Link
-                              key={idx}
-                              href={item.href}
-                              className="block px-4 py-2 text-sm lg:text-base text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-                              onClick={closeMenu}
-                              role="menuitem"
-                            >
-                              {item.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
+                      <AnimatePresence>
+                        <motion.div
+                          initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                          animate={{
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            transition: { duration: 0.2 },
+                          }}
+                          exit={{
+                            opacity: 0,
+                            y: -10,
+                            scale: 0.95,
+                            transition: { duration: 0.15 },
+                          }}
+                          className="absolute right-0 mt-1 w-48 rounded-xl shadow-xl bg-[#282A2A] ring-1 ring-black ring-opacity-5 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+                          role="menu"
+                          aria-orientation="vertical"
+                        >
+                          <div className="py-2" role="none">
+                            {link.dropdown.map((item, idx) => (
+                              <motion.div
+                                key={idx}
+                                whileHover={{ x: 5 }}
+                                transition={{ type: 'spring', stiffness: 300 }}
+                              >
+                                <Link
+                                  href={item.href}
+                                  className="block px-4 py-2 text-sm lg:text-base text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 rounded-lg mx-2"
+                                  onClick={closeMenu}
+                                  role="menuitem"
+                                >
+                                  {item.name}
+                                </Link>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      </AnimatePresence>
                     )}
                   </div>
                 ))}
@@ -530,9 +600,11 @@ const Navbar: React.FC = () => {
               {userData ? (
                 // User is logged in - show user name with dropdown
                 <div className="relative">
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
-                    className="px-2 sm:px-3 md:px-4 lg:px-5 py-1 sm:py-1.5 md:py-2 lg:py-2.5 ml-2 sm:ml-3 md:ml-4 lg:ml-6 text-[10px] xs:text-xs sm:text-sm md:text-base font-medium text-white bg-[#175299] rounded-md sm:rounded-lg md:rounded-xl hover:bg-[#0f3f77] focus:outline-none shadow-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center transition-colors"
+                    className="px-2 sm:px-3 md:px-4 lg:px-5 py-1 sm:py-1.5 md:py-2 lg:py-2.5 ml-2 sm:ml-3 md:ml-4 lg:ml-6 text-[10px] xs:text-xs sm:text-sm md:text-base font-medium text-white bg-gradient-to-r from-[#175299] to-[#468FD5] rounded-md sm:rounded-lg md:rounded-xl hover:from-[#0f3f77] hover:to-[#175299] focus:outline-none shadow-lg flex items-center transition-all duration-300"
                   >
                     <FiUser
                       className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 lg:h-5 lg:w-5"
@@ -541,12 +613,14 @@ const Navbar: React.FC = () => {
                     <span className="max-w-[60px] sm:max-w-[80px] md:max-w-[100px] lg:max-w-[120px] truncate">
                       {getFirstName(userData.name)}
                     </span>
-                    <FiChevronDown
-                      className={`mr-1 h-3 w-3 sm:h-4 sm:w-4 transition-transform ${
-                        isUserDropdownOpen ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
+                    <motion.div
+                      variants={iconVariants}
+                      animate={isUserDropdownOpen ? 'open' : 'closed'}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <FiChevronDown className="mr-1 h-3 w-3 sm:h-4 sm:w-4" />
+                    </motion.div>
+                  </motion.button>
 
                   {/* User Dropdown Menu */}
                   <AnimatePresence>
@@ -556,42 +630,48 @@ const Navbar: React.FC = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-[#282A2A] ring-1 ring-black ring-opacity-5 z-10"
+                        className="absolute left-0 mt-2 w-48 rounded-xl shadow-xl bg-[#282A2A] ring-1 ring-black ring-opacity-5 z-10"
                         role="menu"
                       >
-                        <div className="py-1" role="none">
-                          <div className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-600">
+                        <div className="py-2" role="none">
+                          <div className="px-4 py-2 text-sm text-white border-b border-gray-600 mx-2 rounded-lg">
                             <p className="font-medium truncate">
                               {userData.name}
                             </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                            <p className="text-xs text-gray-400 truncate">
                               {userData.phone}
                             </p>
                           </div>
-                          <Link
-                            href="/profile"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-                            onClick={closeMenu}
-                            role="menuitem"
-                          >
-                            پروفایل کاربری
-                          </Link>
-                          <Link
-                            href="/dashboard"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-                            onClick={closeMenu}
-                            role="menuitem"
-                          >
-                            داشبورد
-                          </Link>
-                          <button
-                            onClick={handleLogout}
-                            className="w-full text-right px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 transition-colors flex items-center"
-                            role="menuitem"
-                          >
-                            <FiLogOut className="ml-2 h-4 w-4" />
-                            خروج از حساب
-                          </button>
+                          <motion.div whileHover={{ x: 5 }}>
+                            <Link
+                              href="/profile"
+                              className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 rounded-lg mx-2 mt-2"
+                              onClick={closeMenu}
+                              role="menuitem"
+                            >
+                              پروفایل کاربری
+                            </Link>
+                          </motion.div>
+                          <motion.div whileHover={{ x: 5 }}>
+                            <Link
+                              href="/dashboard"
+                              className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 rounded-lg mx-2"
+                              onClick={closeMenu}
+                              role="menuitem"
+                            >
+                              داشبورد
+                            </Link>
+                          </motion.div>
+                          <motion.div whileHover={{ x: 5 }}>
+                            <button
+                              onClick={handleLogout}
+                              className="w-full text-right px-4 py-2 text-sm text-red-400 hover:bg-red-900/20 hover:text-red-300 transition-all duration-200 flex items-center rounded-lg mx-2"
+                              role="menuitem"
+                            >
+                              <FiLogOut className="ml-2 h-4 w-4" />
+                              خروج از حساب
+                            </button>
+                          </motion.div>
                         </div>
                       </motion.div>
                     )}
@@ -599,206 +679,378 @@ const Navbar: React.FC = () => {
                 </div>
               ) : (
                 // User is not logged in - show login button
-                <Link
-                  href="/login"
-                  className="px-2 sm:px-3 md:px-4 lg:px-5 py-1 sm:py-1.5 md:py-2 lg:py-2.5 ml-2 sm:ml-3 md:ml-4 lg:ml-6 text-[10px] xs:text-xs sm:text-sm md:text-base font-medium text-white bg-[#175299] rounded-md sm:rounded-lg md:rounded-xl hover:bg-[#0f3f77] focus:outline-none shadow-inner shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] flex items-center transition-colors whitespace-nowrap"
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <FiUser
-                    className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 lg:h-5 lg:w-5"
-                    aria-hidden="true"
-                  />
-                  <span className="hidden xs:inline">ورود / ثبت نام</span>
-                  <span className="xs:hidden">ورود</span>
-                </Link>
+                  <Link
+                    href="/login"
+                    className="px-2 sm:px-3 md:px-4 lg:px-5 py-1 sm:py-1.5 md:py-2 lg:py-2.5 ml-2 sm:ml-3 md:ml-4 lg:ml-6 text-[10px] xs:text-xs sm:text-sm md:text-base font-medium text-white bg-gradient-to-r from-[#175299] to-[#468FD5] rounded-md sm:rounded-lg md:rounded-xl hover:from-[#0f3f77] hover:to-[#175299] focus:outline-none shadow-lg flex items-center transition-all duration-300 whitespace-nowrap"
+                  >
+                    <FiUser
+                      className="ml-1 h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 lg:h-5 lg:w-5"
+                      aria-hidden="true"
+                    />
+                    <span className="hidden xs:inline">ورود / ثبت نام</span>
+                    <span className="xs:hidden">ورود</span>
+                  </Link>
+                </motion.div>
               )}
 
               {/* Desktop icons with improved spacing */}
               <div className="hidden md:flex items-center space-x-3 lg:space-x-4 xl:space-x-6 space-x-reverse">
-                <button
-                  className="p-1 rounded-md hover:bg-gray-700 hover:bg-opacity-40 transition-colors"
+                <motion.button
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-2 rounded-full hover:bg-gray-700 transition-all duration-300"
                   aria-label="سبد خرید"
                 >
                   <FiShoppingCart className="h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7 text-white hover:text-gray-300 transition-colors" />
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.1, rotate: -5 }}
+                  whileTap={{ scale: 0.9 }}
                   onClick={handleOpenSearch}
-                  className="p-1 rounded-md hover:bg-gray-700 hover:bg-opacity-40 transition-colors"
+                  className="p-2 rounded-full hover:bg-gray-700 transition-all duration-300"
                   aria-label="جستجو"
                 >
                   <FiSearch className="h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7 text-white hover:text-gray-300 transition-colors" />
-                </button>
+                </motion.button>
               </div>
 
-              {/* Mobile icons with improved spacing */}
+              {/* Mobile icons and menu button */}
               <div className="flex md:hidden items-center space-x-2 sm:space-x-3 space-x-reverse">
-                <button
-                  className="p-1 rounded-md hover:bg-gray-700 hover:bg-opacity-40 transition-colors"
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-1 rounded-md hover:bg-gray-700 transition-all duration-300"
                   aria-label="سبد خرید"
                 >
                   <FiShoppingCart className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                   onClick={handleOpenSearch}
-                  className="p-1 rounded-md hover:bg-gray-700 hover:bg-opacity-40 transition-colors"
+                  className="p-1 rounded-md hover:bg-gray-700 transition-all duration-300"
                   aria-label="جستجو"
                 >
                   <FiSearch className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
-                </button>
+                </motion.button>
+
+                {/* Mobile hamburger menu */}
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-all duration-300"
+                  aria-expanded={isOpen ? 'true' : 'false'}
+                  aria-controls="mobile-menu"
+                >
+                  <span className="sr-only">
+                    {isOpen ? 'بستن منو' : 'باز کردن منو'}
+                  </span>
+                  <motion.div
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {isOpen ? (
+                      <FiX
+                        className="block h-5 w-5 sm:h-6 sm:w-6"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <FiMenu
+                        className="block h-5 w-5 sm:h-6 sm:w-6"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </motion.div>
+                </motion.button>
               </div>
             </div>
           </div>
         </div>
+      </nav>
 
-        {/* Mobile menu */}
-        <AnimatePresence>
-          {isOpen && (
+      {/* Mobile menu - Sliding from right */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop overlay */}
             <motion.div
-              id="mobile-menu"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden bg-[#353737] rounded-b-[12px] sm:rounded-b-[20px] overflow-hidden shadow-lg"
+              variants={overlayVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              onClick={closeMenu}
+            />
+
+            {/* Mobile sidebar */}
+            <motion.div
+              variants={sidebarVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[#353737] shadow-2xl z-50 md:hidden"
+              dir="rtl"
             >
-              <div className="px-2 pt-1 pb-2 space-y-1 sm:px-3">
-                {navLinks.map((link, index) => (
-                  <div key={index}>
-                    <button
-                      onClick={() => link.dropdown && toggleDropdown(index)}
-                      className={`w-full text-right px-2 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium flex items-center justify-between
-                        ${
+              {/* Header with logo and close button */}
+              <div className="flex items-center justify-between p-6 border-b border-gray-600">
+                <div className="flex items-center">
+                  <span id="testFont" className="text-lg font-bold">
+                    <span className="text-white">یوتیوب </span>
+                    <span className="text-[#468FD5]">کلاب</span>
+                  </span>
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={closeMenu}
+                  className="p-2 rounded-full hover:bg-gray-700 transition-all duration-300"
+                >
+                  <FiX className="h-6 w-6 text-white" />
+                </motion.button>
+              </div>
+
+              {/* Navigation items */}
+              <div className="flex-1 overflow-y-auto py-6">
+                <div className="px-4 space-y-2">
+                  {navLinks.map((link, index) => (
+                    <motion.div
+                      key={index}
+                      custom={index}
+                      variants={menuItemVariants}
+                      initial="closed"
+                      animate="open"
+                      exit="closed"
+                      className="space-y-1"
+                    >
+                      <motion.button
+                        whileHover={{ x: 5 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => link.dropdown && toggleDropdown(index)}
+                        className={`w-full text-right px-4 py-3 rounded-xl font-medium flex items-center justify-between transition-all duration-300 ${
                           isActive(link.href)
-                            ? 'text-blue-400 bg-gray-700 bg-opacity-40'
-                            : 'text-gray-300 hover:bg-gray-700 hover:bg-opacity-40'
-                        } transition-colors`}
-                      aria-expanded={
-                        activeDropdown === index ? 'true' : 'false'
-                      }
-                    >
-                      {link.name}
-                      {link.dropdown && (
-                        <FiChevronDown
-                          className={`h-3 w-3 sm:h-4 sm:w-4 transition-transform ${
-                            activeDropdown === index
-                              ? 'transform rotate-180'
-                              : ''
-                          }`}
-                          aria-hidden="true"
-                        />
-                      )}
-                    </button>
-
-                    {link.dropdown && activeDropdown === index && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="bg-[#282A2A] rounded-md mt-1 mb-1 overflow-hidden"
-                        role="menu"
+                            ? 'text-white bg-gradient-to-r from-[#175299] to-[#468FD5] shadow-lg'
+                            : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                        }`}
+                        aria-expanded={
+                          activeDropdown === index ? 'true' : 'false'
+                        }
                       >
-                        {link.dropdown.map((item, idx) => (
-                          <Link
-                            key={idx}
-                            href={item.href}
-                            className="block px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white border-b border-gray-700 last:border-b-0 transition-colors"
-                            onClick={closeMenu}
-                            role="menuitem"
+                        <div className="flex items-center">
+                          <span className="ml-3 text-[#468FD5]">
+                            {link.icon}
+                          </span>
+                          <span className="text-base">{link.name}</span>
+                        </div>
+                        {link.dropdown && (
+                          <motion.div
+                            variants={iconVariants}
+                            animate={
+                              activeDropdown === index ? 'open' : 'closed'
+                            }
+                            transition={{ duration: 0.3 }}
                           >
-                            {item.name}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </div>
-                ))}
+                            <FiChevronDown className="h-5 w-5" />
+                          </motion.div>
+                        )}
+                      </motion.button>
 
-                {/* Mobile User Section */}
+                      {/* Dropdown items */}
+                      <AnimatePresence>
+                        {link.dropdown && activeDropdown === index && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="overflow-hidden bg-gray-800 rounded-xl ml-4 mt-2"
+                          >
+                            {link.dropdown.map((item, idx) => (
+                              <motion.div
+                                key={idx}
+                                initial={{ x: -20, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ delay: idx * 0.1 }}
+                              >
+                                <Link
+                                  href={item.href}
+                                  className="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 border-b border-gray-700 last:border-b-0"
+                                  onClick={closeMenu}
+                                >
+                                  <span className="mr-2">•</span>
+                                  {item.name}
+                                </Link>
+                              </motion.div>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* User section in mobile menu */}
                 {userData && (
-                  <div className="border-t border-gray-600 pt-2 mt-2">
-                    <div className="px-2 py-2 text-gray-300">
-                      <p className="text-sm font-medium">{userData.name}</p>
-                      <p className="text-xs text-gray-400">{userData.phone}</p>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="mt-8 mx-4 p-4 bg-gray-800 rounded-xl border border-gray-600"
+                  >
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-r from-[#175299] to-[#468FD5] rounded-full flex items-center justify-center ml-3">
+                        <FiUser className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-white font-medium">
+                          {userData.name}
+                        </p>
+                        <p className="text-gray-400 text-sm">
+                          {userData.phone}
+                        </p>
+                      </div>
                     </div>
-                    <Link
-                      href="/profile"
-                      className="block px-2 py-1.5 text-xs sm:text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
-                      onClick={closeMenu}
-                    >
-                      پروفایل کاربری
-                    </Link>
-                    <Link
-                      href="/dashboard"
-                      className="block px-2 py-1.5 text-xs sm:text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
-                      onClick={closeMenu}
-                    >
-                      داشبورد
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="w-full text-right px-2 py-1.5 text-xs sm:text-sm font-medium text-red-400 hover:bg-red-900/20 hover:text-red-300 transition-colors flex items-center"
-                    >
-                      <FiLogOut className="ml-2 h-4 w-4" />
-                      خروج از حساب
-                    </button>
-                  </div>
+
+                    <div className="space-y-2">
+                      <motion.div whileHover={{ x: 5 }}>
+                        <Link
+                          href="/profile"
+                          className="block px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 rounded-lg"
+                          onClick={closeMenu}
+                        >
+                          پروفایل کاربری
+                        </Link>
+                      </motion.div>
+                      <motion.div whileHover={{ x: 5 }}>
+                        <Link
+                          href="/dashboard"
+                          className="block px-3 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 rounded-lg"
+                          onClick={closeMenu}
+                        >
+                          داشبورد
+                        </Link>
+                      </motion.div>
+                      <motion.div whileHover={{ x: 5 }}>
+                        <button
+                          onClick={handleLogout}
+                          className="w-full text-right px-3 py-2 text-sm text-red-400 hover:bg-red-900/20 hover:text-red-300 transition-all duration-200 flex items-center rounded-lg"
+                        >
+                          <FiLogOut className="ml-2 h-4 w-4" />
+                          خروج از حساب
+                        </button>
+                      </motion.div>
+                    </div>
+                  </motion.div>
                 )}
+
+                {/* Action buttons in mobile menu */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  className="mt-6 mx-4 space-y-3"
+                >
+                  {!userData && (
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Link
+                        href="/login"
+                        className="w-full bg-gradient-to-r from-[#175299] to-[#468FD5] text-white font-medium py-3 px-4 rounded-xl hover:from-[#0f3f77] hover:to-[#175299] transition-all duration-300 flex items-center justify-center shadow-lg"
+                        onClick={closeMenu}
+                      >
+                        <FiUser className="ml-2 h-5 w-5" />
+                        ورود / ثبت نام
+                      </Link>
+                    </motion.div>
+                  )}
+
+                  <div className="flex space-x-3 space-x-reverse">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex-1 bg-gray-700 text-white font-medium py-3 px-4 rounded-xl hover:bg-gray-600 transition-all duration-300 flex items-center justify-center"
+                      aria-label="سبد خرید"
+                    >
+                      <FiShoppingCart className="h-5 w-5" />
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={handleOpenSearch}
+                      className="flex-1 bg-gray-700 text-white font-medium py-3 px-4 rounded-xl hover:bg-gray-600 transition-all duration-300 flex items-center justify-center"
+                      aria-label="جستجو"
+                    >
+                      <FiSearch className="h-5 w-5" />
+                    </motion.button>
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Search Modal */}
       <AnimatePresence>
         {isSearchOpen && (
           <>
-            {/* Overlay with slight transparency */}
+            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm z-50"
+              className="fixed inset-0 bg-black bg-opacity-20 z-50"
               onClick={handleCloseSearch}
             />
 
             {/* Search bar at the top */}
             <motion.div
-              initial={{ y: -100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -100, opacity: 0 }}
+              initial={{ y: -100, opacity: 0, scale: 0.9 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: -100, opacity: 0, scale: 0.9 }}
               transition={{
-                duration: 0.3,
+                duration: 0.4,
                 type: 'spring',
                 stiffness: 300,
                 damping: 30,
               }}
               className="fixed top-4 left-1/2 transform -translate-x-1/2 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl z-50"
             >
-              <div className="bg-[#353737] rounded-xl shadow-lg overflow-hidden mx-4">
-                <div className="p-2 sm:p-3 md:p-4">
+              <div className="bg-[#353737] rounded-2xl shadow-2xl overflow-hidden mx-4">
+                <div className="p-3 sm:p-4 md:p-5">
                   <form onSubmit={handleSearch} className="relative">
-                    <input
+                    <motion.input
+                      initial={{ scale: 0.95 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.1 }}
                       ref={searchInputRef}
                       type="text"
                       value={searchTerm}
                       onChange={e => setSearchTerm(e.target.value)}
                       placeholder="جستجو در صفحه..."
-                      className="w-full bg-[#282A2A] text-white px-3 py-2 sm:py-2.5 pr-8 sm:pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-xs sm:text-sm"
+                      className="w-full bg-[#282A2A] text-white px-4 py-3 sm:py-3.5 pr-10 sm:pr-12 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#468FD5] text-sm sm:text-base transition-all duration-300"
                       dir="rtl"
                     />
-                    <div className="absolute left-2 sm:left-3 top-1.5 sm:top-2 flex items-center">
-                      <button
+                    <div className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-1 space-x-reverse">
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
                         type="button"
                         onClick={() => navigateResults('prev')}
-                        className="text-gray-400 hover:text-white p-0.5 sm:p-1 mr-0.5 sm:mr-1 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="text-gray-400 hover:text-white p-1 transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded-md hover:bg-gray-700"
                         disabled={highlightedElements.length === 0}
                         aria-label="نتیجه قبلی"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-3 w-3 sm:h-4 sm:w-4"
+                          className="h-4 w-4"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -810,17 +1062,19 @@ const Navbar: React.FC = () => {
                             d="M5 15l7-7 7 7"
                           />
                         </svg>
-                      </button>
-                      <button
+                      </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
                         type="button"
                         onClick={() => navigateResults('next')}
-                        className="text-gray-400 hover:text-white p-0.5 sm:p-1 mr-0.5 sm:mr-1 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="text-gray-400 hover:text-white p-1 transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded-md hover:bg-gray-700"
                         disabled={highlightedElements.length === 0}
                         aria-label="نتیجه بعدی"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-3 w-3 sm:h-4 sm:w-4"
+                          className="h-4 w-4"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -832,51 +1086,72 @@ const Navbar: React.FC = () => {
                             d="M19 9l-7 7-7-7"
                           />
                         </svg>
-                      </button>
-                      <button
+                      </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
                         type="submit"
-                        className="text-blue-500 hover:text-blue-400 p-0.5 sm:p-1 transition-colors"
+                        className="text-[#468FD5] hover:text-blue-400 p-1 transition-colors rounded-md hover:bg-gray-700"
                         aria-label="جستجو"
                       >
-                        <FiSearch className="h-3 w-3 sm:h-4 sm:w-4" />
-                      </button>
+                        <FiSearch className="h-4 w-4" />
+                      </motion.button>
                     </div>
-                    <div className="absolute right-2 sm:right-3 top-1.5 sm:top-2">
-                      <button
+                    <div className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2">
+                      <motion.button
+                        whileHover={{ scale: 1.1, rotate: 90 }}
+                        whileTap={{ scale: 0.9 }}
                         type="button"
                         onClick={handleCloseSearch}
-                        className="text-gray-400 hover:text-white transition-colors"
+                        className="text-gray-400 hover:text-white transition-all duration-300 p-1 rounded-md hover:bg-gray-700"
                         aria-label="بستن جستجو"
                       >
-                        <FiX className="h-3 w-3 sm:h-4 sm:w-4" />
-                      </button>
+                        <FiX className="h-4 w-4" />
+                      </motion.button>
                     </div>
                   </form>
                 </div>
 
                 {/* Search results counter */}
-                {highlightedElements.length > 0 && (
-                  <div className="px-3 py-1.5 sm:px-4 sm:py-2 bg-[#282A2A] text-gray-300 text-[10px] xs:text-xs sm:text-sm flex justify-between items-center">
-                    <span>
-                      {currentResultIndex + 1} از {highlightedElements.length}{' '}
-                      نتیجه
-                    </span>
-                    <span>
-                      {searchResults.reduce(
-                        (total, result) => total + result.count,
-                        0,
-                      )}{' '}
-                      مورد یافت شد
-                    </span>
-                  </div>
-                )}
+                <AnimatePresence>
+                  {highlightedElements.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="px-4 py-3 bg-[#282A2A] border-t border-gray-600 text-gray-300 text-xs sm:text-sm flex justify-between items-center"
+                    >
+                      <span className="font-medium">
+                        {currentResultIndex + 1} از {highlightedElements.length}{' '}
+                        نتیجه
+                      </span>
+                      <span className="text-[#468FD5]">
+                        {searchResults.reduce(
+                          (total, result) => total + result.count,
+                          0,
+                        )}{' '}
+                        مورد یافت شد
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 {/* No results message */}
-                {searchTerm && searchResults.length === 0 && (
-                  <div className="px-3 py-2 sm:px-4 sm:py-3 bg-[#282A2A] text-gray-400 text-xs sm:text-sm text-center">
-                    نتیجه‌ای یافت نشد
-                  </div>
-                )}
+                <AnimatePresence>
+                  {searchTerm && searchResults.length === 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="px-4 py-3 bg-[#282A2A] border-t border-gray-600 text-gray-400 text-xs sm:text-sm text-center"
+                    >
+                      <div className="flex items-center justify-center">
+                        <FiSearch className="ml-2 h-4 w-4" />
+                        نتیجه‌ای یافت نشد
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </motion.div>
           </>
