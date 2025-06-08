@@ -206,7 +206,7 @@ const CircularScroller: React.FC<CircularScrollerProps> = ({
               >
                 <Link
                   href={imageData.href}
-                  className="block rounded-full overflow-hidden h-full w-full hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-xl"
+                  className="block rounded-full overflow-hidden h-full w-full transition-transform duration-300 shadow-lg hover:shadow-xl"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
