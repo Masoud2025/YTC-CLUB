@@ -754,8 +754,7 @@ const Navbar: React.FC = () => {
                   </span>
                   <motion.div
                     animate={{ rotate: isOpen ? 45 : 0 }}
-                    animate={{ rotate: isOpen ? 45 : 0 }}
-                    transition={{ duration: 0.3 }}
+                    // transition={{ duration: 0.3 }}
                   >
                     {isOpen ? (
                       <FiX

@@ -127,32 +127,31 @@ const Footer: React.FC = () => {
               </ul>
             </div>
 
-            {/* Column 4: Trust Badges - UPDATED with centered images on white background */}
+            {/* Column 4: Trust Badges - UPDATED with Enamad trust seal */}
             <div>
               <h3 className="text-xl font-bold text-white mb-4 border-b border-indigo-500 pb-2">
                 نماد های اعتماد
               </h3>
               <div className="flex flex-row md:flex-col gap-4">
-                {/* Enamad Logo - Centered on white background */}
-                <Link
-                  href="https://trustseal.enamad.ir/?id=583141&Code=XBeyUuednnONcuUwp6bFFlCDVLmo28jw"
+                {/* Enamad Trust Seal - Official Implementation */}
+                <a
+                  referrerPolicy="origin"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  href="https://trustseal.enamad.ir/?id=583141&Code=XBeyUuednnONcuUwp6bFFlCDVLmo28jw"
                   className="inline-block"
                   aria-label="نماد اعتماد الکترونیکی"
                 >
-                  <div className="bg-white rounded-md p-1 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
-                    <div className="relative w-14 h-14 md:w-18 md:h-18">
-                      <Image
-                        src="/enamadLogo.webp"
-                        alt="نماد اعتماد الکترونیکی"
-                        fill
-                        sizes="(max-width: 768px) 56px, 72px"
-                        className="object-contain"
-                      />
-                    </div>
+                  <div className="bg-white rounded-md p-2 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center hover:shadow-lg transition-shadow duration-200">
+                    <img
+                      referrerPolicy="origin"
+                      src="https://trustseal.enamad.ir/logo.aspx?id=583141&Code=XBeyUuednnONcuUwp6bFFlCDVLmo28jw"
+                      alt="نماد اعتماد الکترونیکی"
+                      style={{ cursor: 'pointer' }}
+                      data-code="XBeyUuednnONcuUwp6bFFlCDVLmo28jw"
+                      className="max-w-full max-h-full object-contain"
+                    />
                   </div>
-                </Link>
+                </a>
 
                 {/* ZarinPal Logo - Centered on white background */}
                 <Link
@@ -162,13 +161,13 @@ const Footer: React.FC = () => {
                   className="inline-block"
                   aria-label="درگاه پرداخت زرین‌پال"
                 >
-                  <div className="bg-white rounded-md p-1 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
-                    <div className="relative w-14 h-14 md:w-18 md:h-18">
+                  <div className="bg-white rounded-md p-2 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center hover:shadow-lg transition-shadow duration-200">
+                    <div className="relative w-12 h-12 md:w-16 md:h-16">
                       <Image
                         src="/zarinpal-1.webp"
                         alt="درگاه پرداخت زرین‌پال"
                         fill
-                        sizes="(max-width: 768px) 56px, 72px"
+                        sizes="(max-width: 768px) 48px, 64px"
                         className="object-contain"
                       />
                     </div>
