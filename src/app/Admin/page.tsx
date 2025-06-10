@@ -61,6 +61,11 @@ export default function AdminPage() {
             مدیریت ها پک های پولی
           </a>
         </li>
+        <li>
+          <a className="text-blue-600 underline" href="Admin/Videos">
+            فیلم آموزشی رایگان
+          </a>
+        </li>
       </ul>
     </div>
   );

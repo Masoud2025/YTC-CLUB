@@ -1,0 +1,77 @@
+{
+  "videos": [
+    {
+      "id": 1,
+      "title": "چگونه در یوتیوب به ۱۰۰۰ سابسکرایبر برسیم",
+      "thumbnail": "/videos/thumbnail-1.jpg",
+      "videoUrl": "/videos/video-1.mp4",
+      "downloadUrl": "/downloads/video-1.zip",
+      "category": "رشد کانال",
+      "duration": "15:30",
+      "fileSize": "250 MB",
+      "description": "در این ویدیو یاد می‌گیرید چگونه به سرعت به ۱۰۰۰ سابسکرایبر در یوتیوب برسید و کانال خود را رشد دهید.",
+      "tags": ["یوتیوب", "سابسکرایبر", "رشد", "آموزش"],
+      "createdAt": "2025-01-15T10:00:00Z",
+      "updatedAt": "2025-01-15T10:00:00Z",
+      "isActive": true,
+      "viewCount": 1250,
+      "downloadCount": 89,
+      "difficulty": "مبتدی",
+      "instructor": "احمد محمدی"
+    },
+    {
+      "id": 2,
+      "title": "آموزش طراحی تامبنیل حرفه‌ای برای ویدیوهای یوتیوب",
+      "thumbnail": "/videos/thumbnail-2.jpg",
+      "videoUrl": "/videos/video-2.mp4",
+      "downloadUrl": "/downloads/video-2.zip",
+      "category": "طراحی",
+      "duration": "22:45",
+      "fileSize": "380 MB",
+      "description": "آموزش کامل طراحی تامبنیل جذاب و حرفه‌ای که باعث افزایش کلیک و بازدید ویدیوهای شما می‌شود.",
+      "tags": ["طراحی", "تامبنیل", "فتوشاپ", "گرافیک"],
+      "createdAt": "2025-01-16T10:00:00Z",
+      "updatedAt": "2025-01-16T10:00:00Z",
+      "isActive": true,
+      "viewCount": 980,
+      "downloadCount": 156,
+      "difficulty": "متوسط",
+      "instructor": "سارا احمدی"
+    },
+    {
+      "id": 3,
+      "title": "بهترین دوربین‌ها برای یوتیوبرها در سال ۲۰۲۵",
+      "thumbnail": "/videos/thumbnail-3.jpg",
+      "videoUrl": "/videos/video-3.mp4",
+      "downloadUrl": "/downloads/video-3.zip",
+      "category": "تجهیزات",
+      "duration": "18:20",
+      "fileSize": "320 MB",
+      "description": "بررسی کامل بهترین دوربین‌ها برای ساخت محتوای یوتیوب با کیفیت بالا و قیمت مناسب.",
+      "tags": ["دوربین", "تجهیزات", "کیفیت", "فیلمبرداری"],
+      "createdAt": "2025-01-17T10:00:00Z",
+      "updatedAt": "2025-01-17T10:00:00Z",
+      "isActive": true,
+      "viewCount": 2100,
+      "downloadCount": 203,
+      "difficulty": "مبتدی",
+      "instructor": "رضا کریمی"
+    }
+  ],
+  "categories": [
+    "رشد کانال",
+    "طراحی",
+    "تجهیزات",
+    "سئو",
+    "ادیت",
+    "درآمدزایی",
+    "بازاریابی",
+    "تولید محتوا"
+  ],
+  "settings": {
+    "maxFileSize": "1GB",
+    "allowedFormats": ["mp4", "avi", "mov"],
+    "defaultCategory": "عمومی",
+    "autoApprove": false
+  }
+}

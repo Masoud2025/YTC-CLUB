@@ -7,7 +7,7 @@ export default function AdminLayout({
     <html lang="fa">
       <body
         style={{
-          background: '#f9f9f9',
+          background: 'gray',
           padding: '2rem',
           fontFamily: 'sans-serif',
         }}
