@@ -1,0 +1,67 @@
+{
+  "jobs": [
+    {
+      "id": "1",
+      "title": "ادیتور ویدیو یوتیوب",
+      "description": "به یک ادیتور حرفه‌ای برای تدوین ویدیوهای یوتیوب نیازمندیم. تسلط به پریمیر و افترافکت الزامی است. امکان دورکاری وجود دارد.",
+      "imageUrl": "/sampleUser.jpg",
+      "contactInfo": {
+        "phone": "09123456789",
+        "telegram": "@videoeditor_hire",
+        "email": "editor@example.com"
+      },
+      "location": "تهران (دورکاری)",
+      "category": "ادیت ویدیو",
+      "salary": "۵-۸ میلیون تومان",
+      "workType": "تمام وقت",
+      "experience": "۲-۳ سال",
+      "postedDate": "2025-01-15T10:00:00Z",
+      "expiryDate": "2025-02-15T10:00:00Z",
+      "isPublished": true,
+      "isActive": true,
+      "createdBy": "admin",
+      "createdAt": "2025-01-15T10:00:00Z",
+      "updatedAt": "2025-01-15T10:00:00Z",
+      "views": 126,
+      "applications": 8,
+      "rejectionReason": null,
+      "tags": [
+        "ادیت",
+        "یوتیوب",
+        "پریمیر",
+        "افترافکت"
+      ]
+    }
+  ],
+  "categories": [
+    "ادیت ویدیو",
+    "طراحی گرافیک",
+    "تولید محتوا",
+    "مدیریت محتوا",
+    "فیلمبرداری",
+    "بازاریابی دیجیتال",
+    "سئو و تحلیل",
+    "صداگذاری"
+  ],
+  "workTypes": [
+    "تمام وقت",
+    "پاره وقت",
+    "پروژه‌ای",
+    "دورکاری",
+    "حضوری"
+  ],
+  "experienceLevels": [
+    "بدون تجربه",
+    "۱-۲ سال",
+    "۲-۳ سال",
+    "۳-۵ سال",
+    "بیش از ۵ سال"
+  ],
+  "pendingJobs": [],
+  "settings": {
+    "maxJobsPerUser": 5,
+    "jobExpiryDays": 30,
+    "autoApprove": false,
+    "requireModeration": true
+  }
+}
