@@ -1,0 +1,67 @@
+{
+  "courses": [
+    {
+      "id": "course_1",
+      "title": "دوره جامع یوتیوب",
+      "description": "آموزش کامل ساخت و مدیریت کانال یوتیوب از صفر تا صد",
+      "image": "/footbaly.jpg",
+      "slug": "youtube-course",
+      "downloadLinks": [
+        {
+          "id": "dl_1",
+          "title": "فایل اصلی دوره",
+          "url": "https://example.com/youtube-course.zip",
+          "fileSize": "2.5 GB"
+        }
+      ],
+      "isActive": true,
+      "category": "آموزش",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "course_2",
+      "title": "پک طراحی تامبنیل",
+      "description": "مجموعه کامل قالب‌های آماده برای طراحی تامبنیل حرفه‌ای",
+      "image": "/footbaly.jpg",
+      "slug": "thumbnail-pack",
+      "downloadLinks": [
+        {
+          "id": "dl_2",
+          "title": "قالب‌های فتوشاپ",
+          "url": "https://example.com/thumbnails-psd.zip",
+          "fileSize": "500 MB"
+        },
+        {
+          "id": "dl_3",
+          "title": "قالب‌های کانوا",
+          "url": "https://example.com/thumbnails-canva.zip",
+          "fileSize": "200 MB"
+        }
+      ],
+      "isActive": true,
+      "category": "طراحی",
+      "createdAt": "2024-01-02T00:00:00.000Z",
+      "updatedAt": "2024-01-02T00:00:00.000Z"
+    },
+    {
+      "id": "course_3",
+      "title": "آموزش ادیت ویدیو",
+      "description": "تدوین حرفه‌ای ویدیو با پریمیر و افترافکت",
+      "image": "/footbaly.jpg",
+      "slug": "video-editing",
+      "downloadLinks": [
+        {
+          "id": "dl_4",
+          "title": "فایل‌های آموزشی پریمیر",
+          "url": "https://example.com/premiere-tutorials.zip",
+          "fileSize": "3.2 GB"
+        }
+      ],
+      "isActive": true,
+      "category": "آموزش",
+      "createdAt": "2024-01-03T00:00:00.000Z",
+      "updatedAt": "2024-01-03T00:00:00.000Z"
+    }
+  ]
+}

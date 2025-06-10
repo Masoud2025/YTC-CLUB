@@ -1,58 +1,59 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-// Sample card data - replace with your actual data
-const cardData = [
-  {
-    id: 1,
-    title: 'دوره جامع یوتیوب',
-    description: 'آموزش کامل ساخت و مدیریت کانال یوتیوب از صفر تا صد',
-    image: '/footbaly.jpg',
-    slug: 'youtube-course',
-  },
-  {
-    id: 2,
-    title: 'پک طراحی تامبنیل',
-    description: 'مجموعه کامل قالب‌های آماده برای طراحی تامبنیل حرفه‌ای',
-    image: '/footbaly.jpg',
-    slug: 'thumbnail-pack',
-  },
-  {
-    id: 3,
-    title: 'آموزش ادیت ویدیو',
-    description: 'تدوین حرفه‌ای ویدیو با پریمیر و افترافکت',
-    image: '/footbaly.jpg',
-    slug: 'video-editing',
-  },
-  {
-    id: 4,
-    title: 'پک موشن گرافیک',
-    description: 'مجموعه انیمیشن‌های آماده برای ویدیوهای یوتیوب',
-    image: '/footbaly.jpg',
-    slug: 'motion-graphics',
-  },
-  {
-    id: 5,
-    title: 'دوره مانتیزه کردن',
-    description: 'آموزش کسب درآمد از یوتیوب و استراتژی‌های مانتیزه کردن',
-    image: '/footbaly.jpg',
-    slug: 'monetization',
-  },
-  {
-    id: 6,
-    title: 'پک صوتی یوتیوب',
-    description: 'مجموعه موسیقی و افکت‌های صوتی مخصوص ویدیوهای یوتیوب',
-    image: '/footbaly.jpg',
-    slug: 'audio-pack',
-  },
-];
+interface Course {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  slug: string;
+  downloadLinks: Array<{
+    id: string;
+    title: string;
+    url: string;
+    fileSize: string;
+  }>;
+  isActive: boolean;
+  category: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export default function CoursesPage() {
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch courses from API
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
+  const fetchCourses = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/courses');
+
+      if (!response.ok) {
+        throw new Error('خطا در دریافت پک‌ها');
+      }
+
+      const data = await response.json();
+      // Filter only active courses for public view
+      setCourses(data.filter((course: Course) => course.isActive));
+    } catch (error) {
+      console.error('Error fetching courses:', error);
+      setError('خطا در دریافت اطلاعات پک‌ها');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -73,22 +74,42 @@ export default function CoursesPage() {
     },
   };
 
-  const handleDownload = (card: any) => {
-    // Replace this with your actual download logic
-    console.log('Downloading:', card.title);
-
-    // Example: Create a download link
-    // const link = document.createElement('a');
-    // link.href = `/downloads/${card.slug}.zip`; // Your download URL
-    // link.download = `${card.title}.zip`;
-    // link.click();
+  const handleDownload = (course: Course) => {
+    // Navigate to course page for download
+    window.location.href = `/course/${course.id}`;
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-transparent relative mt-[10%] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p className="text-white">در حال بارگذاری پک‌ها...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-transparent relative mt-[10%] flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-400 mb-4">{error}</p>
+          <button
+            onClick={fetchCourses}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+          >
+            تلاش مجدد
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-transparent relative mt-[10%]">
       {/* Subtle Glass Pattern */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {/* Very subtle grid pattern */}
         <div
           className="absolute inset-0 opacity-5"
           style={{
@@ -99,46 +120,55 @@ export default function CoursesPage() {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
-        {/* Courses Grid - Square Layout */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
-        >
-          {cardData.map(card => (
-            <motion.div key={card.id} variants={itemVariants}>
-              <Card card={card} onDownload={handleDownload} />
-            </motion.div>
-          ))}
-        </motion.div>
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-white mb-4">
+            پک‌های رایگان آموزشی
+          </h1>
+          <p className="text-gray-300">
+            مجموعه کامل پک‌های رایگان یوتیوب و تولید محتوا
+          </p>
+        </div>
+
+        {/* Courses Grid */}
+        {courses.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-400 text-lg">هیچ پکی یافت نشد</p>
+          </div>
+        ) : (
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+          >
+            {courses.map(course => (
+              <motion.div key={course.id} variants={itemVariants}>
+                <Card course={course} onDownload={handleDownload} />
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
     </div>
   );
 }
 
 interface CardProps {
-  card: {
-    id: number;
-    title: string;
-    description: string;
-    image: string;
-    slug: string;
-  };
-  onDownload: (card: any) => void;
+  course: Course;
+  onDownload: (course: Course) => void;
 }
 
-function Card({ card, onDownload }: CardProps) {
+function Card({ course, onDownload }: CardProps) {
   return (
     <div className="backdrop-blur-2xl bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300 group aspect-square flex flex-col transform hover:-translate-y-2 hover:scale-105">
-      {/* Square Image Container - Takes most of the card */}
+      {/* Square Image Container */}
       <div className="relative flex-1 w-full overflow-hidden">
-        {/* Image with padding to keep it contained */}
         <div className="relative w-full h-full p-3">
           <div className="relative w-full h-full rounded-lg overflow-hidden">
             <Image
-              src={card.image}
-              alt={card.title}
+              src={course.image}
+              alt={course.title}
               fill
               className="object-contain transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
@@ -146,23 +176,35 @@ function Card({ card, onDownload }: CardProps) {
           </div>
         </div>
 
+        {/* Category Badge */}
+        <div className="absolute top-2 right-2">
+          <span className="bg-blue-500/80 text-white text-xs px-2 py-1 rounded-full backdrop-blur-sm">
+            {course.category}
+          </span>
+        </div>
+
+        {/* Free Badge */}
+        <div className="absolute top-2 left-2">
+          <span className="bg-green-500/80 text-white text-xs px-2 py-1 rounded-full backdrop-blur-sm">
+            رایگان
+          </span>
+        </div>
+
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-        {/* Download Button - Centered */}
+        {/* Download Button */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <button
-            onClick={() => onDownload(card)}
+            onClick={() => onDownload(course)}
             className="backdrop-blur-xl bg-green-500/90 hover:bg-green-600/90 border border-white/30 rounded-full p-4 transition-all duration-200 shadow-2xl transform scale-75 group-hover:scale-100 hover:shadow-green-500/25"
-            title="دانلود"
+            title="دانلود رایگان"
           >
-            {/* Download Icon */}
             <svg
               className="w-6 h-6 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 strokeLinecap="round"
@@ -175,10 +217,10 @@ function Card({ card, onDownload }: CardProps) {
         </div>
       </div>
 
-      {/* Compact Card Content - Bottom section with centered text */}
+      {/* Card Content */}
       <div className="p-4 flex-shrink-0 flex items-center justify-center text-center">
         <h3 className="font-bold text-white line-clamp-2 text-sm leading-tight hover:text-gray-300 transition-colors duration-300">
-          {card.title}
+          {course.title}
         </h3>
       </div>
 
