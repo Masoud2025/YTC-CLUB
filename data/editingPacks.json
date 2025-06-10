@@ -1,0 +1,53 @@
+{
+  "packs": [
+    {
+      "id": "premiere-pro-basics",
+      "title": "پک آموزش مقدماتی پریمیر پرو",
+      "image": "/packImage.jpg",
+      "price": 590000,
+      "discountPrice": 390000,
+      "level": "مقدماتی",
+      "duration": "۸ ساعت",
+      "description": "در این دوره شما با مفاهیم پایه و اصول اولیه نرم افزار پریمیر پرو آشنا خواهید شد.",
+      "includes": [
+        "۴۵ ویدیوی آموزشی",
+        "۱۰ پروژه عملی",
+        "فایل‌های تمرینی",
+        "گواهی پایان دوره"
+      ],
+      "hasDiscount": true,
+      "isActive": true,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "downloadLinks": [
+        {
+          "id": "link1",
+          "title": "ویدیوهای آموزشی - قسمت اول",
+          "url": "https://example.com/download/premiere-part1.zip",
+          "size": "2.5 GB",
+          "type": "video"
+        },
+        {
+          "id": "link2",
+          "title": "ویدیوهای آموزشی - قسمت دوم",
+          "url": "https://example.com/download/premiere-part2.zip",
+          "size": "3.1 GB",
+          "type": "video"
+        },
+        {
+          "id": "link3",
+          "title": "فایل‌های تمرینی و پروژه‌ها",
+          "url": "https://example.com/download/premiere-projects.zip",
+          "size": "500 MB",
+          "type": "files"
+        },
+        {
+          "id": "link4",
+          "title": "گواهی پایان دوره",
+          "url": "https://example.com/download/certificate-template.pdf",
+          "size": "2 MB",
+          "type": "document"
+        }
+      ]
+    }
+  ]
+}

@@ -56,6 +56,11 @@ export default function AdminPage() {
             کاربران
           </a>
         </li>
+        <li>
+          <a className="text-blue-600 underline" href="Admin/packs">
+            مدیریت ها پک های پولی
+          </a>
+        </li>
       </ul>
     </div>
   );

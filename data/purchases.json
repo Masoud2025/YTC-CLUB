@@ -1,0 +1,14 @@
+{
+  "purchases": [
+    {
+      "id": "purchase-1749561280898",
+      "packId": "premiere-pro-basics",
+      "packTitle": "پک آموزش مقدماتی پریمیر پرو",
+      "userPhone": "09301561067",
+      "userName": "مسعود جعفری",
+      "amount": 390000,
+      "createdAt": "2025-06-10T13:14:40.898Z",
+      "status": "pending"
+    }
+  ]
+}
