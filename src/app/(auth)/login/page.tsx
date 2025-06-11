@@ -243,7 +243,7 @@ export default function LoginPage() {
     try {
       const normalizedPhone = normalizePhoneNumber(phone);
 
-      const res = await fetch('/api/verify', {
+      const res = await fetch('/api/verify-code', {
         method: 'POST',
         body: JSON.stringify({
           phone: normalizedPhone,
