@@ -9,10 +9,12 @@ const dataPath = path.join(process.cwd(), 'data', 'videos.json');
 // PUT - Update video
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
+  // Changed this line
   try {
-    const id = parseInt(params.id);
+    const { id: idString } = await params; // Added await here
+    const id = parseInt(idString);
     const updatedData = await request.json();
 
     const fileContents = fs.readFileSync(dataPath, 'utf8');
@@ -42,10 +44,12 @@ export async function PUT(
 // DELETE - Delete video
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
+  // Changed this line
   try {
-    const id = parseInt(params.id);
+    const { id: idString } = await params; // Added await here
+    const id = parseInt(idString);
 
     const fileContents = fs.readFileSync(dataPath, 'utf8');
     const data = JSON.parse(fileContents);
@@ -70,10 +74,12 @@ export async function DELETE(
 // GET - Get single video
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
+  // Changed this line
   try {
-    const id = parseInt(params.id);
+    const { id: idString } = await params; // Added await here
+    const id = parseInt(idString);
 
     const fileContents = fs.readFileSync(dataPath, 'utf8');
     const data = JSON.parse(fileContents);

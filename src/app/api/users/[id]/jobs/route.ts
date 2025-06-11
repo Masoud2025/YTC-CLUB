@@ -26,10 +26,11 @@ const dataPath = path.join(process.cwd(), 'data', 'jobs.json');
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
+  // Changed this line
   try {
-    const userId = params.id;
+    const { id: userId } = await params; // Added await here
 
     const fileContents = fs.readFileSync(dataPath, 'utf8');
     const data: JobsData = JSON.parse(fileContents);

@@ -9,10 +9,11 @@ const dataPath = path.join(process.cwd(), 'data', 'jobs.json');
 // PUT - Update job
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
+  // Changed this line
   try {
-    const id = params.id;
+    const { id } = await params; // Added await here
     const updatedData = await request.json();
 
     const fileContents = fs.readFileSync(dataPath, 'utf8');
@@ -42,10 +43,11 @@ export async function PUT(
 // DELETE - Delete job
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
+  // Changed this line
   try {
-    const id = params.id;
+    const { id } = await params; // Added await here
 
     const fileContents = fs.readFileSync(dataPath, 'utf8');
     const data = JSON.parse(fileContents);

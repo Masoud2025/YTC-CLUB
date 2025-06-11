@@ -23,11 +23,13 @@ function writeCoursesData(data: any) {
 // GET - Read single course
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
+  // Changed this line
   try {
+    const { id } = await params; // Added await here
     const data = readCoursesData();
-    const course = data.courses.find((c: any) => c.id === params.id);
+    const course = data.courses.find((c: any) => c.id === id);
 
     if (!course) {
       return NextResponse.json({ error: 'دوره یافت نشد' }, { status: 404 });
@@ -43,13 +45,15 @@ export async function GET(
 // PUT - Update course
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
+  // Changed this line
   try {
+    const { id } = await params; // Added await here
     const body = await request.json();
     const data = readCoursesData();
 
-    const courseIndex = data.courses.findIndex((c: any) => c.id === params.id);
+    const courseIndex = data.courses.findIndex((c: any) => c.id === id);
 
     if (courseIndex === -1) {
       return NextResponse.json({ error: 'دوره یافت نشد' }, { status: 404 });
@@ -59,7 +63,7 @@ export async function PUT(
     data.courses[courseIndex] = {
       ...data.courses[courseIndex],
       ...body,
-      id: params.id, // Keep original ID
+      id: id, // Keep original ID
       updatedAt: new Date().toISOString(),
     };
 
@@ -78,11 +82,13 @@ export async function PUT(
 // DELETE - Delete course
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
+  // Changed this line
   try {
+    const { id } = await params; // Added await here
     const data = readCoursesData();
-    const courseIndex = data.courses.findIndex((c: any) => c.id === params.id);
+    const courseIndex = data.courses.findIndex((c: any) => c.id === id);
 
     if (courseIndex === -1) {
       return NextResponse.json({ error: 'دوره یافت نشد' }, { status: 404 });
