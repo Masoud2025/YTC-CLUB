@@ -8,6 +8,10 @@
     {
       "name": "ytc-images",
       "mountTo": "../../public"
+    },
+    {
+      "name": "ytc-data",
+      "mountTo": "../../data"
     }
   ]
 }
