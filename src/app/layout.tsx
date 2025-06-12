@@ -1,11 +1,6 @@
 import type { Metadata } from 'next';
-// import { Lalezar } from 'next/font/google';
-// import Navbar from './components/layout/Header';
-// import Footer from './components/layout/Footer';
-// import ThemeProvider from './components/Theme/ThemProvider';
 import './globals.css';
 import SiteLayout from './components/ui/ClientNvabarFooter';
-// import LoadingProvider from './components/ui/LoadingProvider';
 
 export const metadata: Metadata = {
   title: 'یوتیوب کلاب – ارائه خدمات یوتیوب',
@@ -46,11 +41,9 @@ export default function RootLayout({
           <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/5 to-transparent"></div>
         </div>
 
-        {/* Main Content */}
+        {/* Main Content - Removed the wrapper div and min-h calculation */}
         <div className="relative z-10">
-          <main className="min-h-[calc(100vh-160px)]">
-            <SiteLayout>{children}</SiteLayout>
-          </main>
+          <SiteLayout>{children}</SiteLayout>
         </div>
       </body>
     </html>

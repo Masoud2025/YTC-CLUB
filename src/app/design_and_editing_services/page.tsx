@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function YouTubeClubServices() {
   return (
@@ -104,54 +105,60 @@ export default function YouTubeClubServices() {
         {/* Mobile: 2 columns, Tablet+: 2 columns */}
         <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:gap-8 max-w-4xl mx-auto">
           {/* Instructor 1 */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg lg:rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition-all duration-300 hover:scale-105 min-h-[320px] sm:min-h-[350px] lg:min-h-[400px]">
-            <div className="p-3 sm:p-6 lg:p-8 text-center h-full flex flex-col">
-              <div className="flex justify-center mb-3 sm:mb-6">
-                <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36">
-                  <Image
-                    src="/IliaTarah.png"
-                    alt="ایلیاطراحی - مدرس یوتیوب کلاب"
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    className="rounded-full"
-                  />
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg lg:rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition-all duration-300 hover:scale-105 min-h-[280px] sm:min-h-[320px] lg:min-h-[350px]">
+            <div className="p-3 sm:p-6 lg:p-8 text-center h-full flex flex-col justify-between">
+              <div className="flex flex-col items-center">
+                <div className="flex justify-center mb-3 sm:mb-6">
+                  <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36">
+                    <Image
+                      src="/IliaTarah.png"
+                      alt="ایلیاطراحی - مدرس یوتیوب کلاب"
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className="rounded-full"
+                    />
+                  </div>
                 </div>
+                <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold mb-4 sm:mb-6 text-white">
+                  ایلیاطراحی
+                </h3>
               </div>
-              <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold mb-1 sm:mb-3 text-white">
-                ایلیاطراحی
-              </h3>
-              <p className="text-xs sm:text-sm md:text-base text-white mb-2 sm:mb-3">
-                طراح گرافیک
-              </p>
-              <p className="text-xs sm:text-sm md:text-base text-white leading-relaxed flex-grow">
-                متخصص در طراحی تامنیل‌های جذاب و حرفه‌ای
-              </p>
+
+              <Link
+                href="/instructors/ilia-tarah"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 text-xs sm:text-sm md:text-base"
+              >
+                مشاهده پروفایل
+              </Link>
             </div>
           </div>
 
           {/* Instructor 2 */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg lg:rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition-all duration-300 hover:scale-105 min-h-[320px] sm:min-h-[350px] lg:min-h-[400px]">
-            <div className="p-3 sm:p-6 lg:p-8 text-center h-full flex flex-col">
-              <div className="flex justify-center mb-3 sm:mb-6">
-                <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36">
-                  <Image
-                    src="/aliEditor.png"
-                    alt="علی ادیتور - مدرس یوتیوب کلاب"
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    className="rounded-full"
-                  />
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg lg:rounded-xl shadow-lg hover:shadow-xl overflow-hidden transition-all duration-300 hover:scale-105 min-h-[280px] sm:min-h-[320px] lg:min-h-[350px]">
+            <div className="p-3 sm:p-6 lg:p-8 text-center h-full flex flex-col justify-between">
+              <div className="flex flex-col items-center">
+                <div className="flex justify-center mb-3 sm:mb-6">
+                  <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36">
+                    <Image
+                      src="/aliEditor.png"
+                      alt="علی ادیتور - مدرس یوتیوب کلاب"
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className="rounded-full"
+                    />
+                  </div>
                 </div>
+                <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold mb-4 sm:mb-6 text-white">
+                  علی ادیتور
+                </h3>
               </div>
-              <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold mb-1 sm:mb-3 text-white">
-                علی ادیتور
-              </h3>
-              <p className="text-xs sm:text-sm md:text-base text-white mb-2 sm:mb-3">
-                ادیتور ویدیو
-              </p>
-              <p className="text-xs sm:text-sm md:text-base text-white leading-relaxed flex-grow">
-                متخصص ادیت ویدیو با سال‌ها تجربه
-              </p>
+
+              <Link
+                href="/instructors/ali-editor"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 text-xs sm:text-sm md:text-base"
+              >
+                مشاهده پروفایل
+              </Link>
             </div>
           </div>
         </div>
