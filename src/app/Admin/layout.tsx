@@ -8,7 +8,6 @@ export default function AdminLayout({
       <body
         style={{
           background: 'gray',
-          padding: '2rem',
           fontFamily: 'sans-serif',
         }}
       >

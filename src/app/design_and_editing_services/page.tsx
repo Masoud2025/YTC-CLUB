@@ -125,7 +125,7 @@ export default function YouTubeClubServices() {
               </div>
 
               <Link
-                href="/instructors/ilia-tarah"
+                href="/design_portfolio"
                 className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 text-xs sm:text-sm md:text-base"
               >
                 مشاهده پروفایل
@@ -154,7 +154,7 @@ export default function YouTubeClubServices() {
               </div>
 
               <Link
-                href="/instructors/ali-editor"
+                href="/edit_video_samples"
                 className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 text-xs sm:text-sm md:text-base"
               >
                 مشاهده پروفایل
